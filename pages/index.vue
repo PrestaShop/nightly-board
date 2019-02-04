@@ -1,10 +1,8 @@
 <template>
-  <section class="container">
+  <b-container fluid>
     <div>
-      <logo />
-      <h1 class="title">
-        PrestaShop Nighly Board
-      </h1>
+      <ps-logo />
+      <ps-title />
       <p>
         Sorting By: <b>{{ sortBy }}</b>,
         Sort Direction: <b>{{ sortDesc ? 'Descending' : 'Ascending' }}</b>
@@ -25,24 +23,36 @@
           >
             <b-btn
               size="sm"
-              type="primary"
-              @click.stop="details(cell.item, cell.index)"
+              variant="primary"
+              @click.stop="download(cell.item, cell.index)"
             >
-              View
+              Download
+            </b-btn>
+            <b-btn
+              size="sm"
+              variant="success"
+              @click.stop="details(cell.item, cell.index)"
+              v-if="cell.item.stats"
+            >
+              View Report
             </b-btn>
           </template>
         </b-table>
       </div>
     </div>
-  </section>
+  </b-container>
 </template>
 
 <script>
-  import Logo from '~/components/Logo.vue';
+  import PsLogo from '~/components/Logo.vue';
+  import PsTitle from '~/components/Title.vue';
+
+  const STORAGE_URL = 'https://www.googleapis.com/storage/v1/b/prestashop-core-nightly/o';
 
   export default {
     components: {
-      Logo,
+      PsLogo,
+      PsTitle,
     },
     data() {
       return {
@@ -69,19 +79,28 @@
             sortable: true,
           },
           {
-            key: 'report.passes',
+            key: 'stats.tests',
+            label: 'Total tests',
+            sortable: false,
+            class: 'text-center',
+          },
+          {
+            key: 'stats.passes',
             label: 'Tests passes',
             sortable: false,
+            class: 'text-center',
           },
           {
-            key: 'report.failures',
+            key: 'stats.failures',
             label: 'Tests failures',
             sortable: false,
+            class: 'text-center',
           },
           {
-            key: 'report.skipped',
+            key: 'stats.skipped',
             label: 'Tests skipped',
             sortable: false,
+            class: 'text-center',
           },
           {
             key: 'actions',
@@ -93,9 +112,9 @@
     },
     async mounted() {
       const regex = new RegExp(/^(\d{4}-\d{2}-\d{2})-(.*)-prestashop_(.*)\.zip$/i);
-      const {data} = await this.$axios.get('https://www.googleapis.com/storage/v1/b/prestashop-core-nightly/o');
+      const {data} = await this.$axios.get(STORAGE_URL);
       this.data = data;
-      this.data.items.forEach((file) => {
+      this.data.items.forEach(async (file) => {
         // Yeah it is a nightly build
         const matches = file.name.match(regex);
         if (matches) {
@@ -104,23 +123,33 @@
             date: matches[1],
             branch: matches[2],
             version: matches[3],
+            stats: await this.getStats(`${matches[1]}-${matches[2]}-stats.json`),
             file,
           });
         }
       });
     },
     methods: {
+      findReportFileByName(name) {
+        const lookingForName = `reports/${name}`;
+        return this.data.items.find(file => file.name === lookingForName);
+      },
+      async getStats(name) {
+        const file = this.findReportFileByName(name);
+        if (file === undefined) {
+          return null;
+        }
+
+        const {data} = await this.$axios.get(file.mediaLink);
+        return data;
+      },
       details(item) {
-        const lookingForName = `reports/${item.date}-${item.branch}.html`;
-        console.log(lookingForName);
-        this.data.forEach((file) => {
-          if (file.name === lookingForName) {
-            return file.name;
-          }
+        const file = this.findReportFileByName(`${item.date}-${item.branch}.html`);
+        if (file === undefined) {
+          return null;
+        }
 
-          return false;
-        });
-
+        window.open(`https://storage.googleapis.com/prestashop-core-nightly/${file.name}`);
         return false;
       },
     },
@@ -128,24 +157,6 @@
 </script>
 
 <style>
-  .container {
-    margin: 0 auto;
-    min-height: 100vh;
-    display: flex;
-    justify-content: center;
-    text-align: center;
-  }
-
-  .title {
-    font-family: 'Quicksand', 'Source Sans Pro', -apple-system, BlinkMacSystemFont,
-    'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-    display: block;
-    font-weight: 300;
-    font-size: 30px;
-    color: #35495e;
-    letter-spacing: 1px;
-  }
-
   .files {
     padding-top: 15px;
   }
