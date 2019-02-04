@@ -13,6 +13,23 @@ module.exports = {
   ],
   extends: [
     'prestashop',
-    'plugin:vue/recommended',
+    'plugin:vue/strongly-recommended',
   ],
-}
+  rules: {
+    'vue/script-indent': [
+      'error',
+      2,
+      {
+        'baseIndent': 1
+      }
+    ],
+  },
+  'overrides': [
+    {
+      'files': ['*.vue'],
+      'rules': {
+        'indent': 'off'
+      }
+    }
+  ],
+};
