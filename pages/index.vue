@@ -4,7 +4,7 @@
       <ps-logo />
       <ps-title />
       <p>
-        Sorting By: <b>{{ sortBy }}</b>,
+        Sorting By: <b>{{ sortBy }}</b><br>
         Sort Direction: <b>{{ sortDesc ? 'Descending' : 'Ascending' }}</b>
       </p>
 
@@ -47,7 +47,8 @@
   import PsLogo from '~/components/Logo.vue';
   import PsTitle from '~/components/Title.vue';
 
-  const STORAGE_URL = 'https://www.googleapis.com/storage/v1/b/prestashop-core-nightly/o';
+  const STORAGE_URL_API = 'https://www.googleapis.com/storage/v1/b/prestashop-core-nightly/o';
+  const STORAGE_URL = 'https://storage.googleapis.com/prestashop-core-nightly';
 
   export default {
     components: {
@@ -112,7 +113,7 @@
     },
     async mounted() {
       const regex = new RegExp(/^(\d{4}-\d{2}-\d{2})-(.*)-prestashop_(.*)\.zip$/i);
-      const {data} = await this.$axios.get(STORAGE_URL);
+      const {data} = await this.$axios.get(STORAGE_URL_API);
       this.data = data;
       this.data.items.forEach(async (file) => {
         // Yeah it is a nightly build
@@ -149,7 +150,7 @@
           return null;
         }
 
-        window.open(`https://storage.googleapis.com/prestashop-core-nightly/${file.name}`);
+        window.open(`${STORAGE_URL}/${file.name}`);
         return false;
       },
     },
