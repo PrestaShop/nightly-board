@@ -306,7 +306,7 @@
           color: $primary;
           font-family: "Open Sans";
           font-size: 14px;
-          font-weight: 600;
+          font-weight:bold;
           line-height: 60px;
           white-space: nowrap;
 
@@ -317,10 +317,18 @@
             &:first-child {
               margin-right: 20px;
             }
+            &:hover {
+              font-weight: normal;
+            }
           }
           &.download-reports {
-            .v-icon:first-child {
-              margin-right: 20px;
+            .v-icon {
+              &:hover {
+                color: $primary;
+              }
+              &:first-child {
+                margin-right: 20px;
+              }
             }
           }
         }
