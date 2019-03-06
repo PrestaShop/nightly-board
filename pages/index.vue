@@ -27,7 +27,7 @@
               <template v-if="props.item.stats">
                 <v-icon
                   :color="color.error"
-                  v-if="props.item.stats.errors !== 0"
+                  v-if="hasErrors(props)"
                 >
                   warning
                 </v-icon>
@@ -61,17 +61,25 @@
                 <v-chip
                   :color="color.error"
                   text-color="white"
+                  v-if="hasErrors(props)"
                 >
                   <strong>
                     {{ props.item.stats.failures }}
                   </strong>
+                </v-chip>
+                <v-chip
+                  :color="color.success"
+                  text-color="white"
+                  v-else
+                >
+                  <strong>0</strong>
                 </v-chip>
               </template>
             </td>
             <td class="download-reports">
               <template v-if="$vuetify.breakpoint.lgAndUp">
                 <a
-                href="#"
+                  href="#"
                   @click.stop="download(props.item, props.index)"
                 >
                   Download
@@ -86,8 +94,8 @@
               </template>
               <template v-else>
                 <v-icon
-                right
-                @click.stop="download(props.item, props.index)"
+                  right
+                  @click.stop="download(props.item, props.index)"
                 >
                   save_alt
                 </v-icon>
@@ -195,6 +203,12 @@
     },
     methods: {
       /**
+       * Check if report has errors
+       */
+      hasErrors(props) {
+        return props.item.stats.errors !== 0;
+      },
+      /**
        * Get data table row class
        */
       getRowClass(props) {
@@ -202,7 +216,7 @@
           return '';
         }
 
-        if (props.item.stats.errors !== 0) {
+        if (this.hasErrors(props)) {
           return 'error';
         }
 
