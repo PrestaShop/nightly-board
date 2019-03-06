@@ -34,7 +34,9 @@
     "eslint-plugin-import": ">=2.14.0",
     "eslint-plugin-vue": "^5.1.0",
     "jest": "^24.1.0",
+    "node-sass": "^4.11.0",
     "nodemon": "^1.18.9",
+    "sass-loader": "^7.1.0",
     "vue-jest": "^3.0.2"
   }
 }
