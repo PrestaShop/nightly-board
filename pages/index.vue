@@ -27,14 +27,12 @@
               <template v-if="props.item.stats">
                 <v-icon
                   :color="color.error"
-                  right
                   v-if="props.item.stats.errors !== 0"
                 >
                   warning
                 </v-icon>
                 <v-icon
                   :color="color.success"
-                  right
                   v-else
                 >
                   check
@@ -70,20 +68,35 @@
                 </v-chip>
               </template>
             </td>
-            <td>
-              <a
+            <td class="download-reports">
+              <template v-if="$vuetify.breakpoint.lgAndUp">
+                <a
                 href="#"
+                  @click.stop="download(props.item, props.index)"
+                >
+                  Download
+                </a>
+                <a
+                  href="#"
+                  @click.stop="details(props.item, props.index)"
+                  v-if="props.item.stats"
+                >
+                  View Report
+                </a>
+              </template>
+              <template v-else>
+                <v-icon
+                right
                 @click.stop="download(props.item, props.index)"
-              >
-                Download
-              </a>
-              <a
-                href="#"
-                @click.stop="details(props.item, props.index)"
-                v-if="props.item.stats"
-              >
-                View Report
-              </a>
+                >
+                  save_alt
+                </v-icon>
+                <v-icon
+                  @click.stop="details(props.item, props.index)"
+                >
+                  visibility
+                </v-icon>
+              </template>
             </td>
           </tr>
         </template>
@@ -177,8 +190,13 @@
           });
         }
       });
+
+      this.pagination.rowsPerPage = this.$vuetify.breakpoint.lgAndUp ? -1 : 5;
     },
     methods: {
+      /**
+       * Get data table row class
+       */
       getRowClass(props) {
         if (props.item.stats === null) {
           return '';
@@ -190,10 +208,16 @@
 
         return 'success';
       },
+      /**
+       * Find report file by name
+       */
       findReportFileByName(name) {
         const lookingForName = `reports/${name}`;
         return this.data.items.find(file => file.name === lookingForName);
       },
+      /**
+       * Get stats for a specific report
+       */
       async getStats(name) {
         const file = this.findReportFileByName(name);
         if (file === undefined) {
@@ -203,6 +227,9 @@
         const {data} = await this.$axios.get(file.mediaLink);
         return data;
       },
+      /**
+       * Go to report page
+       */
       details(item) {
         const file = this.findReportFileByName(`${item.date}-${item.branch}.html`);
         if (file === undefined) {
@@ -212,6 +239,9 @@
         window.open(`${STORAGE_URL}/${file.name}`);
         return false;
       },
+      /**
+       * Download archive
+       */
       download(item) {
         window.open(`${STORAGE_URL}/${item.name}`);
         return false;
@@ -263,13 +293,19 @@
           font-family: "Open Sans";
           font-size: 14px;
           font-weight: 600;
-          line-height: 22px;
+          line-height: 60px;
+          white-space: nowrap;
 
           a {
             color: $primary;
             font-size: 14px;
             display: inline-block;
             &:first-child {
+              margin-right: 20px;
+            }
+          }
+          &.download-reports {
+            .v-icon:first-child {
               margin-right: 20px;
             }
           }
