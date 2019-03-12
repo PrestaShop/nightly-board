@@ -15,38 +15,38 @@ module.exports = {
     ],
     link: [
       {rel: 'icon', type: 'image/x-icon', href: '/favicon.ico'},
+      {rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=Montserrat|Open+Sans'},
     ],
   },
 
-  /*
-  ** Customize the progress-bar color
-  */
+  /**
+   * Customize the progress-bar color
+   */
   loading: {color: '#fff'},
 
-  /*
-  ** Global CSS
-  */
+  /**
+   * Global CSS
+   */
   css: [
   ],
 
-  /*
-  ** Plugins to load before mounting the App
-  */
+  /**
+   * Plugins to load before mounting the App
+   */
   plugins: [
   ],
 
-  /*
-  ** Nuxt.js modules
-  */
+  /**
+   * Nuxt.js modules
+   */
   modules: [
     // Doc: https://axios.nuxtjs.org/usage
     '@nuxtjs/axios',
-    // Doc: https://bootstrap-vue.js.org/docs/
-    'bootstrap-vue/nuxt',
+    '@nuxtjs/vuetify',
   ],
-  /*
-  ** Axios module configuration
-  */
+  /**
+   * Axios module configuration
+   */
   axios: {
     // See https://github.com/nuxt-community/axios-module#options
   },
