@@ -77,34 +77,38 @@
               </template>
             </td>
             <td class="download-reports">
-              <template v-if="$vuetify.breakpoint.lgAndUp">
-                <a
-                  href="#"
-                  @click.stop="download(props.item, props.index)"
-                >
+              <a
+                :href="downloadLink(props.item, props.index)"
+                target="_blank"
+                :class="{'lg-and-up': !$vuetify.breakpoint.lgAndUp}"
+              >
+                <template v-if="$vuetify.breakpoint.lgAndUp">
                   Download
-                </a>
-                <a
-                  href="#"
-                  @click.stop="details(props.item, props.index)"
-                  v-if="props.item.stats"
-                >
+                </template>
+                <template v-else>
+                  <v-icon
+                    right
+                  >
+                    save_alt
+                  </v-icon>
+                </template>
+              </a>
+
+              <a
+                :href="detailsLink(props.item, props.index)"
+                target="_blank"
+                v-if="props.item.stats"
+                :class="{'lg-and-up': !$vuetify.breakpoint.lgAndUp}"
+              >
+                <template v-if="$vuetify.breakpoint.lgAndUp">
                   View Report
-                </a>
-              </template>
-              <template v-else>
-                <v-icon
-                  right
-                  @click.stop="download(props.item, props.index)"
-                >
-                  save_alt
-                </v-icon>
-                <v-icon
-                  @click.stop="details(props.item, props.index)"
-                >
-                  visibility
-                </v-icon>
-              </template>
+                </template>
+                <template v-else>
+                  <v-icon>
+                    visibility
+                  </v-icon>
+                </template>
+              </a>
             </td>
           </tr>
         </template>
@@ -242,23 +246,21 @@
         return data;
       },
       /**
-       * Go to report page
+       * Details link
        */
-      details(item) {
+      detailsLink(item) {
         const file = this.findReportFileByName(`${item.date}-${item.branch}.html`);
         if (file === undefined) {
           return null;
         }
 
-        window.open(`${STORAGE_URL}/${file.name}`);
-        return false;
+        return `${STORAGE_URL}/${file.name}`;
       },
       /**
-       * Download archive
+       * Link to download archive
        */
-      download(item) {
-        window.open(`${STORAGE_URL}/${item.name}`);
-        return false;
+      downloadLink(item) {
+        return `${STORAGE_URL}/${item.name}`;
       },
     },
   };
@@ -319,6 +321,9 @@
             }
             &:hover {
               font-weight: normal;
+            }
+            &.lg-and-up {
+              text-decoration: none;
             }
           }
           &.download-reports {
