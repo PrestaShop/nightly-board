@@ -16,7 +16,15 @@ $ npm run build
 $ npm start
 
 # generate static project
-$ yarn run generate
+$ npm run generate
 ```
 
 For detailed explanation on how things work, checkout [Nuxt.js docs](https://nuxtjs.org).
+
+## Deploy
+
+You need to have a Google App Engine to deploy this app, at least with our app.yml file:
+
+```
+$ npm run deploy
+```
