@@ -129,6 +129,7 @@
     },
     data() {
       return {
+        reportEnabled: false,
         color: {
           primary: '#251B5B',
           error: '#F44336',
@@ -237,6 +238,10 @@
        * Get stats for a specific report
        */
       async getStats(name) {
+        if (!this.reportEnabled) {
+          return null;
+        }
+
         const file = this.findReportFileByName(name);
         if (file === undefined) {
           return null;
