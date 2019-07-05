@@ -129,7 +129,7 @@
     },
     data() {
       return {
-        reportEnabled: false,
+        ignoredBranches: ['1.7.6.x'],
         color: {
           primary: '#251B5B',
           error: '#F44336',
@@ -198,7 +198,7 @@
             date: matches[1],
             branch: matches[2],
             version: matches[3],
-            stats: await this.getStats(`${matches[1]}-${matches[2]}-stats.json`),
+            stats: this.ignoredBranches.includes(matches[2]) ? null : await this.getStats(`${matches[1]}-${matches[2]}-stats.json`),
             file,
           });
         }
@@ -238,10 +238,6 @@
        * Get stats for a specific report
        */
       async getStats(name) {
-        if (!this.reportEnabled) {
-          return null;
-        }
-
         const file = this.findReportFileByName(name);
         if (file === undefined) {
           return null;
