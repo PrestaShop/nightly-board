@@ -129,6 +129,7 @@
     },
     data() {
       return {
+        ignoredBranches: ['1.7.6.x'],
         color: {
           primary: '#251B5B',
           error: '#F44336',
@@ -197,7 +198,7 @@
             date: matches[1],
             branch: matches[2],
             version: matches[3],
-            stats: await this.getStats(`${matches[1]}-${matches[2]}-stats.json`),
+            stats: this.ignoredBranches.includes(matches[2]) ? null : await this.getStats(`${matches[1]}-${matches[2]}-stats.json`),
             file,
           });
         }
