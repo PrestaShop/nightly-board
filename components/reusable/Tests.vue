@@ -26,7 +26,7 @@
             class="icon-pending"
             size="15"
           >
-            check
+            pause
           </v-icon>
           <v-icon
             v-if="test.state === 'failed'"
