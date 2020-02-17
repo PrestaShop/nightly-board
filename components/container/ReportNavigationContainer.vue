@@ -1,0 +1,40 @@
+<template>
+  <div class="reportNavigation-container">
+    <slot></slot>
+  </div>
+</template>
+
+<script>
+  export default {
+    name: 'ReportNavigationContainer'
+  }
+</script>
+
+<style lang="scss">
+  .reportNavigation-container {
+    overflow-y: scroll;
+    max-height: 400px;
+
+    &:hover::-webkit-scrollbar-thumb {
+      background: #b7ced3;
+    }
+
+    &::-webkit-scrollbar {
+      width: 5px;
+    }
+
+    &::-webkit-scrollbar-track {
+      background: transparent;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background: transparent;
+      border-radius: 10px;
+      transition: 0.4s ease-out;
+    }
+
+    &::-webkit-scrollbar-thumb:hover {
+      background: #b7ced3;
+    }
+  }
+</style>

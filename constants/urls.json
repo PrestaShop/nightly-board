@@ -1,0 +1,6 @@
+{
+  "domain": "http://www.qa.local/",
+  "reports": "api/reports",
+  "graph": "api/graph",
+  "graphParameters": "api/graph/parameters"
+}

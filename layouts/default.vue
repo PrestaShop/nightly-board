@@ -1,15 +1,38 @@
 <template>
   <v-app>
     <v-content>
+      <Header :title="title" />
       <nuxt />
     </v-content>
   </v-app>
 </template>
 
-<style>
+<script>
+  import Header from '~/components/reusable/Header'
+
+  export default {
+    components: {
+      Header
+    },
+    data() {
+      return {
+        title: 'Nightly Board'
+      }
+    },
+    beforeMount() {
+      const localConfig = JSON.parse(localStorage.getItem('localConfig'))
+
+      if (localConfig) {
+        this.$store.commit('changeLocalConfig', localConfig)
+      }
+    }
+  }
+</script>
+
+<style lang="scss">
   html {
-    font-family: 'Source Sans Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI',
-    Roboto, 'Helvetica Neue', Arial, sans-serif;
+    font-family: 'Source Sans Pro', -apple-system, BlinkMacSystemFont,
+      'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
     font-size: 16px;
     word-spacing: 1px;
     -ms-text-size-adjust: 100%;
@@ -17,6 +40,10 @@
     -moz-osx-font-smoothing: grayscale;
     -webkit-font-smoothing: antialiased;
     box-sizing: border-box;
+  }
+
+  body {
+    padding-top: 60px;
   }
 
   *,
@@ -53,5 +80,22 @@
   .button--grey:hover {
     color: #fff;
     background-color: #35495e;
+  }
+
+  .container {
+    padding: 0;
+  }
+
+  #app.theme--light.application {
+    background: #f6f6f6;
+    padding: 20px 0;
+  }
+
+  h2 {
+    font-size: 16px;
+    font-weight: bold;
+    line-height: 22px;
+    color: $primary;
+    margin-bottom: 15px;
   }
 </style>
