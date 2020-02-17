@@ -3,33 +3,28 @@ module.exports = {
   env: {
     browser: true,
     node: true,
-    es6: true,
+    es6: true
   },
   parserOptions: {
-    parser: 'babel-eslint',
+    parser: 'babel-eslint'
   },
-  plugins: [
-    'vue',
-  ],
+  plugins: ['vue'],
   extends: [
     'prestashop',
     'plugin:vue/strongly-recommended',
+    'prettier/vue',
+    'plugin:prettier/recommended'
   ],
   rules: {
-    'vue/script-indent': [
-      'error',
-      2,
-      {
-        'baseIndent': 1
-      }
-    ],
+    'prettier/prettier': ['error'],
+    'no-unused-labels': 'off'
   },
-  'overrides': [
+  overrides: [
     {
-      'files': ['*.vue'],
-      'rules': {
-        'indent': 'off'
+      files: ['*.vue'],
+      rules: {
+        indent: 'off'
       }
     }
-  ],
-};
+  ]
+}

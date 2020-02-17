@@ -1,0 +1,103 @@
+;; -*- mode: emacs-lisp; coding: emacs-mule; -*-
+;; --------------------------------------------------------------------------
+;; Desktop File for Emacs
+;; --------------------------------------------------------------------------
+;; Created Fri Jul  5 15:03:07 2019
+;; Desktop file format version 208
+;; Emacs version 26.1
+
+;; Global section:
+(setq desktop-saved-frameset [frameset 1 (23839 19083 88996 367000) (desktop . "208") "got@got" nil nil ((((minibuffer . t) (undecorated) (override-redirect) (font-backend xft x) (font . "-PfEd-DejaVu Sans Mono-normal-normal-normal-*-15-*-*-*-m-0-iso10646-1") (font-parameter . "Monospace 11") (border-width . 0) (internal-border-width . 0) (right-divider-width . 0) (bottom-divider-width . 0) (vertical-scroll-bars) (horizontal-scroll-bars) (foreground-color . "#f0fef0") (background-color . "#000000") (mouse-color . "black") (border-color . "black") (screen-gamma) (line-spacing) (left-fringe . 8) (right-fringe . 8) (no-special-glyphs) (scroll-bar-foreground) (scroll-bar-background) (menu-bar-lines . 0) (tool-bar-lines . 0) (title) (wait-for-wm . t) (tool-bar-position . top) (inhibit-double-buffering) (icon-type . t) (auto-raise) (auto-lower) (cursor-type . box) (scroll-bar-width . 0) (scroll-bar-height . 0) (alpha) (no-focus-on-map) (no-accept-focus) (fullscreen . maximized) (visibility . t) (skip-taskbar) (z-group) (display-type . color) (background-mode . dark) (cursor-color . "#f0fef0") (environment) (powerline-cache) (sticky) (frameset--id . "A2E5-5176-BF66-CFBF") (frameset--mini t . t) (modeline . t) (unsplittable) (icon-name) (display . ":1.0") (explicit-name) (height . 57) (width . 211) (left . 1920) (top . 0)) ((min-height . 4) (min-width . 10) (min-height-ignore . 2) (min-width-ignore . 4) (min-height-safe . 1) (min-width-safe . 2) (min-pixel-height . 72) (min-pixel-width . 90) (min-pixel-height-ignore . 36) (min-pixel-width-ignore . 36) (min-pixel-height-safe . 18) (min-pixel-width-safe . 18)) leaf (pixel-width . 1920) (pixel-height . 1017) (total-width . 213) (total-height . 56) (normal-height . 1.0) (normal-width . 1.0) (buffer "index.vue" (selected . t) (hscroll . 0) (fringes 8 8 nil) (margins nil) (scroll-bars nil 0 t nil 0 t) (vscroll . 0) (dedicated) (point . 5488) (start . 4347))))])
+(setq desktop-missing-file-warning nil)
+(setq tags-file-name nil)
+(setq tags-table-list nil)
+(setq search-ring '("reportEna" "getStats" "getstats" "branch" "getStats" "data(" "getStats" "detailsL" ":class" "a {" "details" "download" "sortal" "STORAGE_URL" "console.log" "report.sk"))
+(setq regexp-search-ring nil)
+(setq register-alist nil)
+(setq file-name-history '("/home/got/projects/prestashop/nightly-board/app.yml" "/home/got/projects/prestashop/nightly-board/README.md" "/home/got/projects/prestashop/nightly-board/pages/README.md" "/home/got/projects/prestashop/nightly-board/pages/index.vue" "/home/got/projects/prestashop/nightly-board/pages/README.md" "/home/got/projects/prestashop/nightly-board/README.md" "/home/got/projects/prestashop/nightly-board/package.json" "/home/got/projects/prestashop/nightly-board/app.yml" "/home/got/projects/prestashop/nightly-board/package.json" "/home/got/projects/prestashop/nightly-board/components/Title.vue" "/home/got/projects/prestashop/nightly-board/components/Logo.vue" "/home/got/projects/prestashop/nightly-board/test/.eslintrc.js" "/home/got/projects/prestashop/nightly-board/test/Logo.spec.js" "/home/got/projects/prestashop/nightly-board/components/Logo.vue" "/home/got/projects/prestashop/nightly-board/package.json" "/home/got/projects/prestashop/nightly-board/.babelrc" "/home/got/projects/prestashop/nightly-board/.eslintrc.js" "~/projects/prestashop/nightly-board/components/Logo.vue" "/home/got/projects/prestashop/nightly-board/package.json" "/home/got/projects/prestashop/nightly-board/README.md" "/home/got/projects/prestashop/nightly-board/.babelrc" "/home/got/projects/prestashop/nightly-board/.eslintrc.js" "/home/got/projects/prestashop/nightly-board/package.json" "/home/got/projects/prestashop/nightly-board/pages/README.md" "~/projects/prestashop/nightly-board/" "/home/got/projects/prestashop/source/develop/tests/E2E/scripts/combine-reports.py" "/home/got/projects/prestashop/source/develop/tests/E2E/docker-compose.yml" "/home/got/projects/prestashop/source/develop/.travis.yml" "~/projects/prestashop/source/develop/tests/E2E/scripts/run-nightly-tests.sh" "~/projects/prestashop/source/develop/classes/Dispatcher.php" "/home/got/projects/prestashop/source/develop/tools/assets/build.sh" "~/projects/prestashop/source/develop/admin-dev/filemanager/js/dropzone.min.js" "~/projects/prestashop/source/develop/admin-dev/themes/default/js/help.js" "/home/got/projects/prestashop/source/develop/.gitignore" "/home/got/projects/prestashop/source/develop/package.json" "/home/got/projects/prestashop/source/develop/.eslintrc.js" "/home/got/projects/prestashop/source/develop/.eslintignore" "/home/got/projects/prestashop/source/develop/modules/ps_emailalerts/ps_emailalerts.php" "~/projects/prestashop/source/develop/classes/PrestaShopLogger.php" "/home/got/projects/prestashop/source/develop/index.php" "/home/got/projects/prestashop/source/develop/modules/ps_emailalerts/ps_emailalerts.php" "/home/got/projects/prestashop/source/develop/modules/ps_emailalerts/.gitignore" "/home/got/projects/prestashop/source/develop/modules/ps_emailalerts/MailAlert.php" "/home/got/projects/prestashop/source/develop/modules/ps_emailalerts/mailalerts.php" "/home/got/projects/prestashop/source/develop/modules/ps_searchbar/composer.json" "/home/got/projects/prestashop/source/develop/modules/ps_searchbar/Readme.md" "/home/got/projects/prestashop/source/develop/modules/ps_searchbar/composer.json" "/home/got/projects/prestashop/source/develop/tests/E2E/scripts/combine-reports.py" "/home/got/projects/prestashop/source/develop/tests/E2E/scripts/run-nightly-tests.sh" "/home/got/projects/prestashop/source/develop/tests/E2E/campaigns/full-03_category.json" "/home/got/projects/prestashop/source/develop/tests/E2E/campaigns/full-02_product.json" "/home/got/projects/prestashop/source/develop/tests/E2E/campaigns/test.json" "/home/got/projects/prestashop/source/develop/tests/E2E/scripts/combine-reports.py" "/home/got/projects/prestashop/source/develop/.gitignore" "/home/got/projects/prestashop/source/develop/admin-dev/themes/new-theme/package-lock.json" "/home/got/projects/prestashop/source/develop/composer.json" "/home/got/projects/prestashop/source/develop/package.json" "/home/got/projects/prestashop/source/develop/admin-dev/themes/new-theme/webpack.config.js" "/home/got/projects/prestashop/source/develop/admin-dev/themes/new-theme/package-lock.json" "/home/got/projects/prestashop/source/develop/admin-dev/themes/new-theme/package.json" "/home/got/projects/prestashop/source/develop/admin-dev/themes/new-theme/package-lock.json" "/home/got/projects/prestashop/source/develop/.git/info/refs" "~/projects/prestashop/source/develop/.git/" "/home/got/projects/prestashop/source/develop/.gitignore" "/home/got/projects/prestashop/source/develop/tests/E2E/scripts/run-nightly-tests.sh" "/home/got/projects/prestashop/source/develop/tests/E2E/package.json" "/home/got/projects/prestashop/source/develop/tests/E2E/node_modules/pdf-to-text/index.js" "/home/got/projects/prestashop/source/develop/tests/E2E/test/campaigns/high/01_orders/1_create_order_in_BO.js" "/home/got/projects/prestashop/source/develop/tests/E2E/test/campaigns/full/01_orders/01_create_order_in_BO.js" "/home/got/projects/prestashop/source/develop/tests/E2E/test/campaigns/high/01_orders/1_create_order_in_BO.js" "/home/got/projects/prestashop/source/develop/tests/E2E/test/campaigns/full/01_orders/01_create_order_in_BO.js" "/home/got/projects/prestashop/source/develop/tests/E2E/scripts/run-nightly-tests.sh" "/home/got/projects/prestashop/source/develop/tests/E2E/scripts/combine-reports.py" "/home/got/projects/prestashop/source/develop/README.md" "/home/got/projects/prestashop/source/develop/admin-dev/themes/new-theme/package-lock.json" "/home/got/projects/prestashop/source/develop/tests/E2E/.docker/prestashop/docker_run.sh" "/home/got/projects/prestashop/source/develop/tests/E2E/.docker/prestashop/Dockerfile" "/home/got/projects/prestashop/source/develop/tests/E2E/docker-compose.yml" "/home/got/projects/prestashop/source/develop/docker-compose.yml" "/home/got/projects/prestashop/source/documentation" "~/projects/prestashop/source/develop/tests/E2E/.docker/prestashop/wait-for-it.sh" "~/projects/prestashop/source/develop/tests/E2E/docker-compose.yml" "~/projects/prestashop/source/develop/docker-compose.yml" "/home/got/projects/prestashop/ready/docker/.env" "/home/got/projects/prestashop/source/.env" "~/projects/prestashop/source/key.json" "~/projects/prestashop/source/.env" "/home/got/projects/prestashop/source/.env" "/home/got/projects/prestashop/source/develop/.travis.yml" "~/projects/prestashop/source/develop/themes/classic/config/theme.yml" "~/projects/prestashop/source/develop/src/PrestaShopBundle/Install/Install.php" "/home/got/projects/prestashop/source/develop/README.md" "/home/got/projects/prestashop/source/develop/INSTALL.txt" "/home/got/projects/prestashop/source/develop/.htaccess" "/home/got/projects/prestashop/source/develop/img/p/2/2/22.jpg" "/home/got/projects/prestashop/source/develop/.htaccess" "~/projects/prestashop/source/develop/src/Core/Foundation/Filesystem/FileSystem.php" "/home/got/projects/prestashop/source/develop/robots.txt" "/etc/apache2/apache2.conf" "/etc/apache2/sites-enabled/ps_develop.conf"))
+
+;; Buffer section -- buffers listed in same order as in buffer list:
+(desktop-create-buffer 208
+  "/home/got/projects/prestashop/nightly-board/pages/index.vue"
+  "index.vue"
+  'web-mode
+  '(guru-mode global-auto-revert-mode project-persist-mode projectile-mode smartparens-mode volatile-highlights-mode flx-ido-mode anzu-mode undo-tree-mode magit-file-mode kbd-mode flycheck-mode editorconfig-mode)
+  5488
+  '(5483 nil)
+  nil
+  nil
+  '((tab-width . 2) (indent-tabs-mode) (buffer-display-time 23838 64397 396060 933000) (buffer-file-coding-system . utf-8-unix) (case-fold-search . t))
+  '((mark-ring (5483 3734 3751 6463 4422 5419 5553 6745 1 3763 4636 2820 5155 6837 6826 2878))))
+
+(desktop-create-buffer 208
+  "/home/got/projects/prestashop/nightly-board/README.md"
+  "README.md"
+  'markdown-mode
+  '(abbrev-mode eldoc-mode global-auto-revert-mode project-persist-mode projectile-mode smartparens-mode volatile-highlights-mode flx-ido-mode anzu-mode undo-tree-mode magit-file-mode kbd-mode flycheck-mode editorconfig-mode)
+  489
+  '(273 nil)
+  nil
+  nil
+  '((tab-width . 2) (indent-tabs-mode) (buffer-display-time 23838 64396 867940 959000) (buffer-file-coding-system . utf-8-unix))
+  '((mark-ring (273))))
+
+(desktop-create-buffer 208
+  "/home/got/projects/prestashop/nightly-board/pages/README.md"
+  "README.md"
+  'markdown-mode
+  '(abbrev-mode eldoc-mode global-auto-revert-mode project-persist-mode projectile-mode smartparens-mode volatile-highlights-mode flx-ido-mode anzu-mode undo-tree-mode magit-file-mode kbd-mode flycheck-mode editorconfig-mode)
+  1
+  '(nil nil)
+  nil
+  nil
+  '((tab-width . 2) (indent-tabs-mode) (buffer-display-time 23838 63820 736885 112000) (buffer-file-coding-system . utf-8-unix))
+  '((mark-ring nil)))
+
+(desktop-create-buffer 208
+  "/home/got/projects/prestashop/nightly-board/package.json"
+  "package.json"
+  'json-mode
+  '(guru-mode global-auto-revert-mode project-persist-mode projectile-mode smartparens-mode volatile-highlights-mode flx-ido-mode anzu-mode undo-tree-mode magit-file-mode kbd-mode flycheck-mode editorconfig-mode)
+  460
+  '(387 nil)
+  nil
+  nil
+  '((tab-width . 2) (indent-tabs-mode) (buffer-display-time 23838 57073 964751 675000) (buffer-file-coding-system . utf-8-unix))
+  '((mark-ring (387 387 387 387 387))))
+
+(desktop-create-buffer 208
+  nil
+  "nightly-board"
+  'dired-mode
+  '(global-auto-revert-mode project-persist-mode projectile-mode volatile-highlights-mode flx-ido-mode anzu-mode kbd-mode editorconfig-mode)
+  241
+  '(237 nil)
+  t
+  '("/home/got/projects/prestashop/nightly-board/")
+  '((buffer-display-time 23837 46416 904327 482000))
+  '((mark-ring (237))))
+
+(desktop-create-buffer 208
+  "/home/got/projects/prestashop/nightly-board/.eslintrc.js"
+  ".eslintrc.js"
+  'web-mode
+  '(guru-mode global-auto-revert-mode project-persist-mode projectile-mode smartparens-mode volatile-highlights-mode flx-ido-mode anzu-mode undo-tree-mode magit-file-mode kbd-mode flycheck-mode editorconfig-mode)
+  240
+  '(247 nil)
+  nil
+  nil
+  '((tab-width . 2) (indent-tabs-mode) (buffer-display-time 23837 44336 96355 614000) (buffer-file-coding-system . utf-8-unix) (case-fold-search . t))
+  '((mark-ring (210 209 191 192 179 245 92 149 98 247 1))))
+
+(desktop-create-buffer 208
+  nil
+  "pages"
+  'dired-mode
+  '(global-auto-revert-mode project-persist-mode projectile-mode volatile-highlights-mode flx-ido-mode anzu-mode kbd-mode editorconfig-mode)
+  233
+  '(nil nil)
+  t
+  '("/home/got/projects/prestashop/nightly-board/pages/")
+  '((buffer-display-time 23838 64347 553536 795000))
+  '((mark-ring nil)))
+
