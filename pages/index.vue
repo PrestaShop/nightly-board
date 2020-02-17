@@ -366,9 +366,9 @@
     font-weight: normal;
     text-decoration: none;
     padding: 0 5px;
+    font-weight: 600;
 
     &:hover {
-      font-weight: 600;
       color: $primary;
       padding-right: 0;
 
