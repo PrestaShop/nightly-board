@@ -397,6 +397,7 @@
 <style lang="scss">
   .preston-logo {
     margin: 10px 50px;
+    margin-left: 20px;
 
     img {
       height: 40px;
