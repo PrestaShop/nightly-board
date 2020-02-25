@@ -22,6 +22,10 @@
           "
         >
           <p :class="{ hasFailed: suite.totalFailures }" class="suites-title">
+            <v-icon size="18" :color="$vuetify.theme.themes.light.primary">
+              library_books
+            </v-icon>
+
             {{ suite.title }}
           </p>
 
@@ -223,7 +227,7 @@
 
         &-title {
           color: #4c4f57;
-          font-size: 14px;
+          font-size: 16px;
           font-weight: bold;
           margin-bottom: 0;
           padding-left: 5px;
@@ -275,8 +279,13 @@
       line-height: 27px;
       margin-bottom: 10px;
 
+      .v-icon {
+        display: inline-block;
+        vertical-align: middle;
+      }
+
       &.hasFailed {
-        color: $red;
+        color: lighten($red, 10%);
       }
     }
   }
