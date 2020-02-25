@@ -26,7 +26,7 @@
             class="icon-pending"
             size="15"
           >
-            check
+            pause
           </v-icon>
           <v-icon
             v-if="test.state === 'failed'"
@@ -39,13 +39,16 @@
           {{ test.title }}
         </p>
 
-        <span>
+        <span v-if="test.duration">
           <v-icon size="18">timer</v-icon>
           {{ $moment.duration(test.duration).asSeconds() }}s
         </span>
       </div>
 
-      <p class="tests-stacktrace" v-if="testsOpened.includes(test.id)">
+      <p
+        class="tests-stacktrace"
+        v-if="testsOpened.includes(test.id) && test.state === 'failed'"
+      >
         {{ test.stack_trace }}
       </p>
     </li>

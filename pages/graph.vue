@@ -1,9 +1,5 @@
 <template>
   <div class="graph" v-resize="onResize" :class="{ isMobile }">
-    <sidebar v-if="!isMobile">
-      <filters />
-    </sidebar>
-
     <div class="center">
       <top-bar v-if="params && params.periods">
         <template v-slot:left>
@@ -35,27 +31,30 @@
       </top-bar>
 
       <div class="chart-container">
-        <h2 class="chart-title">Percentage of tests passed and failed</h2>
-        <Chart
-          :chart-data="this.graphDatasets"
-          :options="{
-            maintainAspectRatio: false,
-            animation: null,
-            scales: {
-              xAxes: [
-                {
-                  stacked: true
-                }
-              ],
-              yAxes: [
-                {
-                  stacked: true
-                }
-              ]
-            }
-          }"
-          :height="500"
-        />
+        <h2 class="chart-title">Tests statistics</h2>
+
+        <div class="chart-container-inside">
+          <Chart
+            :chart-data="this.graphDatasets"
+            :options="{
+              maintainAspectRatio: false,
+              animation: null,
+              scales: {
+                xAxes: [
+                  {
+                    stacked: true
+                  }
+                ],
+                yAxes: [
+                  {
+                    stacked: true
+                  }
+                ]
+              }
+            }"
+            :height="500"
+          />
+        </div>
       </div>
     </div>
     <template v-if="!graph">
@@ -66,10 +65,8 @@
 
 <script>
   import { BulletListLoader } from 'vue-content-loader'
-  import Sidebar from '~/components/reusable/Sidebar'
   import TopBar from '~/components/reusable/TopBar'
   import Chart from '~/components/reusable/Chart'
-  import Filters from '~/components/reusable/Filters'
   import URLS from '~/constants/urls'
 
   const GRAPH_API = URLS.domain + URLS.graph
@@ -78,9 +75,7 @@
   export default {
     components: {
       BulletListLoader,
-      Sidebar,
       TopBar,
-      Filters,
       Chart
     },
     data() {
@@ -256,6 +251,11 @@
     background-color: #ffffff;
     box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.1);
     padding: 15px;
+    overflow: scroll;
+
+    &-inside {
+      min-width: 700px;
+    }
   }
 
   .chart-title {
@@ -268,8 +268,7 @@
   }
 
   .graph {
-    padding: 0 290px;
-    padding-right: 50px;
+    padding: 0 50px;
 
     .icon-success {
       background: #c1f4d1;

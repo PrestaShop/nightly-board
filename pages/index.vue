@@ -10,6 +10,7 @@
           :items="files"
           :headers="isMobile ? [] : headers"
           :pagination.sync="pagination"
+          :rows-per-page-items="[20, 50, { text: 'All', value: -1 }]"
           :footer-props="{
             showFirstLastPage: true,
             firstIcon: 'mdi-arrow-collapse-left',
@@ -35,6 +36,9 @@
                     <span>View Report</span>
                   </template>
                 </nuxt-link>
+                <p class="lowdisplay" v-else>
+                  No tests found
+                </p>
               </td>
               <td>
                 <template v-if="props.suites">
@@ -52,14 +56,20 @@
                   </v-icon>
                 </template>
               </td>
-              <td>{{ props.item.date }}</td>
-              <td>{{ props.item.version }}</td>
+              <td :class="{ lowdisplay: !props.item.suites }">
+                {{ props.item.date }}
+              </td>
+              <td :class="{ lowdisplay: !props.item.suites }">
+                {{ props.item.version }}
+              </td>
               <td>
-                {{ $moment(props.item.start_date).format('h:mm:ss') }} -
-                {{ $moment(props.item.end_date).format('h:mm:ss') }}
-                ({{ $moment.duration(props.item.duration).hours() }}h{{
-                  $moment.duration(props.item.duration).minutes()
-                }}m{{ $moment.duration(props.item.duration).seconds() }}s)
+                <template v-if="props.item.duration">
+                  {{ $moment(props.item.start_date).format('h:mm:ss') }} -
+                  {{ $moment(props.item.end_date).format('h:mm:ss') }}
+                  ({{ $moment.utc(props.item.duration).format('H') }}h{{
+                    $moment.utc(props.item.duration).format('mm')
+                  }}m{{ $moment.utc(props.item.duration).format('ss') }}s)
+                </template>
               </td>
               <td>
                 <template
@@ -165,10 +175,10 @@
                   <ul>
                     <li>{{ props.item.date }}</li>
                     <li>{{ props.item.version }}</li>
-                    <li>
-                      {{ $moment.duration(props.item.duration).hours() }}h{{
-                        $moment.duration(props.item.duration).minutes()
-                      }}m{{ $moment.duration(props.item.duration).seconds() }}s
+                    <li v-if="props.items.duration">
+                      ({{ $moment.utc(props.item.duration).format('H') }}h{{
+                        $moment.utc(props.item.duration).format('mm')
+                      }}m{{ $moment.utc(props.item.duration).format('ss') }}s)
                     </li>
                     <li>
                       <template
@@ -267,7 +277,7 @@
         pagination: {
           descending: true,
           page: 1,
-          rowsPerPage: 10,
+          rowsPerPage: 20,
           sortBy: 'date'
         },
         headers: [
@@ -380,6 +390,11 @@
         text-decoration: underline;
       }
     }
+  }
+
+  .lowdisplay {
+    opacity: 0.5;
+    margin: 0;
   }
 
   .mobile {

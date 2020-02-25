@@ -46,7 +46,7 @@
         </div>
         <v-switch v-model="isShowPending" class="ma-2"></v-switch>
       </div>
-      <div class="filter">
+      <!-- <div class="filter">
         <div class="filter-label">
           <v-icon size="16" color="#B3C7CD">
             nights_stay
@@ -54,7 +54,7 @@
           <span>Dark mode</span>
         </div>
         <v-switch v-model="isDark" class="ma-2"></v-switch>
-      </div>
+      </div> -->
     </div>
   </div>
 </template>
@@ -196,7 +196,7 @@
           width: 35px;
           border-radius: 1000px;
           opacity: 1;
-          background-color: #d2d2d2;
+          background-color: $lowgray;
         }
 
         &--switch__thumb {

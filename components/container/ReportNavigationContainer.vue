@@ -14,6 +14,11 @@
   .reportNavigation-container {
     overflow-y: scroll;
     max-height: 400px;
+    border: 1px solid #eaeaea;
+    margin: -5px;
+    padding: 10px;
+    border-radius: 4px;
+    box-shadow: 0 0 6px 0 #0000001c;
 
     &:hover::-webkit-scrollbar-thumb {
       background: #b7ced3;

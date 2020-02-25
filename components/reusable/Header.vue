@@ -5,8 +5,12 @@
     <Menu v-if="!isMobile" />
     <h1>{{ pageTitle }}</h1>
     <div class="dates" v-if="!isMobile">
-      <p class="start-date" v-if="reportDates">{{ reportDates.startDate }}</p>
-      <p class="end-date" v-if="reportDates">{{ reportDates.endDate }}</p>
+      <p class="start-date" v-if="reportDates">
+        Start date : {{ reportDates.startDate }}
+      </p>
+      <p class="end-date" v-if="reportDates">
+        End date : {{ reportDates.endDate }}
+      </p>
     </div>
   </div>
 </template>

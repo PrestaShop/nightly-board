@@ -5,11 +5,10 @@
       <div class="separator"></div>
 
       <h2>Navigation</h2>
-      <report-navigation-container>
-        <report-navigation
-          :items="report.suites_data"
-          v-if="report && report.suites_data"
-        />
+      <report-navigation-container
+        v-if="report && report.suites_data && report.suites_data.length !== 0"
+      >
+        <report-navigation :items="report.suites_data" />
 
         <template v-if="!report.suites_data">
           <bullet-list-loader :speed="999" class="list-loader" />
@@ -19,6 +18,13 @@
 
     <div class="center">
       <search />
+
+      <p
+        class="not-found"
+        v-if="report && report.suites_data && report.suites_data.length <= 0"
+      >
+        No results found. Try another search ?
+      </p>
 
       <suites :items="report.suites_data" v-if="report && report.suites_data" />
     </div>
@@ -151,6 +157,13 @@
     padding: 0 290px;
     padding-right: 210px;
 
+    .not-found {
+      color: $primary;
+      font-size: 20px;
+      font-weight: bold;
+      text-align: center;
+    }
+
     .icon-success {
       background: #c1f4d1;
     }
@@ -181,11 +194,16 @@
       padding: 0;
       margin-bottom: 15px;
 
+      i {
+        color: #759299;
+      }
+
       li {
         list-style-type: none;
         color: #363a41;
         font-weight: 14px;
         margin-bottom: 10px;
+        font-size: 14px;
       }
     }
   }
