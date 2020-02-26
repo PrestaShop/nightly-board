@@ -29,8 +29,8 @@
             {{ suite.title }}
           </p>
 
-          <div class="suite-infos">
-            <p class="suite-time">
+          <div class="suite-infos" v-if="!isChild">
+            <p class="suite-time" v-if="suite.duration">
               <v-icon size="18">timer</v-icon>
               {{ $moment.duration(suite.duration).asSeconds() }}s
             </p>
@@ -46,7 +46,66 @@
               }}
             </p>
 
-            <p class="suite-passed">
+            <p class="suite-passed" v-if="suite.childrenData.totalPasses !== 0">
+              <v-icon size="18">check</v-icon>
+              {{ suite.childrenData.totalPasses }}
+            </p>
+
+            <p
+              class="suite-pending"
+              v-if="suite.childrenData.totalPending !== 0"
+            >
+              <v-icon size="18">pause</v-icon>
+              {{ suite.childrenData.totalPending }}
+            </p>
+
+            <p
+              class="suite-failed"
+              v-if="suite.childrenData.totalFailures !== 0"
+            >
+              <v-icon size="18">close</v-icon>
+              {{ suite.childrenData.totalFailures }}
+            </p>
+
+            <v-icon
+              v-if="
+                !$store.state.testsOpened.includes(suite.id) &&
+                  !$store.state.searchOpened.includes(suite.id) &&
+                  isChild
+              "
+              color="#759299"
+            >
+              keyboard_arrow_down
+            </v-icon>
+            <v-icon
+              v-if="
+                ($store.state.testsOpened.includes(suite.id) ||
+                  $store.state.searchOpened.includes(suite.id)) &&
+                  isChild
+              "
+            >
+              keyboard_arrow_up
+            </v-icon>
+          </div>
+
+          <div class="suite-infos" v-if="isChild">
+            <p class="suite-time" v-if="suite.duration">
+              <v-icon size="18">timer</v-icon>
+              {{ $moment.duration(suite.duration).asSeconds() }}s
+            </p>
+
+            <p class="suite-assignment">
+              <v-icon size="18">assignment</v-icon>
+              {{
+                suites.tests && suite.tests.length > 0
+                  ? suite.tests.length
+                  : suite.tests
+                  ? Object.keys(suite.tests).length
+                  : 0
+              }}
+            </p>
+
+            <p class="suite-passed" v-if="suite.totalPasses !== 0">
               <v-icon size="18">check</v-icon>
               {{ suite.totalPasses }}
             </p>
