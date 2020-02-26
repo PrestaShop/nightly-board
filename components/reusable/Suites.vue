@@ -35,7 +35,10 @@
               {{ $moment.duration(suite.duration).asSeconds() }}s
             </p>
 
-            <p class="suite-assignment">
+            <p
+              class="suite-assignment"
+              v-if="suite && suite.tests && suite.tests.length > 0"
+            >
               <v-icon size="18">assignment</v-icon>
               {{
                 suites.tests && suite.tests.length > 0
@@ -94,7 +97,10 @@
               {{ $moment.duration(suite.duration).asSeconds() }}s
             </p>
 
-            <p class="suite-assignment">
+            <p
+              class="suite-assignment"
+              v-if="suite && suite.tests && suite.tests.length > 0"
+            >
               <v-icon size="18">assignment</v-icon>
               {{
                 suites.tests && suite.tests.length > 0
