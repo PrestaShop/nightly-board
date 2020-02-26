@@ -29,6 +29,22 @@ export const state = () => {
   }
 }
 
+function toggleTests(state, values) {
+  console.log(values.suite)
+  Object.keys(values.suite.suites).forEach(e => {
+    if (!state.testsOpened.includes(values.suite.suites[e].id)) {
+      state.testsOpened.push(values.suite.suites[e].id)
+
+      if (values.suite.suites[e].suites) {
+        toggleTests(state, {suite: values.suite.suites[e], show: true})
+      }
+    } else if (!values.show) {
+      const indexToDelete = state.testsOpened.indexOf(values.suite.suites[e].id)
+      state.testsOpened = [...state.testsOpened.slice(0, indexToDelete), ...state.testsOpened.slice(indexToDelete + 1)]
+    }
+  })
+}
+
 export const mutations = {
   changePageTitle(state, pageTitle) {
     state.pageTitle = pageTitle
@@ -44,12 +60,13 @@ export const mutations = {
   toggleTests(state, values) {
     if (!state.testsOpened.includes(values.suite.id)) {
       state.testsOpened.push(values.suite.id)
+
+      if (values.suite.suites) {
+        toggleTests(state, values)
+      }
     } else if (!values.show) {
       const indexToDelete = state.testsOpened.indexOf(values.suite.id)
-      state.testsOpened = [
-        ...state.testsOpened.slice(0, indexToDelete),
-        ...state.testsOpened.slice(indexToDelete + 1)
-      ]
+      state.testsOpened = [...state.testsOpened.slice(0, indexToDelete), ...state.testsOpened.slice(indexToDelete + 1)]
     }
   },
   updateSearch(state, values) {
@@ -60,10 +77,7 @@ export const mutations = {
       state.searchOpened.push(values.suite.id)
     } else if (!values.show) {
       const indexToDelete = state.searchOpened.indexOf(values.suite.id)
-      state.searchOpened = [
-        ...state.searchOpened.slice(0, indexToDelete),
-        ...state.searchOpened.slice(indexToDelete + 1)
-      ]
+      state.searchOpened = [...state.searchOpened.slice(0, indexToDelete), ...state.searchOpened.slice(indexToDelete + 1)]
     }
   },
   toggleGraphFilter(state, values) {
