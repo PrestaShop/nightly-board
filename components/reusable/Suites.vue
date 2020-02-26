@@ -20,6 +20,7 @@
               show: false
             })
           "
+          :class="{ isChild }"
         >
           <p :class="{ hasFailed: suite.totalFailures }" class="suites-title">
             <v-icon size="18" :color="$vuetify.theme.themes.light.primary">
@@ -33,20 +34,6 @@
             <p class="suite-time" v-if="suite.duration">
               <v-icon size="18">timer</v-icon>
               {{ $moment.duration(suite.duration).asSeconds() }}s
-            </p>
-
-            <p
-              class="suite-assignment"
-              v-if="suite && suite.tests && suite.tests.length > 0"
-            >
-              <v-icon size="18">assignment</v-icon>
-              {{
-                suites.tests && suite.tests.length > 0
-                  ? suite.tests.length
-                  : suite.tests
-                  ? Object.keys(suite.tests).length
-                  : 0
-              }}
             </p>
 
             <p class="suite-passed" v-if="suite.childrenData.totalPasses !== 0">
@@ -97,10 +84,7 @@
               {{ $moment.duration(suite.duration).asSeconds() }}s
             </p>
 
-            <p
-              class="suite-assignment"
-              v-if="suite && suite.tests && suite.tests.length > 0"
-            >
+            <p class="suite-assignment">
               <v-icon size="18">assignment</v-icon>
               {{
                 suites.tests && suite.tests.length > 0
@@ -151,12 +135,13 @@
         <tests
           :items="suite.tests"
           v-if="
-            ($store.state.testsOpened.includes(suite.id) ||
+            ((($store.state.testsOpened.includes(suite.id) ||
               $store.state.searchOpened.includes(suite.id)) &&
-              suite.hasTests &&
               ((suite.tests && suite.tests.length > 0) ||
                 (Object.keys(suite.tests) &&
-                  Object.keys(suite.tests).length > 0))
+                  Object.keys(suite.tests).length > 0))) ||
+              isChild) &&
+              suite.hasTests
           "
         />
 
@@ -165,7 +150,9 @@
           :is-child="true"
           v-if="
             ($store.state.testsOpened.includes(suite.id) && suite.hasSuites) ||
-              ($store.state.searchOpened.includes(suite.id) && suite.hasSuites)
+              ($store.state.searchOpened.includes(suite.id) &&
+                suite.hasSuites) ||
+              (suite.hasSuites && isChild)
           "
           :parent="suite"
           class="childs"
@@ -398,11 +385,14 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      cursor: pointer;
       transition: 0.4s ease-out;
 
-      &:hover {
-        opacity: 0.6;
+      &:not(.isChild) {
+        cursor: pointer;
+
+        &:hover {
+          opacity: 0.6;
+        }
       }
     }
   }
