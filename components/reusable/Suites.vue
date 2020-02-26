@@ -135,12 +135,10 @@
         <tests
           :items="suite.tests"
           v-if="
-            ((($store.state.testsOpened.includes(suite.id) ||
+            ($store.state.testsOpened.includes(suite.id) ||
               $store.state.searchOpened.includes(suite.id)) &&
-              ((suite.tests && suite.tests.length > 0) ||
-                (Object.keys(suite.tests) &&
-                  Object.keys(suite.tests).length > 0))) ||
-              isChild) &&
+              suite.tests &&
+              suite.tests.length > 0 &&
               suite.hasTests
           "
         />
@@ -150,9 +148,7 @@
           :is-child="true"
           v-if="
             ($store.state.testsOpened.includes(suite.id) && suite.hasSuites) ||
-              ($store.state.searchOpened.includes(suite.id) &&
-                suite.hasSuites) ||
-              (suite.hasSuites && isChild)
+              ($store.state.searchOpened.includes(suite.id) && suite.hasSuites)
           "
           :parent="suite"
           class="childs"
@@ -386,13 +382,10 @@
       align-items: center;
       justify-content: space-between;
       transition: 0.4s ease-out;
+      cursor: pointer;
 
-      &:not(.isChild) {
-        cursor: pointer;
-
-        &:hover {
-          opacity: 0.6;
-        }
+      &:hover {
+        opacity: 0.6;
       }
     }
   }

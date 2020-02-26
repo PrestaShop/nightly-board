@@ -69,9 +69,7 @@
         testsOpened: []
       }
     },
-    mounted() {
-      console.log(this.items)
-    },
+    mounted() {},
     methods: {
       toggleTests(test) {
         if (!this.testsOpened.includes(test.id)) {
