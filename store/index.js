@@ -30,7 +30,6 @@ export const state = () => {
 }
 
 function toggleTests(state, values) {
-  console.log(values.suite)
   Object.keys(values.suite.suites).forEach(e => {
     if (!state.testsOpened.includes(values.suite.suites[e].id)) {
       state.testsOpened.push(values.suite.suites[e].id)
@@ -67,6 +66,10 @@ export const mutations = {
     } else if (!values.show) {
       const indexToDelete = state.testsOpened.indexOf(values.suite.id)
       state.testsOpened = [...state.testsOpened.slice(0, indexToDelete), ...state.testsOpened.slice(indexToDelete + 1)]
+
+      if (values.suite.suites) {
+        toggleTests(state, values)
+      }
     }
   },
   updateSearch(state, values) {
