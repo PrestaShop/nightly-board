@@ -8,7 +8,11 @@
       :class="{
         titleMargin:
           (!$store.state.testsOpened.includes(suite.id) && suite.hasSuites) ||
-          (!$store.state.searchOpened.includes(suite.id) && suite.hasSuites)
+          (!$store.state.searchOpened.includes(suite.id) && suite.hasSuites),
+        hasFailed:
+          suite && suite.childrenData && suite.childrenData.totalFailures !== 0,
+        hasPendings:
+          suite && suite.childrenData && suite.childrenData.totalPending !== 0
       }"
     >
       <div class="suite">
@@ -261,6 +265,14 @@
           padding: 5px;
           border: 1px solid darken(white, 20%);
 
+          &.hasFailed {
+            background: lighten($red, 40%);
+          }
+
+          &.hasPendings {
+            background: lighten($blue, 40%);
+          }
+
           &:not(:last-child) {
             border-bottom-left-radius: 0;
             border-bottom-right-radius: 0;
@@ -312,6 +324,14 @@
       box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.1);
       padding: 15px 19px;
       margin-bottom: 15px;
+
+      &.hasFailed {
+        background: lighten($red, 36%);
+      }
+
+      &.hasPendings {
+        background: lighten($blue, 47%);
+      }
 
       &.titleMargin {
         .suites-title {
