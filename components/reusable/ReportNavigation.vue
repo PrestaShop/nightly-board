@@ -9,7 +9,14 @@
     <li :key="suite.id" v-for="suite in suites" class="navigation-item">
       <p
         @click="dispatchEvent(suite)"
-        :class="{ hasFailed: suite.totalFailures }"
+        :class="{
+          hasFailed:
+            suite &&
+            suite.childrenData &&
+            suite.childrenData.totalFailures !== 0,
+          hasPendings:
+            suite && suite.childrenData && suite.childrenData.totalPending !== 0
+        }"
         class="navigation-title"
         v-scroll-to="'#suite-' + suite.id"
       >
@@ -127,7 +134,11 @@
       }
 
       &.hasFailed {
-        color: $red;
+        color: lighten($red, 10%);
+      }
+
+      &.hasPendings {
+        color: lighten($blue, 10%);
       }
     }
   }

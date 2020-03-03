@@ -26,7 +26,19 @@
           "
           :class="{ isChild }"
         >
-          <p :class="{ hasFailed: suite.totalFailures }" class="suites-title">
+          <p
+            :class="{
+              hasFailed:
+                suite &&
+                suite.childrenData &&
+                suite.childrenData.totalFailures !== 0,
+              hasPendings:
+                suite &&
+                suite.childrenData &&
+                suite.childrenData.totalPending !== 0
+            }"
+            class="suites-title"
+          >
             <v-icon size="18" :color="$vuetify.theme.themes.light.primary">
               library_books
             </v-icon>
@@ -383,6 +395,10 @@
 
       &.hasFailed {
         color: lighten($red, 10%);
+      }
+
+      &.hasPendings {
+        color: lighten($blue, 10%);
       }
     }
   }
