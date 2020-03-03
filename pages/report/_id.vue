@@ -14,9 +14,11 @@
           <bullet-list-loader
             :speed="999"
             class="list-loader"
-            :primary-color="$store.state.localConfig.isDark ? '#191A20' : null"
+            :primary-color="
+              $store.state.localConfig.isDark ? '#191A20' : '#f6f6f6'
+            "
             :secondary-color="
-              $store.state.localConfig.isDark ? '#191a20' : null
+              $store.state.localConfig.isDark ? '#191a20' : '#949494'
             "
           />
         </template>
@@ -39,8 +41,10 @@
       <bullet-list-loader
         :speed="10"
         class="list-loader"
-        :primary-color="$store.state.localConfig.isDark ? '#191A20' : null"
-        :secondary-color="$store.state.localConfig.isDark ? '#191a20' : null"
+        :primary-color="$store.state.localConfig.isDark ? '#191A20' : '#f6f6f6'"
+        :secondary-color="
+          $store.state.localConfig.isDark ? '#191a20' : '#949494'
+        "
       />
     </template>
 

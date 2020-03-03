@@ -24,10 +24,10 @@
               :speed="2"
               class="list-loader"
               :primary-color="
-                $store.state.localConfig.isDark ? '#191A20' : null
+                $store.state.localConfig.isDark ? '#191A20' : '#f6f6f6'
               "
               :secondary-color="
-                $store.state.localConfig.isDark ? '#191a20' : null
+                $store.state.localConfig.isDark ? '#191a20' : '#949494'
               "
             />
           </template>
@@ -277,6 +277,18 @@
     components: {
       BulletListLoader
     },
+    computed: {
+      isDark: {
+        get() {
+          return this.$store.state.localConfig.isDark
+        },
+        set(value) {
+          this.$store.commit('changeLocalConfig', {
+            isDark: value
+          })
+        }
+      }
+    },
     data() {
       return {
         ignoredBranches: [],
@@ -472,6 +484,10 @@
   .theme--light.v-table,
   table.v-table {
     transition: 0.4s ease-out;
+
+    .v-datatable__actions {
+      transition: 0.4s ease-out;
+    }
 
     thead {
       th {

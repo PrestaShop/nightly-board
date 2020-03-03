@@ -58,7 +58,14 @@
       </div>
     </div>
     <template v-if="!graph">
-      <bullet-list-loader :speed="2" class="list-loader" />
+      <bullet-list-loader
+        :speed="2"
+        class="list-loader"
+        :primary-color="$store.state.localConfig.isDark ? '#191A20' : '#f6f6f6'"
+        :secondary-color="
+          $store.state.localConfig.isDark ? '#191a20' : '#949494'
+        "
+      />
     </template>
   </div>
 </template>

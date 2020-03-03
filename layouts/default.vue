@@ -3,6 +3,24 @@
     <v-content>
       <Header :title="title" />
       <nuxt />
+      <v-btn
+        @click="toggleDark"
+        color="#011638"
+        v-if="
+          $store.state.pageTitle == 'Nightly reports' ||
+            $store.state.pageTitle == 'Graph'
+        "
+        class="night-button"
+        dark
+        small
+        fixed
+        bottom
+        right
+        fab
+      >
+        <v-icon v-if="$store.state.localConfig.isDark">flash_on</v-icon>
+        <v-icon v-else>nights_stay</v-icon>
+      </v-btn>
     </v-content>
   </v-app>
 </template>
@@ -13,6 +31,13 @@
   export default {
     components: {
       Header
+    },
+    methods: {
+      toggleDark() {
+        this.$store.commit('changeLocalConfig', {
+          isDark: !this.$store.state.localConfig.isDark
+        })
+      }
     },
     data() {
       return {
@@ -59,6 +84,17 @@
       #app.theme--light.application {
         background: $backgroundDark;
       }
+
+      .night-button {
+        background: $greyDark !important;
+      }
+    }
+  }
+
+  .night-button {
+    @media screen and (max-width: 768px) {
+      left: 20px;
+      right: inherit;
     }
   }
 
