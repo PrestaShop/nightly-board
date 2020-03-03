@@ -20,6 +20,10 @@
     border-radius: 4px;
     box-shadow: 0 0 6px 0 #0000001c;
 
+    @at-root .dark & {
+      border: 1px solid #363636;
+    }
+
     &:hover::-webkit-scrollbar-thumb {
       background: #b7ced3;
     }

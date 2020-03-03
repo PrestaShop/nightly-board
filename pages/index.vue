@@ -20,7 +20,16 @@
           }"
         >
           <template v-slot:no-data>
-            <bullet-list-loader :speed="2" class="list-loader" />
+            <bullet-list-loader
+              :speed="2"
+              class="list-loader"
+              :primary-color="
+                $store.state.localConfig.isDark ? '#191A20' : null
+              "
+              :secondary-color="
+                $store.state.localConfig.isDark ? '#191a20' : null
+              "
+            />
           </template>
 
           <template slot="items" slot-scope="props">
@@ -175,7 +184,7 @@
                   <ul>
                     <li>{{ props.item.date }}</li>
                     <li>{{ props.item.version }}</li>
-                    <li v-if="props.items.duration">
+                    <li v-if="props.item.duration">
                       ({{ $moment.utc(props.item.duration).format('H') }}h{{
                         $moment.utc(props.item.duration).format('mm')
                       }}m{{ $moment.utc(props.item.duration).format('ss') }}s)
@@ -377,6 +386,25 @@
     text-decoration: none;
     padding: 0 5px;
     font-weight: 600;
+    transition: 0.4s ease-out;
+
+    @at-root .dark & {
+      &,
+      i {
+        color: #a5a5a5;
+      }
+
+      &:hover {
+        &,
+        i {
+          color: darken(white, 7%);
+        }
+      }
+    }
+
+    i {
+      transition: 0.4s ease-out;
+    }
 
     &:hover {
       color: $primary;
@@ -402,6 +430,10 @@
       display: flex;
       border-bottom: 1px solid darken(white, 5%);
 
+      @at-root .dark & {
+        border-bottom: 1px solid #363636;
+      }
+
       &-left {
         width: 40%;
       }
@@ -414,13 +446,33 @@
           font-size: 14px;
           font-weight: bold;
           margin: 10px 0;
+
+          @at-root & {
+            color: white;
+          }
         }
+      }
+    }
+  }
+
+  .dark .theme--light.v-table.v-datatable {
+    .v-datatable__actions,
+    & {
+      background-color: $greyDark;
+
+      &,
+      .v-icon,
+      .v-select__selection,
+      .v-input {
+        color: white !important;
       }
     }
   }
 
   .theme--light.v-table,
   table.v-table {
+    transition: 0.4s ease-out;
+
     thead {
       th {
       }
@@ -430,6 +482,10 @@
         &-line {
           &:not(:last-child) {
             border-bottom: 1px solid darken(white, 5%);
+
+            @at-root .dark & {
+              border-bottom: 1px solid #363636;
+            }
           }
 
           td {
@@ -492,6 +548,10 @@
           font-weight: normal;
           white-space: nowrap;
 
+          @at-root .dark & {
+            color: white;
+          }
+
           .v-chip {
             margin-right: 15px;
             margin-left: 0;
@@ -504,6 +564,10 @@
               height: 19px;
               border-radius: 50%;
               margin-right: 5px;
+
+              @at-root .dark &.v-icon {
+                color: $greyDark !important;
+              }
             }
 
             &.success-chip i {
@@ -539,11 +603,19 @@
     font-size: 14px;
     font-weight: bold;
     line-height: 20px;
+
+    @at-root .dark & {
+      color: white;
+    }
   }
 
   .theme--light.v-datatable thead th.column.sortable .v-icon,
   .theme--light.v-datatable thead th.column.sortable.active .v-icon {
     color: $primary;
+
+    @at-root .dark & {
+      color: white;
+    }
   }
 
   .container-home {
@@ -563,8 +635,8 @@
       }
     }
 
-    @at-root .theme--dark & {
-      background: black;
+    @at-root .dark & {
+      background: $greyDark;
     }
   }
 </style>

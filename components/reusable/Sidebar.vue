@@ -25,5 +25,10 @@
     position: fixed;
     top: 60px;
     left: 0;
+    transition: 0.4s ease-out;
+
+    @at-root .dark & {
+      background: $greyDark;
+    }
   }
 </style>

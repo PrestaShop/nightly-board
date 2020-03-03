@@ -77,6 +77,11 @@
     box-shadow: 0 0 10px 0 rgba(black, 0.2);
     z-index: 10;
     min-height: 50px;
+    transition: 0.4s ease-out;
+
+    @at-root .dark & {
+      background: $primaryDark;
+    }
 
     &.isMobile {
       padding: 0 15px;

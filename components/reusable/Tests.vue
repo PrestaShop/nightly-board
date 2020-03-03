@@ -92,6 +92,11 @@
     background: lighten($blue, 47%);
     border-radius: 4px;
     padding: 5px 0;
+    transition: 0.4s ease-out;
+
+    @at-root .dark & {
+      background: #2a2b33;
+    }
 
     .icon-success {
       background: #c1f4d1;
@@ -150,6 +155,11 @@
       p {
         margin: 5px 0;
         font-size: 15px;
+        transition: 0.4s ease-out;
+
+        @at-root .dark & {
+          color: darken(white, 25%);
+        }
       }
 
       &.failed {

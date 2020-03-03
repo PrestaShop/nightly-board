@@ -265,6 +265,10 @@
           padding: 5px;
           border: 1px solid darken(white, 20%);
 
+          @at-root .dark & {
+            border: 1px solid #363636;
+          }
+
           &.hasFailed {
             background: lighten($red, 40%);
           }
@@ -291,6 +295,10 @@
           font-weight: bold;
           margin-bottom: 0;
           padding-left: 5px;
+
+          @at-root .dark & {
+            color: white;
+          }
 
           .v-icon {
             display: none;
@@ -324,13 +332,26 @@
       box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.1);
       padding: 15px 19px;
       margin-bottom: 15px;
+      transition: 0.4s ease-out;
+
+      @at-root .dark & {
+        background-color: $greyDark;
+      }
 
       &.hasFailed {
         background: lighten($red, 36%);
+
+        @at-root .dark & {
+          background-color: #422222;
+        }
       }
 
       &.hasPendings {
         background: lighten($blue, 47%);
+
+        @at-root .dark & {
+          background-color: #1b4365;
+        }
       }
 
       &.titleMargin {
@@ -347,9 +368,17 @@
       line-height: 27px;
       margin-bottom: 10px;
 
+      @at-root .dark & {
+        color: white;
+      }
+
       .v-icon {
         display: inline-block;
         vertical-align: middle;
+
+        @at-root .dark & {
+          color: white !important;
+        }
       }
 
       &.hasFailed {
@@ -361,6 +390,12 @@
   .suite {
     &-infos {
       display: flex;
+
+      > .v-icon {
+        @at-root .dark & {
+          color: #8ba7ad;
+        }
+      }
 
       p {
         color: #8ba7ad;

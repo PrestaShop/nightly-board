@@ -98,6 +98,10 @@
         font-size: 14px;
         line-height: 19px;
         font-weight: normal;
+
+        @at-root .dark & {
+          color: darken(white, 25%);
+        }
       }
     }
 
@@ -113,6 +117,10 @@
       cursor: pointer;
       transition: 0.4s ease-out;
       margin-bottom: 5px;
+
+      @at-root .dark & {
+        color: darken(white, 15%);
+      }
 
       &:hover {
         opacity: 0.6;

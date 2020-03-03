@@ -11,7 +11,14 @@
         <report-navigation :items="report.suites_data" />
 
         <template v-if="!report.suites_data">
-          <bullet-list-loader :speed="999" class="list-loader" />
+          <bullet-list-loader
+            :speed="999"
+            class="list-loader"
+            :primary-color="$store.state.localConfig.isDark ? '#191A20' : null"
+            :secondary-color="
+              $store.state.localConfig.isDark ? '#191a20' : null
+            "
+          />
         </template>
       </report-navigation-container>
     </sidebar>
@@ -29,7 +36,12 @@
       <suites :items="report.suites_data" v-if="report && report.suites_data" />
     </div>
     <template v-if="!report.suites_data">
-      <bullet-list-loader :speed="10" class="list-loader" />
+      <bullet-list-loader
+        :speed="10"
+        class="list-loader"
+        :primary-color="$store.state.localConfig.isDark ? '#191A20' : null"
+        :secondary-color="$store.state.localConfig.isDark ? '#191a20' : null"
+      />
     </template>
 
     <infos-bar>
@@ -176,11 +188,15 @@
 
     .separator {
       height: 1px;
-      border: 1px solid #e1e7e9;
+      border-top: 1px solid #e1e7e9;
       margin-left: -19px;
       width: calc(100% + 38px);
       margin-top: 5px;
       margin-bottom: 15px;
+
+      @at-root .dark & {
+        border: 1px solid #363636;
+      }
     }
 
     .v-icon {
@@ -204,6 +220,10 @@
         font-weight: 14px;
         margin-bottom: 10px;
         font-size: 14px;
+
+        @at-root .dark & {
+          color: #a5a5a5;
+        }
       }
     }
   }
@@ -240,6 +260,10 @@
             margin: 0 5px;
             color: #363a41;
             font-size: 12px;
+
+            @at-root .dark & {
+              color: white;
+            }
           }
         }
       }

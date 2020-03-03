@@ -46,7 +46,7 @@
         </div>
         <v-switch v-model="isShowPending" class="ma-2"></v-switch>
       </div>
-      <!-- <div class="filter">
+      <div class="filter">
         <div class="filter-label">
           <v-icon size="16" color="#B3C7CD">
             nights_stay
@@ -54,7 +54,7 @@
           <span>Dark mode</span>
         </div>
         <v-switch v-model="isDark" class="ma-2"></v-switch>
-      </div> -->
+      </div>
     </div>
   </div>
 </template>
@@ -146,11 +146,15 @@
 
     .separator {
       height: 1px;
-      border: 1px solid #e1e7e9;
+      border-top: 1px solid #e1e7e9;
       margin-left: -19px;
       width: calc(100% + 38px);
       margin-top: 5px;
       margin-bottom: 15px;
+
+      @at-root .dark & {
+        border-top: 1px solid #363636;
+      }
     }
 
     .v-icon {
@@ -164,6 +168,12 @@
       align-items: center;
       justify-content: space-between;
       margin-bottom: 10px;
+
+      &-label {
+        @at-root .dark & {
+          color: darken(white, 25%);
+        }
+      }
 
       .v-messages {
         display: none;
@@ -197,6 +207,11 @@
           border-radius: 1000px;
           opacity: 1;
           background-color: $lowgray;
+          opacity: 0.4s ease-out;
+
+          @at-root .dark & {
+            background-color: lighten($greyDark, 7%);
+          }
         }
 
         &--switch__thumb {

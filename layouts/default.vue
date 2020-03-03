@@ -25,6 +25,13 @@
       if (localConfig) {
         this.$store.commit('changeLocalConfig', localConfig)
       }
+    },
+    head() {
+      return {
+        bodyAttrs: {
+          class: this.$store.state.localConfig.isDark ? 'dark' : 'light'
+        }
+      }
     }
   }
 </script>
@@ -44,6 +51,15 @@
 
   body {
     padding-top: 60px;
+    transition: 0.4s ease-out;
+
+    &.dark {
+      background: $backgroundDark;
+
+      #app.theme--light.application {
+        background: $backgroundDark;
+      }
+    }
   }
 
   *,
@@ -89,6 +105,7 @@
   #app.theme--light.application {
     background: #f6f6f6;
     padding: 20px 0;
+    transition: 0.4s ease-out;
   }
 
   h2 {
@@ -97,5 +114,9 @@
     line-height: 22px;
     color: $primary;
     margin-bottom: 15px;
+
+    @at-root .dark & {
+      color: white;
+    }
   }
 </style>

@@ -130,6 +130,10 @@
       padding-top: 40px;
       box-sizing: border-box;
 
+      @at-root .dark & {
+        background: $primaryDark;
+      }
+
       .responsiveNav {
         padding: 0 15px;
 
@@ -137,6 +141,12 @@
           display: flex;
           align-items: center;
           justify-content: space-between;
+
+          .v-icon {
+            @at-root .dark & {
+              color: white !important;
+            }
+          }
         }
       }
 
@@ -147,6 +157,12 @@
           display: flex;
           align-items: center;
           justify-content: space-between;
+
+          .v-icon {
+            @at-root .dark & {
+              color: white !important;
+            }
+          }
         }
       }
 
@@ -160,6 +176,10 @@
         .filter-label {
           color: #363a41;
           font-size: 14px;
+
+          @at-root .dark & {
+            color: white !important;
+          }
 
           i {
             vertical-align: middle;
@@ -179,6 +199,10 @@
             padding: 10px 15px;
             display: block;
             border-bottom: 1px solid darken(white, 15%);
+
+            @at-root .dark & {
+              border-bottom: 1px solid lighten($greyDark, 7%);
+            }
           }
         }
       }
@@ -187,6 +211,10 @@
         position: absolute;
         top: 10px;
         right: 10px;
+
+        @at-root .dark & {
+          color: white !important;
+        }
       }
 
       &.opened {

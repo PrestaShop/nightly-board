@@ -1,6 +1,12 @@
 <template>
   <div class="search">
-    <input type="text" name="search" id="search" v-model="search" />
+    <input
+      type="text"
+      name="search"
+      id="search"
+      placeholder="Rechercher"
+      v-model="search"
+    />
 
     <div class="icon">
       <v-icon size="22" color="#759299">
@@ -68,6 +74,13 @@
       border-right: 0;
       padding: 0 10px;
       font-size: 14px;
+
+      @at-root .dark & {
+        background-color: $greyDark;
+        border: 1px solid lighten($greyDark, 5%);
+        border-right: 0;
+        color: white;
+      }
     }
 
     .icon {
@@ -79,6 +92,15 @@
       border: 1px solid #b3c7cd;
       border-radius: 0 3px 3px 0;
       background-color: #f6f6f6;
+
+      @at-root .dark & {
+        background-color: transparent;
+        border: 1px solid lighten($greyDark, 5%);
+
+        .v-icon {
+          color: white !important;
+        }
+      }
 
       .v-icon {
         margin-right: 0;

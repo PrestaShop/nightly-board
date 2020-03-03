@@ -87,48 +87,6 @@
         isMobile: false
       }
     },
-    computed: {
-      isShowSuccess: {
-        get() {
-          return this.$store.state.localConfig.isShowSuccess
-        },
-        set(value) {
-          this.$store.commit('changeLocalConfig', {
-            isShowSuccess: value
-          })
-        }
-      },
-      isShowFailed: {
-        get() {
-          return this.$store.state.localConfig.isShowFailed
-        },
-        set(value) {
-          this.$store.commit('changeLocalConfig', {
-            isShowFailed: value
-          })
-        }
-      },
-      isShowPending: {
-        get() {
-          return this.$store.state.localConfig.isShowPending
-        },
-        set(value) {
-          this.$store.commit('changeLocalConfig', {
-            isShowPending: value
-          })
-        }
-      },
-      isDark: {
-        get() {
-          return this.$store.state.localConfig.isDark
-        },
-        set(value) {
-          this.$store.commit('changeLocalConfig', {
-            isDark: value
-          })
-        }
-      }
-    },
     methods: {
       onResize() {
         if (window.innerWidth < 769) {
@@ -252,6 +210,11 @@
     box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.1);
     padding: 15px;
     overflow: scroll;
+    transition: 0.4s ease-out;
+
+    @at-root .dark & {
+      background-color: $greyDark;
+    }
 
     &-inside {
       min-width: 700px;
@@ -298,6 +261,10 @@
         color: #363a41;
         font-size: 14px;
         line-height: 19px;
+
+        @at-root .dark & {
+          color: white;
+        }
       }
 
       .v-input {
@@ -306,6 +273,10 @@
         .v-icon {
           color: #363a41;
           font-size: 18px;
+
+          @at-root .dark & {
+            color: white;
+          }
         }
 
         &__slot {
@@ -315,6 +286,11 @@
           min-height: initial;
           box-shadow: none !important;
           border-radius: 4px !important;
+
+          @at-root .dark & {
+            border: 1px solid lighten($greyDark, 7%);
+            background: $greyDark;
+          }
         }
 
         .v-select {
@@ -323,6 +299,10 @@
             font-family: 'Open Sans';
             font-size: 14px;
             line-height: 19px;
+
+            @at-root .dark & {
+              color: white;
+            }
           }
         }
       }
@@ -335,12 +315,25 @@
     background-color: #f0fcfd;
     border: 1px solid #b7ced3;
 
+    @at-root .dark & {
+      border: 1px solid lighten($greyDark, 7%);
+      background-color: $greyDark !important;
+    }
+
     .v-list {
       padding: 0;
+
+      @at-root .dark & {
+        background-color: $greyDark !important;
+      }
 
       > div {
         &:not(:first-child) {
           border-top: 1px solid #b7ced3;
+
+          @at-root .dark & {
+            border-top: 1px solid lighten($greyDark, 7%);
+          }
         }
       }
 
@@ -349,6 +342,10 @@
 
         &:hover {
           background-color: #f0fcfd !important;
+
+          @at-root .dark & {
+            background-color: lighten($greyDark, 7%) !important;
+          }
         }
       }
 
@@ -356,6 +353,10 @@
         color: #011640;
         font-size: 14px;
         font-weight: 600;
+
+        @at-root .dark & {
+          color: white;
+        }
       }
     }
   }

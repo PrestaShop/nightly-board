@@ -45,6 +45,10 @@
       .menu {
         &-link {
           color: $primary;
+
+          @at-root .dark & {
+            color: white;
+          }
         }
       }
     }
