@@ -46,15 +46,6 @@
         </div>
         <v-switch v-model="isShowPending" class="ma-2"></v-switch>
       </div>
-      <div class="filter">
-        <div class="filter-label">
-          <v-icon size="16" color="#B3C7CD">
-            nights_stay
-          </v-icon>
-          <span>Dark mode</span>
-        </div>
-        <v-switch v-model="isDark" class="ma-2"></v-switch>
-      </div>
     </div>
   </div>
 </template>
@@ -115,16 +106,6 @@
 
           this.$store.commit('getSuites', {
             params: this.$route.params
-          })
-        }
-      },
-      isDark: {
-        get() {
-          return this.$store.state.localConfig.isDark
-        },
-        set(value) {
-          this.$store.commit('changeLocalConfig', {
-            isDark: value
           })
         }
       }

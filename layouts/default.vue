@@ -6,10 +6,6 @@
       <v-btn
         @click="toggleDark"
         color="#011638"
-        v-if="
-          $store.state.pageTitle == 'Nightly reports' ||
-            $store.state.pageTitle == 'Graph'
-        "
         class="night-button"
         dark
         small
