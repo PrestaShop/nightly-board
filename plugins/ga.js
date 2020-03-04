@@ -1,15 +1,14 @@
 /* eslint-disable */
 
-import constants from '~/constants/settings.json'
-
 export default ({app}) => {
   /*
    ** Only run on client-side and only in production mode
    */
-  if (process.env.NODE_ENV !== 'production')
-    return /*
-     ** Include Google Analytics Script
-     */
+  if (process.env.NODE_ENV !== 'production') return
+  /*
+   ** Include Google Analytics Script
+   */
+  console.log(process.env.ga)
   ;(function(i, s, o, g, r, a, m) {
     i['GoogleAnalyticsObject'] = r
     ;(i[r] =
@@ -26,7 +25,7 @@ export default ({app}) => {
   /*
    ** Set the current page
    */
-  ga('create', constants.ga, 'auto')
+  ga('create', process.env.ga, 'auto')
   /*
    ** Every time the route changes (fired on initialization too)
    */

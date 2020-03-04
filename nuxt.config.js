@@ -1,8 +1,13 @@
 /* eslint-disable no-param-reassign */
 const pkg = require('./package')
 
+console.log(process.env.QANB_GA)
+
 module.exports = {
   mode: 'universal',
+  env: {
+    ga: process.env.QANB_GA || 'UA-XXXXXXXX-X'
+  },
 
   /*
    ** Headers of the page
