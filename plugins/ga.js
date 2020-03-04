@@ -4,11 +4,10 @@ export default ({app}) => {
   /*
    ** Only run on client-side and only in production mode
    */
-  if (process.env.NODE_ENV !== 'production') return
-  /*
-   ** Include Google Analytics Script
-   */
-  console.log(process.env.ga)
+  if (process.env.NODE_ENV !== 'production')
+    return /*
+     ** Include Google Analytics Script
+     */
   ;(function(i, s, o, g, r, a, m) {
     i['GoogleAnalyticsObject'] = r
     ;(i[r] =
