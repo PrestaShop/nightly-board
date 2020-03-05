@@ -5,7 +5,7 @@ module.exports = {
   mode: 'universal',
   env: {
     ga: process.env.QANB_GA || 'UA-XXXXXXXX-X',
-    DOMAIN_URL: process.env.DOMAIN_URL || 'http://www.qa.local/'
+    DOMAIN_URL: process.env.QANB_API_DOMAIN || 'http://www.qa.local/'
   },
 
   /*
