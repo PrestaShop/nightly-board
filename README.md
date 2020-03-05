@@ -20,3 +20,12 @@ $ npm run generate
 ```
 
 For detailed explanation on how things work, checkout [Nuxt.js docs](https://nuxtjs.org).
+
+### Configuration
+
+You must pass the values via environment variables. Here they are:
+
+|Variables          |   |
+|-------------------|---|
+| QANB_GA           | Google Analytics key  |
+| QANB_API_DOMAIN   | URL for the API backend (must ends with a `/`)  |
