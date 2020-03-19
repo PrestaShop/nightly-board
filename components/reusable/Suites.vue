@@ -429,7 +429,7 @@
         background: lighten($skipped, 30%);
 
         @at-root .dark & {
-          background-color: #62bfb5;
+          background-color: #285d57;
         }
       }
 
@@ -470,6 +470,10 @@
 
       &.hasSkipped {
         color: lighten($skipped, 1%);
+
+        @at-root .dark & {
+          color: lighten($skipped, 10%);
+        }
       }
     }
   }
