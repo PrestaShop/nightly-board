@@ -409,6 +409,18 @@
         background-color: $greyDark;
       }
 
+      &.hasPendings {
+        background: lighten($blue, 47%);
+
+        .suites-title i {
+          color: $blue !important;
+        }
+
+        @at-root .dark & {
+          background-color: #1b4365;
+        }
+      }
+
       &.hasSkipped {
         background: $skippedBg;
 
@@ -421,16 +433,12 @@
         }
       }
 
-      &.hasPendings {
-        background: lighten($blue, 47%);
-
-        @at-root .dark & {
-          background-color: #1b4365;
-        }
-      }
-
       &.hasFailed {
         background: lighten($red, 36%);
+
+        .suites-title i {
+          color: $red !important;
+        }
 
         @at-root .dark & {
           background-color: #422222;
@@ -464,19 +472,19 @@
         }
       }
 
-      &.hasSkipped {
-        color: lighten($skipped, 1%);
-
-        @at-root .dark & {
-          color: lighten($skipped, 10%);
-        }
-      }
-
       &.hasPendings {
         color: lighten($blue, 10%);
 
         @at-root .dark & {
           color: lighten($blue, 10%);
+        }
+      }
+
+      &.hasSkipped {
+        color: lighten($skipped, 1%);
+
+        @at-root .dark & {
+          color: lighten($skipped, 10%);
         }
       }
 
