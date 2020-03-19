@@ -676,6 +676,12 @@
             &.pending-chip i {
               background: #beeaf3;
             }
+
+            &.skipped-chip {
+              @at-root .dark & {
+                color: $skippedBg !important;
+              }
+            }
           }
           a {
             @include showLink;

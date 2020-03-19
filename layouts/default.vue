@@ -153,7 +153,7 @@
   }
 
   .icon-skipped {
-    background: #daf2f0;
+    background: $skippedBg;
     font-weight: bold;
     line-height: 10px;
     width: 19px;

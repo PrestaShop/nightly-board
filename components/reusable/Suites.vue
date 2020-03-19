@@ -337,7 +337,7 @@
           }
 
           &.hasSkipped {
-            background: lighten($skipped, 40%);
+            background: $skippedBg;
           }
 
           &.hasPendings {
@@ -410,10 +410,14 @@
       }
 
       &.hasSkipped {
-        background: lighten($skipped, 30%);
+        background: $skippedBg;
+
+        .suites-title i {
+          color: $skipped !important;
+        }
 
         @at-root .dark & {
-          background-color: #285d57;
+          background: $skippedBg;
         }
       }
 
