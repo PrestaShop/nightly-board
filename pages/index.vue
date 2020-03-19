@@ -650,6 +650,12 @@
             .v-chip__content {
               padding: 0;
             }
+
+            .icon-skipped {
+              @at-root .dark & svg {
+                fill: $greyDark !important;
+              }
+            }
             i {
               width: 19px;
               height: 19px;
