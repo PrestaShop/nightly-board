@@ -12,7 +12,9 @@
         hasFailed:
           suite && suite.childrenData && suite.childrenData.totalFailures !== 0,
         hasPendings:
-          suite && suite.childrenData && suite.childrenData.totalPending !== 0
+          suite && suite.childrenData && suite.childrenData.totalPending !== 0,
+        hasSkipped:
+          suite && suite.childrenData && suite.childrenData.totalSkipped !== 0
       }"
     >
       <div class="suite">
@@ -35,7 +37,11 @@
               hasPendings:
                 suite &&
                 suite.childrenData &&
-                suite.childrenData.totalPending !== 0
+                suite.childrenData.totalPending !== 0,
+              hasSkipped:
+                suite &&
+                suite.childrenData &&
+                suite.childrenData.totalSkipped !== 0
             }"
             class="suites-title"
           >
@@ -71,6 +77,32 @@
             >
               <v-icon size="18">close</v-icon>
               {{ suite.childrenData.totalFailures }}
+            </p>
+
+            <p
+              class="suite-skipped"
+              v-if="suite.childrenData.totalSkipped !== 0"
+            >
+              <span class="icon-skipped">
+                <svg
+                  version="1.1"
+                  id="Layer_1"
+                  xmlns="http://www.w3.org/2000/svg"
+                  xmlns:xlink="http://www.w3.org/1999/xlink"
+                  x="0px"
+                  y="0px"
+                  width="44px"
+                  height="44px"
+                  viewBox="0 0 44 44"
+                  enable-background="new 0 0 44 44"
+                  xml:space="preserve"
+                >
+                  <g>
+                    <path d="M27,29H17V0h10V29z M27,44H17v-8h10V44z" />
+                  </g>
+                </svg>
+              </span>
+              {{ suite.childrenData.totalSkipped }}
             </p>
 
             <v-icon
@@ -124,6 +156,29 @@
             <p class="suite-failed" v-if="suite.totalFailures !== 0">
               <v-icon size="18">close</v-icon>
               {{ suite.totalFailures }}
+            </p>
+
+            <p class="suite-skipped" v-if="suite.totalSkipped !== 0">
+              <span class="icon-skipped">
+                <svg
+                  version="1.1"
+                  id="Layer_1"
+                  xmlns="http://www.w3.org/2000/svg"
+                  xmlns:xlink="http://www.w3.org/1999/xlink"
+                  x="0px"
+                  y="0px"
+                  width="44px"
+                  height="44px"
+                  viewBox="0 0 44 44"
+                  enable-background="new 0 0 44 44"
+                  xml:space="preserve"
+                >
+                  <g>
+                    <path d="M27,29H17V0h10V29z M27,44H17v-8h10V44z" />
+                  </g>
+                </svg>
+              </span>
+              {{ suite.totalSkipped }}
             </p>
 
             <v-icon
@@ -289,6 +344,10 @@
             background: lighten($blue, 40%);
           }
 
+          &.hasSkipped {
+            background: lighten($skipped, 40%);
+          }
+
           &:not(:last-child) {
             border-bottom-left-radius: 0;
             border-bottom-right-radius: 0;
@@ -366,6 +425,14 @@
         }
       }
 
+      &.hasSkipped {
+        background: lighten($skipped, 47%);
+
+        @at-root .dark & {
+          background-color: #62bfb5;
+        }
+      }
+
       &.titleMargin {
         .suites-title {
           margin-bottom: 0;
@@ -438,6 +505,18 @@
           &,
           .v-icon {
             color: $blue;
+          }
+        }
+
+        &.suite-skipped {
+          .icon-skipped {
+            background: none;
+            margin-right: 2px;
+            width: 12px;
+          }
+          &,
+          svg {
+            color: $skipped;
           }
         }
 

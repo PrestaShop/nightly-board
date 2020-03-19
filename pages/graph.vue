@@ -133,6 +133,7 @@
         const failed = this.graph.map(e => e.failures)
         const succ = this.graph.map(e => e.passes)
         const pass = this.graph.map(e => e.pending)
+        const skipped = this.graph.map(e => e.skipped)
 
         const labels = this.graph.map(e =>
           this.$moment(e.start_date).format('DD/MM/YYYY')
@@ -153,15 +154,22 @@
         }
 
         const passed = {
-          label: 'Skipped',
+          label: 'Paused',
           backgroundColor: '#6EDF8D',
           data: pass,
           order: 1
         }
 
+        const skippedShip = {
+          label: 'Skipped',
+          backgroundColor: '#62bfb5',
+          data: skipped,
+          order: 1
+        }
+
         this.graphDatasets = {
           labels,
-          datasets: [failures, success, passed]
+          datasets: [failures, success, passed, skippedShip]
         }
       }
     },

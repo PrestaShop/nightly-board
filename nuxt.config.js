@@ -67,7 +67,8 @@ module.exports = {
           color: {
             green: '#53D572',
             red: '#F54C3E',
-            blue: '#25B9D7'
+            blue: '#25B9D7',
+            skipped: '#62bfb5'
           }
         }
       }

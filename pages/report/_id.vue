@@ -100,6 +100,28 @@
           </v-icon>
           {{ report.pending }}
         </li>
+        <li>
+          <div class="icon-skipped">
+            <svg
+              version="1.1"
+              id="Layer_1"
+              xmlns="http://www.w3.org/2000/svg"
+              xmlns:xlink="http://www.w3.org/1999/xlink"
+              x="0px"
+              y="0px"
+              width="44px"
+              height="44px"
+              viewBox="0 0 44 44"
+              enable-background="new 0 0 44 44"
+              xml:space="preserve"
+            >
+              <g>
+                <path d="M27,29H17V0h10V29z M27,44H17v-8h10V44z" />
+              </g>
+            </svg>
+          </div>
+          {{ report.skipped }}
+        </li>
       </ul>
     </infos-bar>
   </div>

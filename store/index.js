@@ -9,6 +9,7 @@ export const state = () => {
     isShowSuccess: true,
     isShowPending: true,
     isShowFailed: true,
+    isShowSkippes: true,
     isDark: false
   }
 
@@ -80,7 +81,10 @@ export const mutations = {
       state.searchOpened.push(values.suite.id)
     } else if (!values.show) {
       const indexToDelete = state.searchOpened.indexOf(values.suite.id)
-      state.searchOpened = [...state.searchOpened.slice(0, indexToDelete), ...state.searchOpened.slice(indexToDelete + 1)]
+      state.searchOpened = [
+        ...state.searchOpened.slice(0, indexToDelete),
+        ...state.searchOpened.slice(indexToDelete + 1)
+      ]
     }
   },
   toggleGraphFilter(state, values) {
@@ -111,6 +115,10 @@ export const mutations = {
             break
           case 'isShowFailed':
             url += `filter_state[${counter}]=failed`
+
+            break
+          case 'isShowSkipped':
+            url += `filter_state[${counter}]=skipped`
 
             break
           default:

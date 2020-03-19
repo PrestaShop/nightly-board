@@ -142,6 +142,39 @@
                     </strong>
                   </v-chip>
                 </template>
+
+                <template
+                  v-if="props.item.tests && props.item.tests.skipped !== 0"
+                >
+                  <v-chip
+                    color="transparent"
+                    class="skipped-chip"
+                    :text-color="$vuetify.theme.themes.light.color.skipped"
+                  >
+                    <div class="icon-skipped">
+                      <svg
+                        version="1.1"
+                        id="Layer_1"
+                        xmlns="http://www.w3.org/2000/svg"
+                        xmlns:xlink="http://www.w3.org/1999/xlink"
+                        x="0px"
+                        y="0px"
+                        width="44px"
+                        height="44px"
+                        viewBox="0 0 44 44"
+                        enable-background="new 0 0 44 44"
+                        xml:space="preserve"
+                      >
+                        <g>
+                          <path d="M27,29H17V0h10V29z M27,44H17v-8h10V44z" />
+                        </g>
+                      </svg>
+                    </div>
+                    <strong>
+                      {{ props.item.tests.skipped }}
+                    </strong>
+                  </v-chip>
+                </template>
               </td>
               <td class="download-reports">
                 <a
@@ -252,6 +285,45 @@
                           </v-icon>
                           <strong>
                             {{ props.item.tests.pending }}
+                          </strong>
+                        </v-chip>
+                      </template>
+
+                      <template
+                        v-if="
+                          props.item.tests && props.item.tests.skipped !== 0
+                        "
+                      >
+                        <v-chip
+                          color="transparent"
+                          class="skipped-chip"
+                          :text-color="
+                            $vuetify.theme.themes.light.color.skipped
+                          "
+                        >
+                          <div class="icon-skipped">
+                            <svg
+                              version="1.1"
+                              id="Layer_1"
+                              xmlns="http://www.w3.org/2000/svg"
+                              xmlns:xlink="http://www.w3.org/1999/xlink"
+                              x="0px"
+                              y="0px"
+                              width="44px"
+                              height="44px"
+                              viewBox="0 0 44 44"
+                              enable-background="new 0 0 44 44"
+                              xml:space="preserve"
+                            >
+                              <g>
+                                <path
+                                  d="M27,29H17V0h10V29z M27,44H17v-8h10V44z"
+                                />
+                              </g>
+                            </svg>
+                          </div>
+                          <strong>
+                            {{ props.item.tests.skipped }}
                           </strong>
                         </v-chip>
                       </template>
@@ -371,6 +443,9 @@
        */
       hasPendings(props) {
         return props.item.tests.pending !== 0
+      },
+      hasSkipped(props) {
+        return props.item.tests.skipped !== 0
       },
       /**
        * Get stats for a specific report
@@ -636,7 +711,7 @@
 
   .container-home {
     width: calc(100% - 10px);
-    max-width: 1090px;
+    max-width: 1200px;
     border-radius: 5px;
     background-color: #ffffff;
     box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.1);

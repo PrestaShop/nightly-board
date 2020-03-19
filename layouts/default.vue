@@ -151,4 +151,23 @@
       color: white;
     }
   }
+
+  .icon-skipped {
+    background: #daf2f0;
+    font-weight: bold;
+    line-height: 10px;
+    width: 19px;
+    height: 19px;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 5px;
+
+    svg {
+      fill: $skipped;
+      width: 10px;
+      height: 10px;
+    }
+  }
 </style>
