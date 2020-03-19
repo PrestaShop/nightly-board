@@ -36,6 +36,25 @@
           >
             close
           </v-icon>
+          <span class="icon-skipped" v-if="test.state === 'skipped'">
+            <svg
+              version="1.1"
+              id="Layer_1"
+              xmlns="http://www.w3.org/2000/svg"
+              xmlns:xlink="http://www.w3.org/1999/xlink"
+              x="0px"
+              y="0px"
+              width="44px"
+              height="44px"
+              viewBox="0 0 44 44"
+              enable-background="new 0 0 44 44"
+              xml:space="preserve"
+            >
+              <g>
+                <path d="M27,29H17V0h10V29z M27,44H17v-8h10V44z" />
+              </g>
+            </svg>
+          </span>
           {{ test.title }}
         </p>
 
@@ -93,6 +112,10 @@
     border-radius: 4px;
     padding: 5px 0;
     transition: 0.4s ease-out;
+
+    .icon-skipped {
+      display: inline-flex;
+    }
 
     @at-root .dark & {
       background: #2a2b33;

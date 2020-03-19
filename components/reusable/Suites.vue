@@ -336,16 +336,16 @@
             border: 1px solid #363636;
           }
 
-          &.hasFailed {
-            background: lighten($red, 40%);
+          &.hasSkipped {
+            background: lighten($skipped, 40%);
           }
 
           &.hasPendings {
             background: lighten($blue, 40%);
           }
 
-          &.hasSkipped {
-            background: lighten($skipped, 40%);
+          &.hasFailed {
+            background: lighten($red, 40%);
           }
 
           &:not(:last-child) {
@@ -409,11 +409,11 @@
         background-color: $greyDark;
       }
 
-      &.hasFailed {
-        background: lighten($red, 36%);
+      &.hasSkipped {
+        background: lighten($skipped, 30%);
 
         @at-root .dark & {
-          background-color: #422222;
+          background-color: #285d57;
         }
       }
 
@@ -425,11 +425,11 @@
         }
       }
 
-      &.hasSkipped {
-        background: lighten($skipped, 30%);
+      &.hasFailed {
+        background: lighten($red, 36%);
 
         @at-root .dark & {
-          background-color: #285d57;
+          background-color: #422222;
         }
       }
 
@@ -460,19 +460,27 @@
         }
       }
 
-      &.hasFailed {
-        color: lighten($red, 10%);
-      }
-
-      &.hasPendings {
-        color: lighten($blue, 10%);
-      }
-
       &.hasSkipped {
         color: lighten($skipped, 1%);
 
         @at-root .dark & {
           color: lighten($skipped, 10%);
+        }
+      }
+
+      &.hasPendings {
+        color: lighten($blue, 10%);
+
+        @at-root .dark & {
+          color: lighten($blue, 10%);
+        }
+      }
+
+      &.hasFailed {
+        color: lighten($red, 10%);
+
+        @at-root .dark & {
+          color: lighten($red, 10%);
         }
       }
     }
