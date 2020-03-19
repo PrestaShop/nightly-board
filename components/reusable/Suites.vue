@@ -426,7 +426,7 @@
       }
 
       &.hasSkipped {
-        background: lighten($skipped, 47%);
+        background: lighten($skipped, 30%);
 
         @at-root .dark & {
           background-color: #62bfb5;
@@ -466,6 +466,10 @@
 
       &.hasPendings {
         color: lighten($blue, 10%);
+      }
+
+      &.hasSkipped {
+        color: lighten($skipped, 1%);
       }
     }
   }
