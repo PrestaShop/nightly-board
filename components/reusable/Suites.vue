@@ -325,6 +325,16 @@
     &.childs {
       margin-top: 15px;
 
+      .suite {
+        &-skipped {
+          color: $skippedBg;
+
+          svg {
+            fill: $skippedBg;
+          }
+        }
+      }
+
       .suites {
         &-item {
           box-shadow: none;
@@ -336,12 +346,12 @@
             border: 1px solid #363636;
           }
 
-          &.hasSkipped {
-            background: $skippedBg;
-          }
-
           &.hasPendings {
             background: lighten($blue, 40%);
+          }
+
+          &.hasSkipped {
+            background: $skippedBg;
           }
 
           &.hasFailed {
