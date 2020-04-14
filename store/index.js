@@ -141,7 +141,7 @@ export const mutations = {
     }
 
     try {
-      const {data} = await this.$axios.get(`${state.env.domain}${URLS.reports}`, {
+      const {data} = await this.$axios.get(url, {
         crossdomain: true
       })
 
