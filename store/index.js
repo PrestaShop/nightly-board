@@ -94,7 +94,6 @@ export const mutations = {
     Object.assign(state.graph, values.value)
   },
   async getSuites(state, values) {
-    console.log(state.env.domain)
     let url = `${state.env.domain}${URLS.reports}/${values.params.id}`
     let hasParams = false
     let counter = 0
