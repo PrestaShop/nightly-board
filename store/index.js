@@ -148,8 +148,8 @@ export const mutations = {
       state.pageTitle = `Report - ${this.$moment(data.date).format('DD/MM/YYYY')}`
 
       Object.assign(state, {
-        startDate: this.$moment(data.start_date).format('DD/MM/YYYY hh:mm'),
-        endDate: this.$moment(data.end_date).format('DD/MM/YYYY hh:mm')
+        startDate: this.$moment(data.start_date).format('DD/MM/YYYY LT'),
+        endDate: this.$moment(data.end_date).format('DD/MM/YYYY LT')
       })
 
       state.report = data

@@ -73,14 +73,14 @@
               </td>
               <td>
                 <template v-if="props.item.duration">
-                  {{ $moment(props.item.start_date).format('h:mm:ss') }} -
-                  {{ $moment(props.item.end_date).format('h:mm:ss') }}
+                  {{ $moment(props.item.start_date).format('LTS') }} -
+                  {{ $moment(props.item.end_date).format('LTS') }}
                   ({{ $moment.utc(props.item.duration).format('H') }}h{{
                     $moment.utc(props.item.duration).format('mm')
                   }}m{{ $moment.utc(props.item.duration).format('ss') }}s)
                 </template>
               </td>
-              <td>
+              <td class="no-padding">
                 <template
                   v-if="props.item.suites && props.item.tests.passed !== 0"
                 >
@@ -397,7 +397,7 @@
             value: 'stats',
             text: 'Content',
             sortable: false,
-            width: 250
+            width: 200
           },
           {
             value: 'actions',
@@ -640,6 +640,10 @@
           line-height: 19px;
           font-weight: normal;
           white-space: nowrap;
+
+          &.no-padding {
+            padding: 0;
+          }
 
           @at-root .dark & {
             color: white;
