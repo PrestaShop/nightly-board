@@ -7,8 +7,10 @@
       class="suites-item"
       :class="{
         titleMargin:
-          (!$store.state.testsOpened.includes(suite.id) && suite.hasSuites) ||
-          (!$store.state.searchOpened.includes(suite.id) && suite.hasSuites),
+          !$store.state.testsOpened.includes(suite.id) &&
+          suite.hasSuites &&
+          !$store.state.searchOpened.includes(suite.id) &&
+          suite.hasSuites,
         hasFailed:
           suite && suite.childrenData && suite.childrenData.totalFailures !== 0,
         hasPendings:
