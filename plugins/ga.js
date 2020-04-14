@@ -1,6 +1,6 @@
 /* eslint-disable */
 
-export default ({app}) => {
+export default ({store, app}) => {
   /*
    ** Only run on client-side and only in production mode
    */
@@ -24,7 +24,7 @@ export default ({app}) => {
   /*
    ** Set the current page
    */
-  ga('create', process.env.ga, 'auto')
+  ga('create', store.state.env.ga, 'auto')
   /*
    ** Every time the route changes (fired on initialization too)
    */

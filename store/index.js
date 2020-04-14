@@ -26,7 +26,8 @@ export const state = () => {
       version: ''
     },
     graphDatasets: {},
-    report: {}
+    report: {},
+    env: {}
   }
 }
 
@@ -46,6 +47,9 @@ function toggleTests(state, values) {
 }
 
 export const mutations = {
+  setEnv(state, env) {
+    state.env = env
+  },
   changePageTitle(state, pageTitle) {
     state.pageTitle = pageTitle
   },
@@ -91,7 +95,8 @@ export const mutations = {
     Object.assign(state.graph, values.value)
   },
   async getSuites(state, values) {
-    let url = `${REPORT_URL_API}/${values.params.id}`
+    console.log(state.env.domain)
+    let url = `${state.env.domain}${URLS.reports}/${values.params.id}`
     let hasParams = false
     let counter = 0
     state.report = {}
@@ -138,7 +143,7 @@ export const mutations = {
     }
 
     try {
-      const {data} = await this.$axios.get(url, {
+      const {data} = await this.$axios.get(`${state.env.domain}${URLS.reports}`, {
         crossdomain: true
       })
 
@@ -156,5 +161,16 @@ export const mutations = {
   },
   resetReport(state) {
     state.report = false
+  }
+}
+
+export const actions = {
+  nuxtServerInit({commit}) {
+    if (process.server) {
+      commit('setEnv', {
+        ga: process.env.QANB_GA || 'UA-XXXXXXXX-X',
+        domain: process.env.QANB_API_DOMAIN || 'http://www.qa.local/'
+      })
+    }
   }
 }

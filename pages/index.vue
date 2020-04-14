@@ -343,8 +343,6 @@
   import { BulletListLoader } from 'vue-content-loader'
   import URLS from '~/constants/urls'
 
-  const REPORTS_URL_API = URLS.domain + URLS.reports
-
   export default {
     components: {
       BulletListLoader
@@ -410,9 +408,13 @@
       }
     },
     async mounted() {
-      const { data } = await this.$axios.get(REPORTS_URL_API, {
-        crossdomain: true
-      })
+      console.log(this.$store.state)
+      const { data } = await this.$axios.get(
+        `${this.$store.state.env.domain}${URLS.reports}`,
+        {
+          crossdomain: true
+        }
+      )
 
       if (this.isMobile) {
         this.files = data.filter(e => e.tests)

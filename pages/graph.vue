@@ -76,9 +76,6 @@
   import Chart from '~/components/reusable/Chart'
   import URLS from '~/constants/urls'
 
-  const GRAPH_API = URLS.domain + URLS.graph
-  const PARAMS_API = URLS.domain + URLS.graphParameters
-
   export default {
     components: {
       BulletListLoader,
@@ -122,7 +119,7 @@
       },
       async setDatasets() {
         const { data } = await this.$axios.get(
-          `${GRAPH_API}?period=${this.$store.state.graph.period}&version=${this.$store.state.graph.version}`,
+          `${this.$store.state.env.domain}${URLS.graph}?period=${this.$store.state.graph.period}&version=${this.$store.state.graph.version}`,
           {
             crossdomain: true
           }
@@ -179,9 +176,12 @@
       }
 
       try {
-        const { data } = await this.$axios.get(`${PARAMS_API}`, {
-          crossdomain: true
-        })
+        const { data } = await this.$axios.get(
+          `${this.$store.state.env.domain}${URLS.graphParameters}`,
+          {
+            crossdomain: true
+          }
+        )
 
         this.params = data
         this.params.versions.values = this.params.versions.values.map(e => {
