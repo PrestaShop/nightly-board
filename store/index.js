@@ -1,6 +1,5 @@
 /* eslint-disable */
 import URLS from '~/constants/urls'
-const REPORT_URL_API = URLS.domain + URLS.reports
 
 export const strict = false
 
