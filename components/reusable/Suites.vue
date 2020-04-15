@@ -8,9 +8,7 @@
       :class="{
         titleMargin:
           !$store.state.testsOpened.includes(suite.id) &&
-          suite.hasSuites &&
-          !$store.state.searchOpened.includes(suite.id) &&
-          suite.hasSuites,
+          !$store.state.searchOpened.includes(suite.id),
         hasFailed:
           suite && suite.childrenData && suite.childrenData.totalFailures !== 0,
         hasPendings:
@@ -413,7 +411,7 @@
       border-radius: 5px;
       background-color: #ffffff;
       box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.1);
-      padding: 15px 19px;
+      padding: 6px 19px;
       margin-bottom: 15px;
       transition: 0.4s ease-out;
 
@@ -455,6 +453,10 @@
         @at-root .dark & {
           background-color: #422222;
         }
+      }
+
+      &:not(.titleMargin) {
+        padding-bottom: 10px;
       }
 
       &.titleMargin {
