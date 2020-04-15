@@ -30,7 +30,7 @@
       this.anim = Lottie.loadAnimation({
         container: this.$refs.lavContainer,
         renderer: 'svg',
-        loop: true,
+        loop: false,
         autoplay: true,
         animationData: animationData.default
       })
