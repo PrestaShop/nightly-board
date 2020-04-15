@@ -49,6 +49,10 @@
       text-decoration: none;
       font-size: 20px;
       font-weight: 600;
+
+      @at-root .dark & {
+        color: white;
+      }
     }
   }
 </style>
