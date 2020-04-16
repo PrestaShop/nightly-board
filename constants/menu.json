@@ -7,7 +7,7 @@
   },
   {
     "id": 2,
-    "name": "Graphs",
+    "name": "Graph",
     "route": "/graph",
     "icon": "timeline"
   }
