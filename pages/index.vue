@@ -20,16 +20,24 @@
           }"
         >
           <template v-slot:no-data>
-            <bullet-list-loader
-              :speed="2"
+            <content-loader
+              :speed="0.8"
               class="list-loader"
               :primary-color="
-                $store.state.localConfig.isDark ? '#191A20' : '#f6f6f6'
+                $store.state.localConfig.isDark ? '#191A20' : '#dedede'
               "
               :secondary-color="
-                $store.state.localConfig.isDark ? '#191a20' : '#949494'
+                $store.state.localConfig.isDark ? '#31333f' : '#bdbdbd'
               "
-            />
+            >
+              <rect x="0" y="0" rx="3" ry="3" width="100%" height="10" />
+              <rect x="0" y="20" rx="3" ry="3" width="100%" height="10" />
+              <rect x="0" y="40" rx="3" ry="3" width="100%" height="10" />
+              <rect x="0" y="60" rx="3" ry="3" width="100%" height="10" />
+              <rect x="0" y="80" rx="3" ry="3" width="100%" height="10" />
+              <rect x="0" y="100" rx="3" ry="3" width="100%" height="10" />
+              <rect x="0" y="120" rx="3" ry="3" width="100%" height="10" />
+            </content-loader>
           </template>
 
           <template slot="items" slot-scope="props">
@@ -340,12 +348,12 @@
 </template>
 
 <script>
-  import { BulletListLoader } from 'vue-content-loader'
+  import { ContentLoader } from 'vue-content-loader'
   import URLS from '~/constants/urls'
 
   export default {
     components: {
-      BulletListLoader
+      ContentLoader
     },
     computed: {
       isDark: {
@@ -414,15 +422,12 @@
           crossdomain: true
         }
       )
-
       if (this.isMobile) {
         this.files = data.filter(e => e.tests)
       } else {
         this.files = data
       }
-
       this.$store.commit('resetReport')
-
       this.$store.commit('changePageTitle', 'Nightly reports')
     },
     methods: {
@@ -560,6 +565,10 @@
   .theme--light.v-table,
   table.v-table {
     transition: 0.4s ease-out;
+
+    .list-loader {
+      margin: 20px 0;
+    }
 
     .v-datatable__actions {
       transition: 0.4s ease-out;

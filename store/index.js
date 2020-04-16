@@ -5,7 +5,7 @@ export const strict = false
 
 export const state = () => {
   let localConfig = {
-    isShowSuccess: true,
+    isShowSuccess: false,
     isShowPending: true,
     isShowFailed: true,
     isShowSkippes: true,
