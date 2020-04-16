@@ -12,6 +12,7 @@
 <script>
   import Lottie from 'lottie-web'
   import * as animationData from './404.json'
+  import * as animationDataDark from './404-dark.json'
 
   export default {
     props: ['error'],
@@ -23,18 +24,27 @@
           height: '500px',
           overflow: 'hidden',
           margin: '0 auto'
-        }
+        },
+        anim: null
       }
     },
     mounted() {
-      this.anim = Lottie.loadAnimation({
+      const anim = Lottie.loadAnimation({
         container: this.$refs.lavContainer,
         renderer: 'svg',
         loop: false,
         autoplay: true,
-        animationData: animationData.default
+        animationData: this.$store.state.localConfig.isDark
+          ? animationDataDark.default
+          : animationData.default
       })
       this.$emit('animCreated', this.anim)
+
+      anim.addEventListener('enterFrame', function(animation) {
+        if (animation.currentTime > anim.totalFrames - 17) {
+          anim.pause()
+        }
+      })
     }
   }
 </script>
