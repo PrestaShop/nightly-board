@@ -469,7 +469,7 @@
     &-title {
       color: $primary;
       font-size: 20px;
-      font-weight: bold;
+      font-weight: 500;
       line-height: 27px;
       margin-bottom: 10px;
 
