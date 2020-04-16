@@ -159,6 +159,40 @@ export const mutations = {
   },
   resetReport(state) {
     state.report = {}
+  },
+  doSecretThing(state) {
+    console.log(state.report)
+    let fullTotalSuccess = state.report.passes
+    let fullTotalSkipped = state.report.skipped
+    let fullTotalFailures = state.report.failures
+
+    Object.keys(state.report.suites_data).forEach((e, index) => {
+      const playGame = Math.floor(Math.random() * 100)
+
+      if (playGame < 20) {
+        let totalSuccess = state.report.suites_data[e].childrenData.totalPasses
+        let totalFailures = state.report.suites_data[e].childrenData.totalFailures
+        let totalSkipped = state.report.suites_data[e].childrenData.totalSkipped
+        let randomFailures = Math.floor(Math.random() * totalSuccess)
+        let randomSkipped = Math.floor(Math.random() * (totalSuccess - randomFailures))
+        let newTotalSuccess = totalSuccess - (randomFailures + randomSkipped)
+        console.log(randomFailures)
+
+        fullTotalSuccess = fullTotalSuccess - totalSuccess + newTotalSuccess
+        fullTotalFailures = fullTotalFailures + (randomFailures + totalFailures)
+        fullTotalSkipped = fullTotalSkipped + (randomSkipped + totalSkipped)
+
+        state.report.suites_data[e].childrenData.totalPasses = newTotalSuccess
+        state.report.suites_data[e].hasFailures = randomFailures ? randomFailures : 0
+        state.report.suites_data[e].hasSkipped = randomSkipped ? randomSkipped : 0
+        state.report.suites_data[e].childrenData.totalFailures = randomFailures + totalFailures
+        state.report.suites_data[e].childrenData.totalSkipped = randomSkipped + totalSkipped
+      }
+    })
+
+    state.report.passes = fullTotalSuccess
+    state.report.failures = fullTotalFailures
+    state.report.skipped = fullTotalSkipped
   }
 }
 

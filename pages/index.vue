@@ -422,11 +422,13 @@
           crossdomain: true
         }
       )
+
       if (this.isMobile) {
         this.files = data.filter(e => e.tests)
       } else {
         this.files = data
       }
+
       this.$store.commit('resetReport')
       this.$store.commit('changePageTitle', 'Nightly reports')
     },
