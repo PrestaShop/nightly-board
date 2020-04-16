@@ -158,7 +158,7 @@ export const mutations = {
     }
   },
   resetReport(state) {
-    state.report = false
+    state.report = {}
   }
 }
 
