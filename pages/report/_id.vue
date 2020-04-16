@@ -9,20 +9,34 @@
         v-if="report && report.suites_data && report.suites_data.length !== 0"
       >
         <report-navigation :items="report.suites_data" />
-
-        <template v-if="!report.suites_data">
-          <bullet-list-loader
-            :speed="999"
-            class="list-loader"
-            :primary-color="
-              $store.state.localConfig.isDark ? '#191A20' : '#f6f6f6'
-            "
-            :secondary-color="
-              $store.state.localConfig.isDark ? '#191a20' : '#949494'
-            "
-          />
-        </template>
       </report-navigation-container>
+
+      <template v-if="!report.suites_data">
+        <content-loader
+          :speed="0.8"
+          class="list-infos-loader"
+          height="300px"
+          width="100%"
+          :primary-color="
+            $store.state.localConfig.isDark ? '#1c1c24' : '#dedede'
+          "
+          :secondary-color="
+            $store.state.localConfig.isDark ? '#31333f' : '#bdbdbd'
+          "
+        >
+          <rect x="0" y="0" rx="3" ry="3" width="100%" height="10" />
+          <rect
+            v-for="index in 20"
+            :x="index % 3 === 0 ? 0 : 20"
+            :key="index"
+            :y="index * 20"
+            rx="3"
+            ry="3"
+            :width="index % 3 === 0 ? '100%' : 'calc(100% - 30px)'"
+            height="10"
+          />
+        </content-loader>
+      </template>
     </sidebar>
 
     <div class="center">
@@ -38,19 +52,33 @@
       <suites :items="report.suites_data" v-if="report && report.suites_data" />
     </div>
     <template v-if="!report.suites_data">
-      <bullet-list-loader
-        :speed="10"
-        class="list-loader"
-        :primary-color="$store.state.localConfig.isDark ? '#191A20' : '#f6f6f6'"
+      <content-loader
+        :speed="0.8"
+        class="list-suites-loader"
+        height="600px"
+        width="100%"
+        :primary-color="$store.state.localConfig.isDark ? '#25262c' : '#dedede'"
         :secondary-color="
-          $store.state.localConfig.isDark ? '#191a20' : '#949494'
+          $store.state.localConfig.isDark ? '#31333f' : '#bdbdbd'
         "
-      />
+      >
+        <rect x="0" y="0" rx="6" ry="6" width="100%" height="39" />
+        <rect
+          v-for="index in 20"
+          x="0"
+          :y="index * 51"
+          :key="index"
+          rx="6"
+          ry="6"
+          width="100%"
+          height="39"
+        />
+      </content-loader>
     </template>
 
     <infos-bar>
       <h2 v-if="!isMobile">Infos</h2>
-      <ul class="infos">
+      <ul class="infos" v-if="report && report.suites_data">
         <li>
           <v-icon size="16">local_offer</v-icon>
           {{ report.version }}
@@ -123,12 +151,35 @@
           {{ report.skipped }}
         </li>
       </ul>
+      <template v-else>
+        <content-loader
+          :speed="0.8"
+          class="list-infos-loader"
+          height="300px"
+          width="100%"
+          :primary-color="
+            $store.state.localConfig.isDark ? '#25262c' : '#dedede'
+          "
+          :secondary-color="
+            $store.state.localConfig.isDark ? '#31333f' : '#bdbdbd'
+          "
+        >
+          <rect x="0" y="0" rx="3" ry="3" width="100%" height="20" />
+          <rect x="0" y="30" rx="3" ry="3" width="100%" height="20" />
+          <rect x="0" y="60" rx="3" ry="3" width="100%" height="20" />
+          <rect x="0" y="90" rx="3" ry="3" width="100%" height="20" />
+          <rect x="0" y="120" rx="3" ry="3" width="100%" height="20" />
+          <rect x="0" y="150" rx="3" ry="3" width="100%" height="20" />
+          <rect x="0" y="180" rx="3" ry="3" width="100%" height="20" />
+          <rect x="0" y="210" rx="3" ry="3" width="100%" height="20" />
+        </content-loader>
+      </template>
     </infos-bar>
   </div>
 </template>
 
 <script>
-  import { BulletListLoader } from 'vue-content-loader'
+  import { ContentLoader } from 'vue-content-loader'
   import Suites from '~/components/reusable/Suites'
   import Sidebar from '~/components/reusable/Sidebar'
   import InfosBar from '~/components/reusable/InfosBar'
@@ -140,7 +191,7 @@
   export default {
     components: {
       Suites,
-      BulletListLoader,
+      ContentLoader,
       Sidebar,
       InfosBar,
       ReportNavigation,
@@ -199,6 +250,16 @@
   .reportDetails {
     padding: 0 290px;
     padding-right: 210px;
+
+    .list-suites-loader {
+      height: 600px;
+      width: 100%;
+    }
+
+    .list-infos-loader {
+      height: 300px;
+      width: 100%;
+    }
 
     .not-found {
       color: $primary;
