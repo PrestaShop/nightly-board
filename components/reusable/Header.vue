@@ -98,7 +98,7 @@
 
     .dates {
       width: 100%;
-      max-width: 530px;
+      max-width: 560px;
       display: flex;
       padding-right: 20px;
 
