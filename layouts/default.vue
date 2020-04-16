@@ -47,6 +47,35 @@
         this.$store.commit('changeLocalConfig', localConfig)
       }
     },
+    mounted() {
+      const pattern = [
+        'ArrowUp',
+        'ArrowUp',
+        'ArrowDown',
+        'ArrowDown',
+        'ArrowLeft',
+        'ArrowRight',
+        'ArrowLeft',
+        'ArrowRight'
+      ]
+      let current = 0
+
+      document.addEventListener('keydown', () => {
+        /* eslint-disable-next-line */
+        if (pattern.indexOf(event.key) < 0 || event.key !== pattern[current]) {
+          current = 0
+          return
+        }
+
+        /* eslint-disable-next-line */
+        current = current + 1
+
+        if (pattern.length === current) {
+          current = 0
+          this.$store.commit('doSecretThing')
+        }
+      })
+    },
     head() {
       return {
         bodyAttrs: {
