@@ -58,6 +58,15 @@
 </script>
 
 <style lang="scss">
+  .page-enter-active,
+  .page-leave-active {
+    transition: opacity 0.25s;
+  }
+  .page-enter,
+  .page-leave-to {
+    opacity: 0;
+  }
+
   html {
     font-family: 'Source Sans Pro', -apple-system, BlinkMacSystemFont,
       'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;

@@ -408,7 +408,6 @@
       }
     },
     async mounted() {
-      console.log(this.$store.state)
       const { data } = await this.$axios.get(
         `${this.$store.state.env.domain}${URLS.reports}`,
         {

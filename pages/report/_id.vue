@@ -156,6 +156,11 @@
     computed: {
       report: {
         get() {
+          if (!this.$store.state.report) {
+            /* eslint-disable-next-line */
+            this.$router.push('/')
+          }
+
           return this.$store.state.report
         },
         set(value) {
