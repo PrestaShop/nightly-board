@@ -161,7 +161,6 @@ export const mutations = {
     state.report = {}
   },
   doSecretThing(state) {
-    console.log(state.report)
     let fullTotalSuccess = state.report.passes
     let fullTotalSkipped = state.report.skipped
     let fullTotalFailures = state.report.failures
