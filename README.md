@@ -12,8 +12,8 @@ $ npm install
 $ npm run dev
 
 # build for production and launch server
-$ npm run build #to expose the domain name
-$ QANB_API_DOMAIN=http://api.nightly.com/ QANB_GA=UA-XXXXX-X NUXT_HOST=http://nightly.com NUXT_PORT=80 npm start #to expose the front domain name and port
+$ npm run build
+$ QANB_API_DOMAIN=http://api.nightly.com/ QANB_GA=UA-XXXXX-X NUXT_HOST=http://nightly.com NUXT_PORT=80 npm start #to expose the front domain name and port, the GA key, and the backend API URL
 
 # generate static project
 $ npm run generate
@@ -29,5 +29,3 @@ You must pass the values via environment variables. Here they are:
 | --------------- | ---------------------------------------------- |
 | QANB_GA         | Google Analytics key                           |
 | QANB_API_DOMAIN | URL for the API backend (must ends with a `/`) |
-
-The `QANB_API_DOMAIN` can be set when building the app (see above).
