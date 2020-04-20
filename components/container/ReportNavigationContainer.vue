@@ -46,4 +46,10 @@
       background: #b7ced3;
     }
   }
+
+  @media screen and (max-width: 1000px) {
+    .reportNavigation-container {
+      max-height: 300px;
+    }
+  }
 </style>
