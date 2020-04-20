@@ -219,10 +219,18 @@
               </p>
             </div>
             <percentages
-              :passed="suite.totalSkipped"
-              :success="suite.totalPasses"
-              :failed="suite.totalFailures"
-              :pendings="suite.totalPending"
+              :passed="
+                isChild ? suite.totalSkipped : suite.childrenData.totalSkipped
+              "
+              :success="
+                isChild ? suite.totalPasses : suite.childrenData.totalPasses
+              "
+              :failed="
+                isChild ? suite.totalFailures : suite.childrenData.totalFailures
+              "
+              :pendings="
+                isChild ? suite.totalPending : suite.childrenData.totalPending
+              "
             />
           </div>
         </div>
