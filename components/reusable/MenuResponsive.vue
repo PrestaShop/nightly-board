@@ -15,31 +15,37 @@
       <v-icon @click="toggleSidebar" class="close">close</v-icon>
 
       <Menu @toggle="toggleSidebar" :column="true" />
+      <template
+        v-if="
+          $store.state.pageTitle !== 'Nightly reports' &&
+            $store.state.pageTitle !== 'Graph'
+        "
+      >
+        <filters
+          :is-responsive="true"
+          @titleclick="toggleState('showFilters')"
+          :show-filters="showFilters"
+        />
 
-      <filters
-        :is-responsive="true"
-        @titleclick="toggleState('showFilters')"
-        :show-filters="showFilters"
-      />
+        <div class="responsiveNav" v-if="$store.state.report">
+          <h2 @click="toggleState('showNav')">
+            Navigation
+            <v-icon v-if="showNav">keyboard_arrow_down</v-icon>
+            <v-icon v-else>keyboard_arrow_up</v-icon>
+          </h2>
+          <report-navigation-container v-if="showNav">
+            <report-navigation
+              :items="$store.state.report.suites_data"
+              v-if="$store.state.report && $store.state.report.suites_data"
+              @toggle="toggleSidebar"
+            />
 
-      <div class="responsiveNav" v-if="$store.state.report">
-        <h2 @click="toggleState('showNav')">
-          Navigation
-          <v-icon v-if="showNav">keyboard_arrow_down</v-icon>
-          <v-icon v-else>keyboard_arrow_up</v-icon>
-        </h2>
-        <report-navigation-container v-if="showNav">
-          <report-navigation
-            :items="$store.state.report.suites_data"
-            v-if="$store.state.report && $store.state.report.suites_data"
-            @toggle="toggleSidebar"
-          />
-
-          <template v-if="!$store.state.report.suites_data">
-            <bullet-list-loader :speed="999" class="list-loader" />
-          </template>
-        </report-navigation-container>
-      </div>
+            <template v-if="!$store.state.report.suites_data">
+              <bullet-list-loader :speed="999" class="list-loader" />
+            </template>
+          </report-navigation-container>
+        </div>
+      </template>
     </div>
   </div>
 </template>

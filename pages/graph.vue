@@ -57,6 +57,7 @@
         </div>
       </div>
     </div>
+
     <template v-if="!graph">
       <bullet-list-loader
         :speed="2"
@@ -224,7 +225,6 @@
     background-color: #ffffff;
     box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.1);
     padding: 15px;
-    overflow: scroll;
     transition: 0.4s ease-out;
 
     @at-root .dark & {
@@ -372,6 +372,14 @@
         @at-root .dark & {
           color: white;
         }
+      }
+    }
+  }
+
+  @media screen and (max-width: 1024px) {
+    .chart {
+      &-container {
+        overflow: scroll;
       }
     }
   }

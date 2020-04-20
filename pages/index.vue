@@ -542,7 +542,7 @@
           font-weight: bold;
           margin: 10px 0;
 
-          @at-root & {
+          @at-root .dark & {
             color: white;
           }
         }

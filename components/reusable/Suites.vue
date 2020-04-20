@@ -53,58 +53,6 @@
           </p>
 
           <div class="suite-infos" v-if="!isChild">
-            <p class="suite-time" v-if="suite.duration">
-              <v-icon size="18">timer</v-icon>
-              {{ $moment.duration(suite.duration).asSeconds() }}s
-            </p>
-
-            <p class="suite-passed" v-if="suite.childrenData.totalPasses !== 0">
-              <v-icon size="18">check</v-icon>
-              {{ suite.childrenData.totalPasses }}
-            </p>
-
-            <p
-              class="suite-pending"
-              v-if="suite.childrenData.totalPending !== 0"
-            >
-              <v-icon size="18">pause</v-icon>
-              {{ suite.childrenData.totalPending }}
-            </p>
-
-            <p
-              class="suite-failed"
-              v-if="suite.childrenData.totalFailures !== 0"
-            >
-              <v-icon size="18">close</v-icon>
-              {{ suite.childrenData.totalFailures }}
-            </p>
-
-            <p
-              class="suite-skipped"
-              v-if="suite.childrenData.totalSkipped !== 0"
-            >
-              <span class="icon-skipped">
-                <svg
-                  version="1.1"
-                  id="Layer_1"
-                  xmlns="http://www.w3.org/2000/svg"
-                  xmlns:xlink="http://www.w3.org/1999/xlink"
-                  x="0px"
-                  y="0px"
-                  width="44px"
-                  height="44px"
-                  viewBox="0 0 44 44"
-                  enable-background="new 0 0 44 44"
-                  xml:space="preserve"
-                >
-                  <g>
-                    <path d="M27,29H17V0h10V29z M27,44H17v-8h10V44z" />
-                  </g>
-                </svg>
-              </span>
-              {{ suite.childrenData.totalSkipped }}
-            </p>
-
             <v-icon
               v-if="
                 !$store.state.testsOpened.includes(suite.id) &&
@@ -203,6 +151,82 @@
           </div>
         </div>
 
+        <div
+          class="suite-top-infos"
+          v-if="
+            $store.state.testsOpened.includes(suite.id) ||
+              $store.state.searchOpened.includes(suite.id)
+          "
+        >
+          <div class="suite-top-infos-left">
+            <p>{{ suite.file }}</p>
+          </div>
+          <div class="suite-top-infos-right">
+            <div class="suite-infos" v-if="suite.childrenData">
+              <p class="suite-time" v-if="suite.duration">
+                <v-icon size="18">timer</v-icon>
+                {{ $moment.duration(suite.duration).asSeconds() }}s
+              </p>
+
+              <p
+                class="suite-passed"
+                v-if="suite.childrenData.totalPasses !== 0"
+              >
+                <v-icon size="18">check</v-icon>
+                {{ suite.childrenData.totalPasses }}
+              </p>
+
+              <p
+                class="suite-pending"
+                v-if="suite.childrenData.totalPending !== 0"
+              >
+                <v-icon size="18">pause</v-icon>
+                {{ suite.childrenData.totalPending }}
+              </p>
+
+              <p
+                class="suite-failed"
+                v-if="suite.childrenData.totalFailures !== 0"
+              >
+                <v-icon size="18">close</v-icon>
+                {{ suite.childrenData.totalFailures }}
+              </p>
+
+              <p
+                class="suite-skipped"
+                v-if="suite.childrenData.totalSkipped !== 0"
+              >
+                <span class="icon-skipped">
+                  <svg
+                    version="1.1"
+                    id="Layer_1"
+                    xmlns="http://www.w3.org/2000/svg"
+                    xmlns:xlink="http://www.w3.org/1999/xlink"
+                    x="0px"
+                    y="0px"
+                    width="44px"
+                    height="44px"
+                    viewBox="0 0 44 44"
+                    enable-background="new 0 0 44 44"
+                    xml:space="preserve"
+                  >
+                    <g>
+                      <path d="M27,29H17V0h10V29z M27,44H17v-8h10V44z" />
+                    </g>
+                  </svg>
+                </span>
+                {{ suite.childrenData.totalSkipped }}
+              </p>
+            </div>
+            <percentages
+              :passed="suite.totalSkipped"
+              :success="suite.totalPasses"
+              :failed="suite.totalFailures"
+              :pendings="suite.totalPending"
+            />
+          </div>
+        </div>
+
         <tests
           :items="suite.tests"
           v-if="
@@ -232,12 +256,14 @@
 <script>
   import Tests from '~/components/reusable/Tests'
   import Suites from '~/components/reusable/Suites'
+  import Percentages from '~/components/reusable/Percentages'
 
   export default {
     name: 'Suites',
     components: {
       Tests,
-      Suites
+      Suites,
+      Percentages
     },
     props: {
       items: {
@@ -326,6 +352,10 @@
       margin-top: 15px;
 
       .suite {
+        &-top-infos-left {
+          padding: 0 5px;
+        }
+
         &-skipped {
           color: $skippedBg;
 
@@ -513,6 +543,30 @@
   }
 
   .suite {
+    &-top-infos {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      &-right {
+        display: flex;
+        align-items: center;
+      }
+
+      &-left {
+        color: #363a41;
+
+        p {
+          font-size: 12px;
+          margin: 0;
+        }
+
+        @at-root .dark & {
+          color: darken(white, 20%);
+        }
+      }
+    }
+
     &-infos {
       display: flex;
 
@@ -588,11 +642,38 @@
 
       &.childs {
         padding: 0;
+
+        .suite {
+          &-top-infos {
+            &-right {
+              > div {
+                &:last-child {
+                  margin-left: 5px;
+                }
+              }
+            }
+          }
+        }
       }
 
       .suite {
         &-topbar {
           align-items: flex-start;
+        }
+
+        &-top-infos {
+          flex-wrap: wrap;
+          max-width: 100%;
+
+          &-right {
+            > div {
+              margin: 0;
+
+              &:last-child {
+                margin-bottom: 10px;
+              }
+            }
+          }
         }
 
         &-time {
