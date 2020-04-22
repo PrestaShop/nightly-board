@@ -418,8 +418,6 @@
         }
       )
 
-      console.log(data)
-
       if (this.isMobile) {
         this.files = data.filter(e => e.id)
       } else {
