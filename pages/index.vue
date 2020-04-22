@@ -202,12 +202,7 @@
                 </a>
               </td>
             </tr>
-            <tr
-              class="mobile-line"
-              v-if="
-                props.item.tests && props.item.tests.pending !== 0 && isMobile
-              "
-            >
+            <tr class="mobile-line" v-if="isMobile">
               <td>
                 <div class="mobile-line-left">
                   <nuxt-link
@@ -423,8 +418,10 @@
         }
       )
 
+      console.log(data)
+
       if (this.isMobile) {
-        this.files = data.filter(e => e.tests)
+        this.files = data.filter(e => e.id)
       } else {
         this.files = data
       }
