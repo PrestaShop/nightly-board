@@ -251,6 +251,11 @@
     padding: 0 290px;
     padding-right: 210px;
 
+    .center {
+      max-width: 100%;
+      overflow: hidden;
+    }
+
     .list-suites-loader {
       height: 600px;
       width: 100%;
