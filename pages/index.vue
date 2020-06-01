@@ -1,5 +1,43 @@
 <template>
   <v-layout v-resize="onResize">
+    <top-bar>
+      <template v-slot:left>
+        <div class="select">
+          <p class="select-label">Campaign</p>
+          <v-select
+            :items="['sanity', 'functional', 'e2e', 'regression']"
+            label="All"
+            :value="['sanity', 'functional', 'e2e', 'regression']"
+            append-icon="keyboard_arrow_down"
+            @change="updateBranch"
+            solo
+          ></v-select>
+        </div>
+        <div class="select">
+          <p class="select-label">Browser</p>
+          <v-select
+            :items="['chromium', 'edge', 'firefox']"
+            label="All"
+            :value="['chromium', 'edge', 'firefox']"
+            append-icon="keyboard_arrow_down"
+            @change="updateBranch"
+            solo
+          ></v-select>
+        </div>
+        <div class="select">
+          <p class="select-label">Version</p>
+          <v-select
+            :items="['develop', '1.7.7.x']"
+            label="All"
+            :value="['develop', '1.7.7.x']"
+            append-icon="keyboard_arrow_down"
+            @change="updateBranch"
+            solo
+          ></v-select>
+        </div>
+      </template>
+    </top-bar>
+
     <v-container class="container-home" :class="{ isMobile: isMobile }">
       <div class="files">
         <div class="mobile-line mobile-head" v-if="isMobile">
@@ -50,7 +88,6 @@
                 >
                   <template>
                     <v-icon size="19">visibility</v-icon>
-                    <span>View Report</span>
                   </template>
                 </nuxt-link>
                 <p class="lowdisplay" v-else>
@@ -76,8 +113,11 @@
               <td :class="{ lowdisplay: !props.item.suites }">
                 {{ props.item.date }}
               </td>
-              <td :class="{ lowdisplay: !props.item.suites }">
+              <td class="version" :class="{ lowdisplay: !props.item.suites }">
                 {{ props.item.version }}
+              </td>
+              <td :class="{ lowdisplay: !props.item.suites }" class="campaign">
+                {{ props.item.campaign }}
               </td>
               <td>
                 <template v-if="props.item.duration">
@@ -87,6 +127,23 @@
                     $moment.utc(props.item.duration).format('mm')
                   }}m{{ $moment.utc(props.item.duration).format('ss') }}s)
                 </template>
+              </td>
+              <td class="browser">
+                <font-awesome-icon
+                  v-if="props.item.browser === 'firefox'"
+                  :icon="['fab', 'firefox']"
+                  :style="{ fontSize: '19px', color: '#6E939A' }"
+                />
+                <font-awesome-icon
+                  v-if="props.item.browser === 'edge'"
+                  :icon="['fab', 'edge']"
+                  :style="{ fontSize: '19px', color: '#6E939A' }"
+                />
+                <font-awesome-icon
+                  v-if="props.item.browser === 'chromium'"
+                  :icon="['fab', 'chrome']"
+                  :style="{ fontSize: '19px', color: '#6E939A' }"
+                />
               </td>
               <td class="no-padding">
                 <template
@@ -184,6 +241,19 @@
                   </v-chip>
                 </template>
               </td>
+              <td class="variance">
+                <div class="variance-item">
+                  <p class="variance-text">{{ props.item.fixed_since_last }}</p>
+                </div>
+                <div class="variance-item">
+                  <p class="variance-text">{{ props.item.equal_since_last }}</p>
+                </div>
+                <div class="variance-item">
+                  <p class="variance-text">
+                    {{ props.item.broken_since_last }}
+                  </p>
+                </div>
+              </td>
               <td class="download-reports">
                 <a
                   :href="props.item.download"
@@ -192,7 +262,6 @@
                 >
                   <template v-if="$vuetify.breakpoint.lgAndUp">
                     <v-icon size="19">cloud_download</v-icon>
-                    Download build
                   </template>
                   <template v-else>
                     <v-icon right>
@@ -212,7 +281,6 @@
                   >
                     <template>
                       <v-icon size="19">visibility</v-icon>
-                      <span>View Report</span>
                     </template>
                   </nuxt-link>
                 </div>
@@ -343,12 +411,16 @@
 </template>
 
 <script>
+  import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
   import { ContentLoader } from 'vue-content-loader'
   import URLS from '~/constants/urls'
+  import TopBar from '~/components/reusable/TopBar'
 
   export default {
     components: {
-      ContentLoader
+      ContentLoader,
+      FontAwesomeIcon,
+      TopBar
     },
     computed: {
       isDark: {
@@ -375,7 +447,12 @@
           sortBy: 'date'
         },
         headers: [
-          { value: 'show', sortable: false, width: 140 },
+          {
+            value: 'show',
+            text: 'View report',
+            sortable: false,
+            width: 100
+          },
           {
             value: 'icons',
             sortable: false,
@@ -392,9 +469,20 @@
             width: 150
           },
           {
+            value: 'campaign',
+            text: 'Campaign',
+            width: 150
+          },
+          {
             value: 'duration',
             text: 'Duration',
             width: 200
+          },
+          {
+            value: 'stats',
+            text: 'Browser',
+            sortable: false,
+            width: 100
           },
           {
             value: 'stats',
@@ -403,9 +491,16 @@
             width: 200
           },
           {
-            value: 'actions',
+            value: 'variance',
+            text: 'Variance',
             sortable: false,
-            width: 250
+            width: 200
+          },
+          {
+            value: 'actions',
+            text: 'Download build',
+            sortable: false,
+            width: 150
           }
         ]
       }
@@ -510,6 +605,77 @@
     }
   }
 
+  .layout {
+    flex-direction: column;
+
+    .select {
+      display: flex;
+      align-items: flex-start;
+
+      label {
+        color: #363a41;
+
+        @at-root .dark & {
+          color: white;
+        }
+      }
+
+      &-label {
+        margin: 0;
+        margin-right: 10px;
+        margin-top: 8px;
+        color: #363a41;
+        font-size: 14px;
+        line-height: 19px;
+
+        @at-root .dark & {
+          color: white;
+        }
+      }
+
+      .v-input {
+        width: 200px;
+
+        .v-icon,
+        .v-icon.primary--text {
+          color: #363a41 !important;
+          font-size: 18px;
+
+          @at-root .dark & {
+            color: white !important;
+          }
+        }
+
+        &__slot {
+          border: 1px solid #b7ced3;
+          border-radius: 4px 4px 0 0;
+          background-color: #ffffff;
+          min-height: initial;
+          box-shadow: none !important;
+          border-radius: 4px !important;
+
+          @at-root .dark & {
+            border: 1px solid lighten($greyDark, 7%);
+            background: $greyDark;
+          }
+        }
+
+        .v-select {
+          &__selection {
+            color: #363a41;
+            font-family: 'Open Sans';
+            font-size: 14px;
+            line-height: 19px;
+
+            @at-root .dark & {
+              color: white;
+            }
+          }
+        }
+      }
+    }
+  }
+
   .lowdisplay {
     opacity: 0.5;
     margin: 0;
@@ -563,6 +729,12 @@
   table.v-table {
     transition: 0.4s ease-out;
 
+    thead {
+      th.text-xs-left {
+        text-align: center !important;
+      }
+    }
+
     .list-loader {
       margin: 20px 0;
     }
@@ -571,10 +743,6 @@
       transition: 0.4s ease-out;
     }
 
-    thead {
-      th {
-      }
-    }
     tbody {
       .mobile {
         &-line {
@@ -645,6 +813,48 @@
           line-height: 19px;
           font-weight: normal;
           white-space: nowrap;
+          text-align: center;
+
+          &.variance {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            .variance-item {
+              margin: 0 7.5px;
+            }
+
+            .variance-text {
+              color: #464b54;
+              font-size: 14px;
+              font-weight: bold;
+              line-height: 19px;
+              margin-bottom: 0;
+
+              @at-root .dark & {
+                color: white;
+              }
+            }
+          }
+
+          &.browser {
+            @at-root .dark & {
+              svg {
+                color: white !important;
+              }
+            }
+          }
+
+          &.version,
+          &.campaign {
+            font-weight: 700;
+          }
+
+          &:first-child {
+            .v-icon {
+              color: #6e939a;
+            }
+          }
 
           &.no-padding {
             padding: 0;
@@ -732,9 +942,13 @@
     }
   }
 
+  .layout {
+    padding: 0 30px;
+  }
+
   .container-home {
     width: calc(100% - 10px);
-    max-width: 1200px;
+    max-width: 100%;
     border-radius: 5px;
     background-color: #ffffff;
     box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.1);
