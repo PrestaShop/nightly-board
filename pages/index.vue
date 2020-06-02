@@ -7,9 +7,9 @@
           <v-select
             :items="['sanity', 'functional', 'e2e', 'regression']"
             label="All"
-            :value="['sanity', 'functional', 'e2e', 'regression']"
+            :value="''"
             append-icon="keyboard_arrow_down"
-            @change="updateBranch"
+            @change="updateCampaignFilter"
             solo
           ></v-select>
         </div>
@@ -18,9 +18,9 @@
           <v-select
             :items="['chromium', 'edge', 'firefox']"
             label="All"
-            :value="['chromium', 'edge', 'firefox']"
+            :value="''"
             append-icon="keyboard_arrow_down"
-            @change="updateBranch"
+            @change="updateBrowserFilter"
             solo
           ></v-select>
         </div>
@@ -29,9 +29,9 @@
           <v-select
             :items="['develop', '1.7.7.x']"
             label="All"
-            :value="['develop', '1.7.7.x']"
+            :value="''"
             append-icon="keyboard_arrow_down"
-            @change="updateBranch"
+            @change="updateVersionFilter"
             solo
           ></v-select>
         </div>
@@ -57,7 +57,7 @@
             nextIcon: 'mdi-plus'
           }"
         >
-          <template v-slot:no-data>
+          <template v-slot:no-data v-if="loading">
             <content-loader
               :speed="0.8"
               class="list-loader"
@@ -242,17 +242,35 @@
                 </template>
               </td>
               <td class="variance">
-                <div class="variance-item">
-                  <p class="variance-text">{{ props.item.fixed_since_last }}</p>
-                </div>
-                <div class="variance-item">
-                  <p class="variance-text">{{ props.item.equal_since_last }}</p>
-                </div>
-                <div class="variance-item">
-                  <p class="variance-text">
-                    {{ props.item.broken_since_last }}
-                  </p>
-                </div>
+                <template
+                  v-if="
+                    props.item.fixed_since_last !== null &&
+                      props.item.equal_since_last !== null &&
+                      props.item.broken_since_last !== null &&
+                      props.item.fixed_since_last !== undefined &&
+                      props.item.equal_since_last !== undefined &&
+                      props.item.broken_since_last !== undefined
+                  "
+                >
+                  <div class="variance-item">
+                    <v-icon size="17">trending_up</v-icon>
+                    <p class="variance-text">
+                      {{ props.item.fixed_since_last }}
+                    </p>
+                  </div>
+                  <div class="variance-item">
+                    <v-icon size="17">trending_flat</v-icon>
+                    <p class="variance-text">
+                      {{ props.item.equal_since_last }}
+                    </p>
+                  </div>
+                  <div class="variance-item">
+                    <v-icon size="17">trending_down</v-icon>
+                    <p class="variance-text">
+                      {{ props.item.broken_since_last }}
+                    </p>
+                  </div>
+                </template>
               </td>
               <td class="download-reports">
                 <a
@@ -440,6 +458,10 @@
         data: {},
         isMobile: false,
         files: [],
+        loading: true,
+        paramVersion: '',
+        paramBrowser: '',
+        paramCampaign: '',
         pagination: {
           descending: true,
           page: 1,
@@ -505,20 +527,9 @@
         ]
       }
     },
+
     async mounted() {
-      const { data } = await this.$axios.get(
-        `${this.$store.state.env.domain}${URLS.reports}`,
-        {
-          crossdomain: true
-        }
-      )
-
-      if (this.isMobile) {
-        this.files = data.filter(e => e.id)
-      } else {
-        this.files = data
-      }
-
+      await this.getSuites()
       this.$store.commit('resetReport')
       this.$store.commit('changePageTitle', 'Nightly reports')
     },
@@ -556,6 +567,58 @@
 
         const { data } = await this.$axios.get(file.mediaLink)
         return data
+      },
+      async getSuites() {
+        this.loading = true
+        let url = `${this.$store.state.env.domain}${URLS.reports}`
+        let hasParams = false
+
+        if (this.paramBrowser !== '') {
+          url = `${url}?filter_browser[0]=${this.paramBrowser}`
+          hasParams = true
+        }
+
+        if (this.paramCampaign !== '') {
+          if (hasParams) {
+            url = `${url}&filter_campaign[0]=${this.paramCampaign}`
+          } else {
+            url = `${url}?filter_campaign[0]=${this.paramCampaign}`
+          }
+
+          hasParams = true
+        }
+
+        if (this.paramVersion !== '') {
+          if (hasParams) {
+            url = `${url}&filter_version[0]=${this.paramVersion}`
+          } else {
+            url = `${url}?filter_version[0]=${this.paramVersion}`
+          }
+        }
+
+        const { data } = await this.$axios.get(url, {
+          crossdomain: true
+        })
+
+        if (this.isMobile) {
+          this.files = data.filter(e => e.id)
+        } else {
+          this.files = data
+        }
+
+        this.loading = false
+      },
+      updateBrowserFilter(value) {
+        this.paramBrowser = value
+        this.getSuites()
+      },
+      updateVersionFilter(value) {
+        this.paramVersion = value
+        this.getSuites()
+      },
+      updateCampaignFilter(value) {
+        this.paramCampaign = value
+        this.getSuites()
       }
     }
   }
@@ -822,6 +885,13 @@
 
             .variance-item {
               margin: 0 7.5px;
+              display: flex;
+              align-items: center;
+
+              i {
+                color: #6e939a;
+                margin-right: 4px;
+              }
             }
 
             .variance-text {
