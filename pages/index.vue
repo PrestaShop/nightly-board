@@ -5,7 +5,7 @@
         <div class="select">
           <p class="select-label">Campaign</p>
           <v-select
-            :items="['sanity', 'functional', 'e2e', 'regression']"
+            :items="['All', 'sanity', 'functional', 'e2e', 'regression']"
             label="All"
             :value="''"
             append-icon="keyboard_arrow_down"
@@ -16,7 +16,7 @@
         <div class="select">
           <p class="select-label">Browser</p>
           <v-select
-            :items="['chromium', 'edge', 'firefox']"
+            :items="['All', 'chromium', 'edge', 'firefox']"
             label="All"
             :value="''"
             append-icon="keyboard_arrow_down"
@@ -27,7 +27,7 @@
         <div class="select">
           <p class="select-label">Version</p>
           <v-select
-            :items="['develop', '1.7.7.x']"
+            :items="['All', 'develop', '1.7.7.x']"
             label="All"
             :value="''"
             append-icon="keyboard_arrow_down"
@@ -40,10 +40,6 @@
 
     <v-container class="container-home" :class="{ isMobile: isMobile }">
       <div class="files">
-        <div class="mobile-line mobile-head" v-if="isMobile">
-          <div class="mobile-line-left"></div>
-          <div class="mobile-line-right"><p>Infos</p></div>
-        </div>
         <v-data-table
           :items="files"
           :headers="isMobile ? [] : headers"
@@ -289,27 +285,39 @@
                 </a>
               </td>
             </tr>
-            <tr class="mobile-line" v-if="isMobile">
+            <tr v-if="isMobile">
               <td>
-                <div class="mobile-line-left">
-                  <nuxt-link
-                    :to="'/report/' + props.item.id"
-                    v-if="props.item.suites"
-                    :class="{ 'lg-and-up': !$vuetify.breakpoint.lgAndUp }"
-                  >
-                    <template>
-                      <v-icon size="19">visibility</v-icon>
-                    </template>
-                  </nuxt-link>
-                </div>
-                <div class="mobile-line-right">
+                <nuxt-link
+                  :to="'/report/' + props.item.id"
+                  v-if="props.item.suites"
+                  :class="{ 'lg-and-up': !$vuetify.breakpoint.lgAndUp }"
+                  class="mobile-line"
+                >
                   <ul>
-                    <li>{{ props.item.date }}</li>
                     <li>{{ props.item.version }}</li>
+                    <li>{{ props.item.campaign }}</li>
+                    <li>
+                      <font-awesome-icon
+                        v-if="props.item.browser === 'firefox'"
+                        :icon="['fab', 'firefox']"
+                        :style="{ fontSize: '19px', color: '#6E939A' }"
+                      />
+                      <font-awesome-icon
+                        v-if="props.item.browser === 'edge'"
+                        :icon="['fab', 'edge']"
+                        :style="{ fontSize: '19px', color: '#6E939A' }"
+                      />
+                      <font-awesome-icon
+                        v-if="props.item.browser === 'chromium'"
+                        :icon="['fab', 'chrome']"
+                        :style="{ fontSize: '19px', color: '#6E939A' }"
+                      />
+                    </li>
+                    <li>{{ props.item.date }}</li>
                     <li v-if="props.item.duration">
-                      ({{ $moment.utc(props.item.duration).format('H') }}h{{
+                      {{ $moment.utc(props.item.duration).format('H') }}h{{
                         $moment.utc(props.item.duration).format('mm')
-                      }}m{{ $moment.utc(props.item.duration).format('ss') }}s)
+                      }}m
                     </li>
                     <li>
                       <template
@@ -333,7 +341,6 @@
                           </strong>
                         </v-chip>
                       </template>
-
                       <template
                         v-if="props.item.tests && props.item.tests.failed !== 0"
                       >
@@ -354,7 +361,6 @@
                           </strong>
                         </v-chip>
                       </template>
-
                       <template
                         v-if="
                           props.item.tests && props.item.tests.pending !== 0
@@ -377,7 +383,6 @@
                           </strong>
                         </v-chip>
                       </template>
-
                       <template
                         v-if="
                           props.item.tests && props.item.tests.skipped !== 0
@@ -418,7 +423,7 @@
                       </template>
                     </li>
                   </ul>
-                </div>
+                </nuxt-link>
               </td>
             </tr>
           </template>
@@ -573,12 +578,12 @@
         let url = `${this.$store.state.env.domain}${URLS.reports}`
         let hasParams = false
 
-        if (this.paramBrowser !== '') {
+        if (this.paramBrowser !== '' && this.paramBrowser !== 'All') {
           url = `${url}?filter_browser[0]=${this.paramBrowser}`
           hasParams = true
         }
 
-        if (this.paramCampaign !== '') {
+        if (this.paramCampaign !== '' && this.paramCampaign !== 'All') {
           if (hasParams) {
             url = `${url}&filter_campaign[0]=${this.paramCampaign}`
           } else {
@@ -588,7 +593,7 @@
           hasParams = true
         }
 
-        if (this.paramVersion !== '') {
+        if (this.paramVersion !== '' && this.paramVersion !== 'All') {
           if (hasParams) {
             url = `${url}&filter_version[0]=${this.paramVersion}`
           } else {
@@ -748,6 +753,19 @@
     &-line {
       display: flex;
       border-bottom: 1px solid darken(white, 5%);
+      padding: 8px 0 !important;
+
+      ul {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+
+        li {
+          width: 26%;
+          padding: 0 5px;
+          text-align: center;
+        }
+      }
 
       @at-root .dark & {
         border-bottom: 1px solid #363636;
@@ -824,6 +842,26 @@
             width: 100%;
           }
 
+          ul {
+            padding-left: 0;
+
+            li {
+              list-style-type: none;
+              span {
+                margin-top: 0;
+                margin-bottom: 0;
+
+                &:last-child {
+                  margin-right: 0;
+                }
+              }
+
+              &:not(:last-child) {
+                margin-bottom: 10px;
+              }
+            }
+          }
+
           &-left {
             width: 40%;
             a {
@@ -833,26 +871,6 @@
 
           &-right {
             width: 60%;
-
-            ul {
-              padding-left: 0;
-
-              li {
-                list-style-type: none;
-                span {
-                  margin-top: 0;
-                  margin-bottom: 0;
-
-                  &:last-child {
-                    margin-right: 0;
-                  }
-                }
-
-                &:not(:last-child) {
-                  margin-bottom: 10px;
-                }
-              }
-            }
           }
         }
       }
@@ -1027,6 +1045,7 @@
 
     &.isMobile {
       margin: 0 10px;
+      margin-top: 15px;
 
       thead {
         display: none;
@@ -1035,6 +1054,34 @@
 
     @at-root .dark & {
       background: $greyDark;
+    }
+  }
+
+  @media screen and (max-width: 767px) {
+    .layout {
+      padding: 0 10px;
+
+      .container-home {
+        margin: 0;
+        width: 100%;
+      }
+
+      .isMobile {
+        td {
+          padding: 0 !important;
+
+          ul {
+            li,
+            strong {
+              font-size: 12px;
+
+              i {
+                font-size: 17px;
+              }
+            }
+          }
+        }
+      }
     }
   }
 </style>
