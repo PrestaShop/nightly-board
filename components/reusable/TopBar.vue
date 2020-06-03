@@ -20,4 +20,26 @@
     justify-content: space-around;
     padding: 0;
   }
+
+  @media screen and (max-width: 767px) {
+    .topBar {
+      flex-wrap: wrap;
+    }
+
+    .layout {
+      .select {
+        flex-wrap: wrap;
+
+        .v-text-field__details {
+          display: none;
+        }
+
+        .select-label {
+          width: 100%;
+          text-align: center;
+          margin-bottom: 10px;
+        }
+      }
+    }
+  }
 </style>
