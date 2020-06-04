@@ -893,7 +893,12 @@
 
       tr {
         &:hover:not(.v-datatable__expand-row) {
-          background: none;
+          background: #edfcfd;
+          cursor: pointer;
+
+          @at-root .dark & {
+            background: #1e1f23;
+          }
         }
         &:not(:last-child) {
           border: none;

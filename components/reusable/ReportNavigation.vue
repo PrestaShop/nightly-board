@@ -11,15 +11,56 @@
         @click="dispatchEvent(suite)"
         :class="{
           hasFailed:
-            suite &&
-            suite.childrenData &&
-            suite.childrenData.totalFailures !== 0,
+            (suite &&
+              suite.childrenData &&
+              suite.childrenData.totalFailures !== 0) ||
+            (suite && suite.totalFailures !== 0),
           hasPendings:
-            suite && suite.childrenData && suite.childrenData.totalPending !== 0
+            (suite &&
+              suite.childrenData &&
+              suite.childrenData.totalPending !== 0) ||
+            (suite && suite.totalPending !== 0)
         }"
         class="navigation-title"
         v-scroll-to="'#suite-' + suite.id"
       >
+        <v-icon
+          :color="$vuetify.theme.themes.light.color.green"
+          v-if="
+            suite &&
+              suite.childrenData &&
+              suite.childrenData.totalFailures === 0 &&
+              suite.childrenData.totalSkipped === 0 &&
+              suite.childrenData.totalPending === 0
+          "
+          size="16"
+        >
+          check
+        </v-icon>
+
+        <v-icon
+          v-if="
+            (suite &&
+              suite.childrenData &&
+              suite.childrenData.totalFailures !== 0) ||
+              (suite && suite.totalFailures !== 0)
+          "
+          size="16"
+        >
+          close
+        </v-icon>
+
+        <v-icon
+          size="16"
+          v-if="
+            (suite &&
+              suite.childrenData &&
+              suite.childrenData.totalPending !== 0) ||
+              (suite && suite.totalPending !== 0)
+          "
+        >
+          pause
+        </v-icon>
         {{ suite.title }}
       </p>
 
@@ -119,7 +160,7 @@
     &-title {
       color: $primary;
       font-size: 14px;
-      font-weight: bold;
+      font-weight: 400;
       line-height: 19px;
       cursor: pointer;
       transition: 0.4s ease-out;
@@ -134,11 +175,30 @@
       }
 
       &.hasFailed {
-        color: lighten($red, 10%);
+        @at-root .navigation.hasPadding &,
+          & {
+          color: lighten($red, 10%);
+        }
+
+        i {
+          color: lighten($red, 10%);
+          vertical-align: middle;
+          margin-right: 0;
+        }
       }
 
       &.hasPendings {
-        color: lighten($blue, 10%);
+        @at-root .navigation.hasPadding &,
+          & {
+          color: lighten($blue, 10%);
+        }
+
+        i {
+          color: lighten($blue, 10%);
+          vertical-align: middle;
+          margin-right: 0;
+          margin-top: -3px;
+        }
       }
     }
   }
