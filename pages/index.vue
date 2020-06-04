@@ -75,8 +75,8 @@
           </template>
 
           <template slot="items" slot-scope="props">
-            <tr v-if="!isMobile">
-              <td>
+            <tr>
+              <td v-if="!isMobile" @click="goToReport($event, props.item.id)">
                 <nuxt-link
                   :to="'/report/' + props.item.id"
                   v-if="props.item.suites"
@@ -90,7 +90,7 @@
                   No tests found
                 </p>
               </td>
-              <td>
+              <td v-if="!isMobile" @click="goToReport($event, props.item.id)">
                 <template v-if="props.suites">
                   <v-icon
                     :color="$vuetify.theme.themes.light.color.red"
@@ -106,16 +106,27 @@
                   </v-icon>
                 </template>
               </td>
-              <td :class="{ lowdisplay: !props.item.suites }">
+              <td
+                @click="goToReport($event, props.item.id)"
+                :class="{ lowdisplay: !props.item.suites }"
+              >
                 {{ props.item.date }}
               </td>
-              <td class="version" :class="{ lowdisplay: !props.item.suites }">
+              <td
+                class="version"
+                @click="goToReport($event, props.item.id)"
+                :class="{ lowdisplay: !props.item.suites }"
+              >
                 {{ props.item.version }}
               </td>
-              <td :class="{ lowdisplay: !props.item.suites }" class="campaign">
+              <td
+                @click="goToReport($event, props.item.id)"
+                :class="{ lowdisplay: !props.item.suites }"
+                class="campaign"
+              >
                 {{ props.item.campaign }}
               </td>
-              <td>
+              <td @click="goToReport($event, props.item.id)">
                 <template v-if="props.item.duration">
                   {{ $moment(props.item.start_date).format('LTS') }} -
                   {{ $moment(props.item.end_date).format('LTS') }}
@@ -124,7 +135,7 @@
                   }}m{{ $moment.utc(props.item.duration).format('ss') }}s)
                 </template>
               </td>
-              <td class="browser">
+              <td class="browser" @click="goToReport($event, props.item.id)">
                 <font-awesome-icon
                   v-if="props.item.browser === 'firefox'"
                   :icon="['fab', 'firefox']"
@@ -141,7 +152,7 @@
                   :style="{ fontSize: '19px', color: '#6E939A' }"
                 />
               </td>
-              <td class="no-padding">
+              <td @click="goToReport($event, props.item.id)" class="no-padding">
                 <template
                   v-if="props.item.suites && props.item.tests.passed !== 0"
                 >
@@ -237,7 +248,7 @@
                   </v-chip>
                 </template>
               </td>
-              <td class="variance">
+              <td class="variance" @click="goToReport($event, props.item.id)">
                 <template
                   v-if="
                     props.item.fixed_since_last !== null &&
@@ -572,6 +583,11 @@
 
         const { data } = await this.$axios.get(file.mediaLink)
         return data
+      },
+      goToReport(event, id) {
+        this.$router.push({
+          path: `/report/${id}`
+        })
       },
       async getSuites() {
         this.loading = true
