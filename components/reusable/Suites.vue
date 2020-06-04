@@ -411,7 +411,7 @@
         &-title {
           color: #4c4f57;
           font-size: 16px;
-          font-weight: bold;
+          font-weight: 400;
           margin-bottom: 0;
           padding-left: 5px;
 
@@ -507,7 +507,7 @@
     &-title {
       color: $primary;
       font-size: 20px;
-      font-weight: 500;
+      font-weight: 400;
       line-height: 27px;
       margin-bottom: 10px;
 
