@@ -86,26 +86,8 @@
                     <v-icon size="19">visibility</v-icon>
                   </template>
                 </nuxt-link>
-                <p class="lowdisplay" v-else>
-                  No tests found
-                </p>
               </td>
-              <td v-if="!isMobile" @click="goToReport($event, props.item.id)">
-                <template v-if="props.suites">
-                  <v-icon
-                    :color="$vuetify.theme.themes.light.color.red"
-                    v-if="hasErrors(props)"
-                  >
-                    warning
-                  </v-icon>
-                  <v-icon
-                    :color="$vuetify.theme.themes.light.color.green"
-                    v-else
-                  >
-                    check
-                  </v-icon>
-                </template>
-              </td>
+
               <td
                 @click="goToReport($event, props.item.id)"
                 :class="{ lowdisplay: !props.item.suites }"
@@ -128,11 +110,11 @@
               </td>
               <td @click="goToReport($event, props.item.id)">
                 <template v-if="props.item.duration">
-                  {{ $moment(props.item.start_date).format('LTS') }} -
-                  {{ $moment(props.item.end_date).format('LTS') }}
+                  {{ $moment(props.item.start_date).format('LT') }} -
+                  {{ $moment(props.item.end_date).format('LT') }}
                   ({{ $moment.utc(props.item.duration).format('H') }}h{{
                     $moment.utc(props.item.duration).format('mm')
-                  }}m{{ $moment.utc(props.item.duration).format('ss') }}s)
+                  }}m)
                 </template>
               </td>
               <td class="browser" @click="goToReport($event, props.item.id)">
@@ -487,14 +469,8 @@
         headers: [
           {
             value: 'show',
-            text: 'View report',
             sortable: false,
-            width: 100
-          },
-          {
-            value: 'icons',
-            sortable: false,
-            width: 40
+            width: 50
           },
           {
             value: 'date',
@@ -536,7 +512,6 @@
           },
           {
             value: 'actions',
-            text: 'Download build',
             sortable: false,
             width: 150
           }
@@ -909,6 +884,14 @@
           border-color: rgba(0, 0, 0, 0.12);
         }
 
+        &:nth-child(2n) {
+          background: darken(#fff, 3%);
+
+          @at-root .dark & {
+            background: lighten(#1e1f23, 5%);
+          }
+        }
+
         td {
           color: #464b54;
           font-family: 'Open Sans';
@@ -917,11 +900,13 @@
           font-weight: normal;
           white-space: nowrap;
           text-align: center;
+          padding: 0 5px !important;
 
           &.variance {
             display: flex;
             align-items: center;
             justify-content: center;
+            opacity: 0.6;
 
             .variance-item {
               margin: 0 7.5px;
@@ -1058,7 +1043,7 @@
 
   .container-home {
     width: calc(100% - 10px);
-    max-width: 100%;
+    max-width: 1150px;
     border-radius: 5px;
     background-color: #ffffff;
     box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.1);
