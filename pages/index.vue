@@ -75,8 +75,8 @@
           </template>
 
           <template slot="items" slot-scope="props">
-            <tr>
-              <td v-if="!isMobile" @click="goToReport($event, props.item.id)">
+            <tr v-if="!isMobile">
+              <td @click="goToReport($event, props.item.id)">
                 <nuxt-link
                   :to="'/report/' + props.item.id"
                   v-if="props.item.suites"
@@ -780,6 +780,7 @@
           width: 26%;
           padding: 0 5px;
           text-align: center;
+          margin-bottom: 0 !important;
         }
       }
 
