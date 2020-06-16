@@ -63,13 +63,18 @@
           {{ $moment.duration(test.duration).asSeconds() }}s
         </span>
       </div>
+      <p
+        class="tests-stacktrace tests-error"
+        @click="toggleTests(test)"
+        v-if="test.state === 'failed' && test.error_message"
+        v-html="test.error_message"
+      ></p>
 
       <p
         class="tests-stacktrace"
         v-if="testsOpened.includes(test.id) && test.state === 'failed'"
-      >
-        {{ test.stack_trace }}
-      </p>
+        v-html="test.stack_trace_formatted"
+      ></p>
     </li>
   </ul>
 </template>
@@ -156,11 +161,6 @@
       }
     }
 
-    &-stacktrace {
-      padding: 10px 20px;
-      font-size: 14px !important;
-    }
-
     &-item {
       list-style-type: none;
 
@@ -188,6 +188,30 @@
       &.failed {
         p {
           color: $red;
+        }
+
+        .tests-stacktrace {
+          padding: 10px 20px;
+          font-size: 14px !important;
+          color: lighten(black, 20%);
+
+          @at-root .dark & {
+            color: white;
+          }
+        }
+
+        .tests-error {
+          cursor: pointer;
+          transition: 0.4s ease-out;
+          color: $red;
+
+          @at-root .dark & {
+            color: $red;
+          }
+
+          &:hover {
+            opacity: 0.6;
+          }
         }
       }
     }
