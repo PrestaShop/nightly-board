@@ -191,9 +191,14 @@
         }
 
         .tests-stacktrace {
-          padding: 10px 20px;
+          padding: 0px 20px;
           font-size: 14px !important;
           color: lighten(black, 20%);
+
+          &:not(.tests-error) {
+            font-family: Courier, sans-serif;
+            font-size: 12px !important;
+          }
 
           @at-root .dark & {
             color: white;

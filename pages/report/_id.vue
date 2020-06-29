@@ -83,6 +83,33 @@
           <v-icon size="16">local_offer</v-icon>
           {{ report.version }}
         </li>
+        <li class="campaign">
+          <v-icon size="16">integration_instructions</v-icon>
+          <p>
+            {{ report.campaign }}
+          </p>
+        </li>
+        <li class="browser">
+          <font-awesome-icon
+            v-if="report.browser === 'firefox'"
+            :icon="['fab', 'firefox']"
+            :style="{ fontSize: '16px', color: '#6E939A' }"
+          />
+          <font-awesome-icon
+            v-if="report.browser === 'edge'"
+            :icon="['fab', 'edge']"
+            :style="{ fontSize: '16px', color: '#6E939A' }"
+          />
+          <font-awesome-icon
+            v-if="report.browser === 'chromium'"
+            :icon="['fab', 'chrome']"
+            :style="{ fontSize: '16px', color: '#6E939A' }"
+          />
+
+          <p>
+            {{ report.browser }}
+          </p>
+        </li>
         <li v-if="!isMobile">
           <v-icon size="16">timer</v-icon>
           {{ $moment.duration(report.duration).hours() }}h{{
@@ -321,6 +348,26 @@
         font-weight: 14px;
         margin-bottom: 10px;
         font-size: 14px;
+
+        &.browser,
+        &.campaign {
+          display: flex;
+          align-items: center;
+
+          svg,
+          i {
+            margin-right: 10px;
+            width: 19px !important;
+          }
+
+          p {
+            margin: 0;
+
+            &::first-letter {
+              text-transform: capitalize;
+            }
+          }
+        }
 
         @at-root .dark & {
           color: #a5a5a5;
