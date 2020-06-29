@@ -117,7 +117,14 @@
                   }}m)
                 </template>
               </td>
-              <td class="browser" @click="goToReport($event, props.item.id)">
+              <td
+                class="browser"
+                :class="{ tooltip: props.item.browser }"
+                @click="goToReport($event, props.item.id)"
+              >
+                <p class="tooltip-title" v-if="props.item.browser">
+                  {{ props.item.browser }}
+                </p>
                 <font-awesome-icon
                   v-if="props.item.browser === 'firefox'"
                   :icon="['fab', 'firefox']"
@@ -241,19 +248,37 @@
                       props.item.broken_since_last !== undefined
                   "
                 >
-                  <div class="variance-item">
+                  <div class="variance-item tooltip">
+                    <p class="tooltip-title">
+                      Tests fixed
+                      <br />
+                      since last execution
+                    </p>
+
                     <v-icon size="17">trending_up</v-icon>
                     <p class="variance-text">
                       {{ props.item.fixed_since_last }}
                     </p>
                   </div>
-                  <div class="variance-item">
+                  <div class="variance-item tooltip">
+                    <p class="tooltip-title">
+                      Tests still broken
+                      <br />
+                      since last execution
+                    </p>
+
                     <v-icon size="17">trending_flat</v-icon>
                     <p class="variance-text">
                       {{ props.item.equal_since_last }}
                     </p>
                   </div>
-                  <div class="variance-item">
+                  <div class="variance-item tooltip">
+                    <p class="tooltip-title">
+                      Tests newly failing
+                      <br />
+                      since last execution
+                    </p>
+
                     <v-icon size="17">trending_down</v-icon>
                     <p class="variance-text">
                       {{ props.item.broken_since_last }}
@@ -907,11 +932,20 @@
             align-items: center;
             justify-content: center;
             opacity: 0.6;
+            transition: 0.25s ease-out;
+
+            &:hover {
+              opacity: 1;
+            }
 
             .variance-item {
               margin: 0 7.5px;
               display: flex;
               align-items: center;
+
+              .tooltip-title {
+                transform: translateX(-50%) translateY(-110%);
+              }
 
               i {
                 color: #6e939a;
