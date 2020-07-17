@@ -500,6 +500,7 @@
           {
             value: 'date',
             text: 'Date',
+            sortable: false,
             width: 250
           },
           {
@@ -510,11 +511,13 @@
           {
             value: 'campaign',
             text: 'Campaign',
+            sortable: false,
             width: 150
           },
           {
             value: 'duration',
             text: 'Duration',
+            sortable: false,
             width: 200
           },
           {
