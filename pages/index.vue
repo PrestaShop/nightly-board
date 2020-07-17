@@ -506,6 +506,7 @@
           {
             value: 'version',
             text: 'Version',
+            sortable: false,
             width: 150
           },
           {
