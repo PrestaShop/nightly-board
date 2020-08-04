@@ -654,6 +654,8 @@
         .suite {
           &-top-infos {
             &-right {
+              margin: 5px 0;
+
               > div {
                 &:last-child {
                   margin-left: 5px;
@@ -661,6 +663,14 @@
               }
             }
           }
+        }
+      }
+
+      &:not(.childs) {
+        > .suites-item > .suite > .suite-top-infos .suite-top-infos-right {
+          width: 100%;
+          justify-content: space-between;
+          margin-top: 10px;
         }
       }
 
@@ -676,10 +686,6 @@
           &-right {
             > div {
               margin: 0;
-
-              &:last-child {
-                margin-bottom: 10px;
-              }
             }
           }
         }
@@ -691,9 +697,14 @@
         &-infos {
           margin-top: 5px;
 
+          p {
+            align-items: center;
+          }
+
           .v-icon {
             width: 14px;
-            font-size: 14px !important;
+            font-size: 18px !important;
+            margin-bottom: -2px;
           }
         }
 
