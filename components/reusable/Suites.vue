@@ -75,60 +75,6 @@
           </div>
 
           <div class="suite-infos" v-if="isChild">
-            <p class="suite-time" v-if="suite.duration">
-              <v-icon size="18">timer</v-icon>
-              {{ $moment.duration(suite.duration).asSeconds() }}s
-            </p>
-
-            <p class="suite-assignment">
-              <v-icon size="18">assignment</v-icon>
-              {{
-                suites.tests && suite.tests.length > 0
-                  ? suite.tests.length
-                  : suite.tests
-                  ? Object.keys(suite.tests).length
-                  : 0
-              }}
-            </p>
-
-            <p class="suite-passed" v-if="suite.totalPasses !== 0">
-              <v-icon size="18">check</v-icon>
-              {{ suite.totalPasses }}
-            </p>
-
-            <p class="suite-pending" v-if="suite.totalPending !== 0">
-              <v-icon size="18">pause</v-icon>
-              {{ suite.totalPending }}
-            </p>
-
-            <p class="suite-failed" v-if="suite.totalFailures !== 0">
-              <v-icon size="18">close</v-icon>
-              {{ suite.totalFailures }}
-            </p>
-
-            <p class="suite-skipped" v-if="suite.totalSkipped !== 0">
-              <span class="icon-skipped">
-                <svg
-                  version="1.1"
-                  id="Layer_1"
-                  xmlns="http://www.w3.org/2000/svg"
-                  xmlns:xlink="http://www.w3.org/1999/xlink"
-                  x="0px"
-                  y="0px"
-                  width="44px"
-                  height="44px"
-                  viewBox="0 0 44 44"
-                  enable-background="new 0 0 44 44"
-                  xml:space="preserve"
-                >
-                  <g>
-                    <path d="M27,29H17V0h10V29z M27,44H17v-8h10V44z" />
-                  </g>
-                </svg>
-              </span>
-              {{ suite.totalSkipped }}
-            </p>
-
             <v-icon
               v-if="
                 !$store.state.testsOpened.includes(suite.id) &&
@@ -216,6 +162,62 @@
                   </svg>
                 </span>
                 {{ suite.childrenData.totalSkipped }}
+              </p>
+            </div>
+
+            <div class="suite-infos" v-if="isChild">
+              <p class="suite-time" v-if="suite.duration">
+                <v-icon size="18">timer</v-icon>
+                {{ $moment.duration(suite.duration).asSeconds() }}s
+              </p>
+
+              <p class="suite-assignment">
+                <v-icon size="18">assignment</v-icon>
+                {{
+                  suites.tests && suite.tests.length > 0
+                    ? suite.tests.length
+                    : suite.tests
+                    ? Object.keys(suite.tests).length
+                    : 0
+                }}
+              </p>
+
+              <p class="suite-passed" v-if="suite.totalPasses !== 0">
+                <v-icon size="18">check</v-icon>
+                {{ suite.totalPasses }}
+              </p>
+
+              <p class="suite-pending" v-if="suite.totalPending !== 0">
+                <v-icon size="18">pause</v-icon>
+                {{ suite.totalPending }}
+              </p>
+
+              <p class="suite-failed" v-if="suite.totalFailures !== 0">
+                <v-icon size="18">close</v-icon>
+                {{ suite.totalFailures }}
+              </p>
+
+              <p class="suite-skipped" v-if="suite.totalSkipped !== 0">
+                <span class="icon-skipped">
+                  <svg
+                    version="1.1"
+                    id="Layer_1"
+                    xmlns="http://www.w3.org/2000/svg"
+                    xmlns:xlink="http://www.w3.org/1999/xlink"
+                    x="0px"
+                    y="0px"
+                    width="44px"
+                    height="44px"
+                    viewBox="0 0 44 44"
+                    enable-background="new 0 0 44 44"
+                    xml:space="preserve"
+                  >
+                    <g>
+                      <path d="M27,29H17V0h10V29z M27,44H17v-8h10V44z" />
+                    </g>
+                  </svg>
+                </span>
+                {{ suite.totalSkipped }}
               </p>
             </div>
             <percentages
@@ -666,12 +668,10 @@
         }
       }
 
-      &:not(.childs) {
-        > .suites-item > .suite > .suite-top-infos .suite-top-infos-right {
-          width: 100%;
-          justify-content: space-between;
-          margin-top: 10px;
-        }
+      > .suites-item > .suite > .suite-top-infos .suite-top-infos-right {
+        width: 100%;
+        justify-content: space-between;
+        margin-top: 10px;
       }
 
       .suite {
