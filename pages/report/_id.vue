@@ -395,6 +395,7 @@
           display: flex;
           align-items: center;
           justify-content: center;
+          flex-wrap: wrap;
           width: 100%;
 
           .v-icon {
@@ -405,7 +406,7 @@
           }
 
           li {
-            margin: 0 5px;
+            margin: 5px;
             color: #363a41;
             font-size: 12px;
 
