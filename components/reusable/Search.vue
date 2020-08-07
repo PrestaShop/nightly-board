@@ -4,7 +4,7 @@
       type="text"
       name="search"
       id="search"
-      placeholder="Rechercher"
+      placeholder="Search"
       v-model="search"
     />
 
