@@ -46,7 +46,7 @@
         class="not-found"
         v-if="report && report.suites_data && report.suites_data.length <= 0"
       >
-        No results found. Try another search ?
+        No results found. Try another search or change the filters.
       </p>
 
       <suites :items="report.suites_data" v-if="report && report.suites_data" />
