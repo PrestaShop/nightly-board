@@ -141,7 +141,10 @@
                   :style="{ fontSize: '19px', color: '#6E939A' }"
                 />
               </td>
-              <td @click="goToReport($event, props.item.id)" class="no-padding">
+              <td
+                @click="goToReport($event, props.item.id)"
+                class="no-padding results"
+              >
                 <template
                   v-if="props.item.suites && props.item.tests.passed !== 0"
                 >
@@ -930,6 +933,10 @@
           white-space: nowrap;
           text-align: center;
           padding: 0 5px !important;
+
+          &.results {
+            text-align: left;
+          }
 
           &.variance {
             display: flex;
