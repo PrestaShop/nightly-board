@@ -7,7 +7,7 @@
       @click="$emit('toggle')"
     >
       <nuxt-link :to="item.route" class="menu-link">
-        <v-icon dark size="19">{{ item.icon }}</v-icon>
+        <v-icon dark size="19" class="notranslate">{{ item.icon }}</v-icon>
         {{ item.name }}
       </nuxt-link>
     </li>

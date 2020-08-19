@@ -83,7 +83,7 @@
                   :class="{ 'lg-and-up': !$vuetify.breakpoint.lgAndUp }"
                 >
                   <template>
-                    <v-icon size="19">visibility</v-icon>
+                    <v-icon size="19" class="notranslate">visibility</v-icon>
                   </template>
                 </nuxt-link>
               </td>
@@ -97,7 +97,7 @@
               <td
                 class="version"
                 @click="goToReport($event, props.item.id)"
-                :class="{ lowdisplay: !props.item.suites }"
+                :class="{ lowdisplay: !props.item.suites, notranslate }"
               >
                 {{ props.item.version }}
               </td>
@@ -156,6 +156,7 @@
                     <v-icon
                       size="15"
                       :color="$vuetify.theme.themes.light.color.green"
+                      class="notranslate"
                     >
                       check
                     </v-icon>
@@ -177,6 +178,7 @@
                     <v-icon
                       size="15"
                       :color="$vuetify.theme.themes.light.color.red"
+                      class="notranslate"
                     >
                       close
                     </v-icon>
@@ -198,6 +200,7 @@
                     <v-icon
                       size="15"
                       :color="$vuetify.theme.themes.light.color.blue"
+                      class="notranslate"
                     >
                       pause
                     </v-icon>
@@ -258,7 +261,7 @@
                       since last execution
                     </p>
 
-                    <v-icon size="17">trending_up</v-icon>
+                    <v-icon size="17" class="notranslate">trending_up</v-icon>
                     <p class="variance-text">
                       {{ props.item.fixed_since_last }}
                     </p>
@@ -270,7 +273,7 @@
                       since last execution
                     </p>
 
-                    <v-icon size="17">trending_flat</v-icon>
+                    <v-icon size="17" class="notranslate">trending_flat</v-icon>
                     <p class="variance-text">
                       {{ props.item.equal_since_last }}
                     </p>
@@ -282,7 +285,7 @@
                       since last execution
                     </p>
 
-                    <v-icon size="17">trending_down</v-icon>
+                    <v-icon size="17" class="notranslate">trending_down</v-icon>
                     <p class="variance-text">
                       {{ props.item.broken_since_last }}
                     </p>
@@ -296,10 +299,12 @@
                   :class="{ 'lg-and-up': !$vuetify.breakpoint.lgAndUp }"
                 >
                   <template v-if="$vuetify.breakpoint.lgAndUp">
-                    <v-icon size="19">cloud_download</v-icon>
+                    <v-icon size="19" class="notranslate">
+                      cloud_download
+                    </v-icon>
                   </template>
                   <template v-else>
-                    <v-icon right>
+                    <v-icon class="notranslate" right>
                       cloud_download
                     </v-icon>
                   </template>
@@ -354,6 +359,7 @@
                           <v-icon
                             size="15"
                             :color="$vuetify.theme.themes.light.color.green"
+                            class="notranslate"
                           >
                             check
                           </v-icon>
@@ -374,6 +380,7 @@
                           <v-icon
                             size="15"
                             :color="$vuetify.theme.themes.light.color.red"
+                            class="notranslate"
                           >
                             close
                           </v-icon>
@@ -396,6 +403,7 @@
                           <v-icon
                             size="15"
                             :color="$vuetify.theme.themes.light.color.blue"
+                            class="notranslate"
                           >
                             pause
                           </v-icon>
