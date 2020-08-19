@@ -80,11 +80,13 @@
       <h2 v-if="!isMobile">Infos</h2>
       <ul class="infos" v-if="report && report.suites_data">
         <li>
-          <v-icon size="16">local_offer</v-icon>
+          <v-icon size="16" class="notranslate">local_offer</v-icon>
           {{ report.version }}
         </li>
         <li class="campaign">
-          <v-icon size="16">integration_instructions</v-icon>
+          <v-icon size="16" class="notranslate">
+            integration_instructions
+          </v-icon>
           <p>
             {{ report.campaign }}
           </p>
@@ -111,24 +113,24 @@
           </p>
         </li>
         <li v-if="!isMobile">
-          <v-icon size="16">timer</v-icon>
+          <v-icon size="16" class="notranslate">timer</v-icon>
           {{ $moment.duration(report.duration).hours() }}h{{
             $moment.duration(report.duration).minutes()
           }}m{{ $moment.duration(report.duration).seconds() }}s
         </li>
         <li v-if="!isMobile">
-          <v-icon size="16">library_books</v-icon>
+          <v-icon size="16" class="notranslate">library_books</v-icon>
           {{ report.suites }}
         </li>
         <li v-if="!isMobile">
-          <v-icon size="16">assignment</v-icon>
+          <v-icon size="16" class="notranslate">assignment</v-icon>
           {{ report.tests }}
         </li>
         <li>
           <v-icon
             size="16"
             :color="$vuetify.theme.themes.light.color.green"
-            class="icon-success"
+            class="icon-success notranslate"
           >
             check
           </v-icon>
@@ -139,7 +141,7 @@
           <v-icon
             size="16"
             :color="$vuetify.theme.themes.light.color.red"
-            class="icon-error"
+            class="icon-error notranslate"
           >
             close
           </v-icon>
@@ -149,7 +151,7 @@
           <v-icon
             size="16"
             :color="$vuetify.theme.themes.light.color.blue"
-            class="icon-pending"
+            class="icon-pending notranslate"
           >
             pause
           </v-icon>

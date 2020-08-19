@@ -45,7 +45,11 @@
             }"
             class="suites-title"
           >
-            <v-icon size="18" :color="$vuetify.theme.themes.light.primary">
+            <v-icon
+              size="18"
+              class="notranslate"
+              :color="$vuetify.theme.themes.light.primary"
+            >
               library_books
             </v-icon>
 
@@ -60,6 +64,7 @@
                   isChild
               "
               color="#759299"
+              class="notranslate"
             >
               keyboard_arrow_down
             </v-icon>
@@ -69,6 +74,7 @@
                   $store.state.searchOpened.includes(suite.id)) &&
                   isChild
               "
+              class="notranslate"
             >
               keyboard_arrow_up
             </v-icon>
@@ -82,6 +88,7 @@
                   isChild
               "
               color="#759299"
+              class="notranslate"
             >
               keyboard_arrow_down
             </v-icon>
@@ -91,6 +98,7 @@
                   $store.state.searchOpened.includes(suite.id)) &&
                   isChild
               "
+              class="notranslate"
             >
               keyboard_arrow_up
             </v-icon>
@@ -110,7 +118,7 @@
           <div class="suite-top-infos-right">
             <div class="suite-infos" v-if="suite.childrenData">
               <p class="suite-time" v-if="suite.duration">
-                <v-icon size="18">timer</v-icon>
+                <v-icon size="18" class="notranslate">timer</v-icon>
                 {{ $moment.duration(suite.duration).asSeconds() }}s
               </p>
 
@@ -118,7 +126,7 @@
                 class="suite-passed"
                 v-if="suite.childrenData.totalPasses !== 0"
               >
-                <v-icon size="18">check</v-icon>
+                <v-icon size="18" class="notranslate">check</v-icon>
                 {{ suite.childrenData.totalPasses }}
               </p>
 
@@ -126,7 +134,7 @@
                 class="suite-pending"
                 v-if="suite.childrenData.totalPending !== 0"
               >
-                <v-icon size="18">pause</v-icon>
+                <v-icon size="18" class="notranslate">pause</v-icon>
                 {{ suite.childrenData.totalPending }}
               </p>
 
@@ -134,7 +142,7 @@
                 class="suite-failed"
                 v-if="suite.childrenData.totalFailures !== 0"
               >
-                <v-icon size="18">close</v-icon>
+                <v-icon size="18" class="notranslate">close</v-icon>
                 {{ suite.childrenData.totalFailures }}
               </p>
 
@@ -167,12 +175,12 @@
 
             <div class="suite-infos" v-if="isChild">
               <p class="suite-time" v-if="suite.duration">
-                <v-icon size="18">timer</v-icon>
+                <v-icon size="18" class="notranslate">timer</v-icon>
                 {{ $moment.duration(suite.duration).asSeconds() }}s
               </p>
 
               <p class="suite-assignment">
-                <v-icon size="18">assignment</v-icon>
+                <v-icon size="18" class="notranslate">assignment</v-icon>
                 {{
                   suites.tests && suite.tests.length > 0
                     ? suite.tests.length
@@ -183,17 +191,17 @@
               </p>
 
               <p class="suite-passed" v-if="suite.totalPasses !== 0">
-                <v-icon size="18">check</v-icon>
+                <v-icon size="18" class="notranslate">check</v-icon>
                 {{ suite.totalPasses }}
               </p>
 
               <p class="suite-pending" v-if="suite.totalPending !== 0">
-                <v-icon size="18">pause</v-icon>
+                <v-icon size="18" class="notranslate">pause</v-icon>
                 {{ suite.totalPending }}
               </p>
 
               <p class="suite-failed" v-if="suite.totalFailures !== 0">
-                <v-icon size="18">close</v-icon>
+                <v-icon size="18" class="notranslate">close</v-icon>
                 {{ suite.totalFailures }}
               </p>
 

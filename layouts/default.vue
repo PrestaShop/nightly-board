@@ -45,6 +45,11 @@
 
       if (localConfig) {
         this.$store.commit('changeLocalConfig', localConfig)
+      } else if (
+        window.matchMedia &&
+        window.matchMedia('(prefers-color-scheme: dark)').matches
+      ) {
+        this.toggleDark()
       }
     },
     mounted() {

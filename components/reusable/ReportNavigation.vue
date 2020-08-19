@@ -33,6 +33,7 @@
               suite.childrenData.totalSkipped === 0 &&
               suite.childrenData.totalPending === 0
           "
+          class="notranslate"
           size="16"
         >
           check
@@ -45,6 +46,7 @@
               suite.childrenData.totalFailures !== 0) ||
               (suite && suite.totalFailures !== 0)
           "
+          class="notranslate"
           size="16"
         >
           close
@@ -58,6 +60,7 @@
               suite.childrenData.totalPending !== 0) ||
               (suite && suite.totalPending !== 0)
           "
+          class="notranslate"
         >
           pause
         </v-icon>
