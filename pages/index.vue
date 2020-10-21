@@ -547,7 +547,7 @@
           },
           {
             value: 'variance',
-            text: 'Variance',
+            text: 'vs last execution',
             sortable: false,
             width: 200
           },
