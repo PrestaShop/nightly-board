@@ -298,6 +298,7 @@
                   target="_blank"
                   :class="{ 'lg-and-up': !$vuetify.breakpoint.lgAndUp }"
                   v-if="props.item.download"
+                  rel="noreferrer"
                 >
                   <template v-if="$vuetify.breakpoint.lgAndUp">
                     <v-icon size="19" class="notranslate">
