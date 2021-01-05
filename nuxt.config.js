@@ -14,15 +14,16 @@ module.exports = {
   head: {
     title: 'PrestaShop Nightly Board',
     meta: [
-      {charset: 'utf-8'},
-      {name: 'viewport', content: 'width=device-width, initial-scale=1'},
-      {hid: 'description', name: 'description', content: pkg.description}
+      { charset: 'utf-8' },
+      { name: 'viewport', content: 'width=device-width, initial-scale=1' },
+      { hid: 'description', name: 'description', content: pkg.description }
     ],
     link: [
-      {rel: 'icon', type: 'image/x-icon', href: '/favicon.ico'},
+      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
       {
         rel: 'stylesheet',
-        href: 'https://fonts.googleapis.com/css?family=Montserrat|Open+Sans:400,600,700'
+        href:
+          'https://fonts.googleapis.com/css?family=Montserrat|Open+Sans:400,600,700'
       }
     ]
   },
@@ -30,7 +31,7 @@ module.exports = {
   /**
    * Customize the progress-bar color
    */
-  loading: {color: '#fff'},
+  loading: { color: '#fff' },
 
   /**
    * Global CSS
@@ -40,13 +41,14 @@ module.exports = {
   /**
    * Plugins to load before mounting the App
    */
-  plugins: [{src: '~plugins/ga.js', mode: 'client'}],
+  plugins: [{ src: '~plugins/ga.js', mode: 'client' }],
 
   /**
    * Nuxt.js modules
    */
   modules: [
     // Doc: https://axios.nuxtjs.org/usage
+    '@nuxtjs/pwa',
     '@nuxtjs/axios',
     '@nuxtjs/vuetify',
     '@nuxtjs/moment',
@@ -100,8 +102,8 @@ module.exports = {
      ** Fix safari infinit reload
      */
     filenames: {
-      app: ({isDev}) => (isDev ? '[name].[hash].js' : '[chunkhash].js'),
-      chunk: ({isDev}) => (isDev ? '[name].[hash].js' : '[chunkhash].js')
+      app: ({ isDev }) => (isDev ? '[name].[hash].js' : '[chunkhash].js'),
+      chunk: ({ isDev }) => (isDev ? '[name].[hash].js' : '[chunkhash].js')
     },
     /*
      ** You can extend webpack config here

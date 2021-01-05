@@ -15,7 +15,12 @@
   import * as animationDataDark from './404-dark.json'
 
   export default {
-    props: ['error'],
+    props: {
+      error: {
+        type: Object,
+        default: () => {}
+      }
+    },
     layout: 'blog', // you can set a custom layout for the error page
     data() {
       return {
@@ -40,7 +45,7 @@
       })
       this.$emit('animCreated', this.anim)
 
-      anim.addEventListener('enterFrame', function(animation) {
+      anim.addEventListener('enterFrame', animation => {
         if (animation.currentTime > anim.totalFrames - 17) {
           anim.pause()
         }
