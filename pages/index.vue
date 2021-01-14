@@ -5,7 +5,7 @@
         <div class="select">
           <p class="select-label">Campaign</p>
           <v-select
-            :items="['All', 'sanity', 'functional', 'e2e', 'regression']"
+            :items="['All', 'sanity', 'functional', 'e2e', 'regression', 'autoupgrade']"
             label="All"
             :value="''"
             append-icon="keyboard_arrow_down"
@@ -14,13 +14,13 @@
           ></v-select>
         </div>
         <div class="select">
-          <p class="select-label">Browser</p>
+          <p class="select-label">Platform</p>
           <v-select
-            :items="['All', 'chromium', 'edge', 'firefox']"
+            :items="['All', 'chromium', 'edge', 'firefox', 'cli']"
             label="All"
             :value="''"
             append-icon="keyboard_arrow_down"
-            @change="updateBrowserFilter"
+            @change="updatePlatformFilter"
             solo
           ></v-select>
         </div>
@@ -118,26 +118,31 @@
                 </template>
               </td>
               <td
-                class="browser"
-                :class="{ tooltip: props.item.browser }"
+                class="platform"
+                :class="{ tooltip: props.item.platform }"
                 @click="goToReport($event, props.item.id)"
               >
-                <p class="tooltip-title" v-if="props.item.browser">
-                  {{ props.item.browser }}
+                <p class="tooltip-title" v-if="props.item.platform">
+                  {{ props.item.platform }}
                 </p>
                 <font-awesome-icon
-                  v-if="props.item.browser === 'firefox'"
+                  v-if="props.item.platform === 'firefox'"
                   :icon="['fab', 'firefox']"
                   :style="{ fontSize: '19px', color: '#6E939A' }"
                 />
                 <font-awesome-icon
-                  v-if="props.item.browser === 'edge'"
+                  v-if="props.item.platform === 'edge'"
                   :icon="['fab', 'edge']"
                   :style="{ fontSize: '19px', color: '#6E939A' }"
                 />
                 <font-awesome-icon
-                  v-if="props.item.browser === 'chromium'"
+                  v-if="props.item.platform === 'chromium'"
                   :icon="['fab', 'chrome']"
+                  :style="{ fontSize: '19px', color: '#6E939A' }"
+                />
+                <font-awesome-icon
+                  v-if="props.item.platform === 'cli'"
+                  :icon="['fas', 'terminal']"
                   :style="{ fontSize: '19px', color: '#6E939A' }"
                 />
               </td>
@@ -326,18 +331,23 @@
                     <li>{{ props.item.campaign }}</li>
                     <li>
                       <font-awesome-icon
-                        v-if="props.item.browser === 'firefox'"
+                        v-if="props.item.platform === 'firefox'"
                         :icon="['fab', 'firefox']"
                         :style="{ fontSize: '19px', color: '#6E939A' }"
                       />
                       <font-awesome-icon
-                        v-if="props.item.browser === 'edge'"
+                        v-if="props.item.platform === 'edge'"
                         :icon="['fab', 'edge']"
                         :style="{ fontSize: '19px', color: '#6E939A' }"
                       />
                       <font-awesome-icon
-                        v-if="props.item.browser === 'chromium'"
+                        v-if="props.item.platform === 'chromium'"
                         :icon="['fab', 'chrome']"
+                        :style="{ fontSize: '19px', color: '#6E939A' }"
+                      />
+                      <font-awesome-icon
+                        v-if="props.item.platform === 'cli'"
+                        :icon="['fas', 'terminal']"
                         :style="{ fontSize: '19px', color: '#6E939A' }"
                       />
                     </li>
@@ -496,7 +506,7 @@
         files: [],
         loading: true,
         paramVersion: '',
-        paramBrowser: '',
+        paramPlatform: '',
         paramCampaign: '',
         pagination: {
           descending: true,
@@ -536,7 +546,7 @@
           },
           {
             value: 'stats',
-            text: 'Browser',
+            text: 'Platform',
             sortable: false,
             width: 100
           },
@@ -611,8 +621,8 @@
         let url = `${this.$store.state.env.domain}${URLS.reports}`
         let hasParams = false
 
-        if (this.paramBrowser !== '' && this.paramBrowser !== 'All') {
-          url = `${url}?filter_browser[0]=${this.paramBrowser}`
+        if (this.paramPlatform !== '' && this.paramPlatform !== 'All') {
+          url = `${url}?filter_platform[0]=${this.paramPlatform}`
           hasParams = true
         }
 
@@ -646,8 +656,8 @@
 
         this.loading = false
       },
-      updateBrowserFilter(value) {
-        this.paramBrowser = value
+      updatePlatformFilter(value) {
+        this.paramPlatform = value
         this.getSuites()
       },
       updateVersionFilter(value) {
@@ -987,7 +997,7 @@
             }
           }
 
-          &.browser {
+          &.platform {
             @at-root .dark & {
               svg {
                 color: white !important;
