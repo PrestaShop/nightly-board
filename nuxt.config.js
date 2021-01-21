@@ -63,7 +63,8 @@ module.exports = {
       '@nuxtjs/fontawesome',
       {
         icons: {
-          brands: ['faSafari', 'faChrome', 'faFirefox', 'faEdge']
+          brands: ['faSafari', 'faChrome', 'faFirefox', 'faEdge'],
+          solid: ['faTerminal']
         }
       }
     ]
