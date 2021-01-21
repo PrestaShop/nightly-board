@@ -91,25 +91,30 @@
             {{ report.campaign }}
           </p>
         </li>
-        <li class="browser">
+        <li class="platform">
           <font-awesome-icon
-            v-if="report.browser === 'firefox'"
+            v-if="report.platform === 'firefox'"
             :icon="['fab', 'firefox']"
             :style="{ fontSize: '16px', color: '#6E939A' }"
           />
           <font-awesome-icon
-            v-if="report.browser === 'edge'"
+            v-if="report.platform === 'edge'"
             :icon="['fab', 'edge']"
             :style="{ fontSize: '16px', color: '#6E939A' }"
           />
           <font-awesome-icon
-            v-if="report.browser === 'chromium'"
+            v-if="report.platform === 'chromium'"
             :icon="['fab', 'chrome']"
+            :style="{ fontSize: '16px', color: '#6E939A' }"
+          />
+          <font-awesome-icon
+            v-if="report.platform === 'cli'"
+            :icon="['fas', 'terminal']"
             :style="{ fontSize: '16px', color: '#6E939A' }"
           />
 
           <p>
-            {{ report.browser }}
+            {{ report.platform }}
           </p>
         </li>
         <li v-if="!isMobile">
@@ -351,7 +356,7 @@
         margin-bottom: 10px;
         font-size: 14px;
 
-        &.browser,
+        &.platform,
         &.campaign {
           display: flex;
           align-items: center;
