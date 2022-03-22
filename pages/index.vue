@@ -593,6 +593,11 @@
             value: 'actions',
             sortable: false,
             width: 150
+          },
+          {
+            value: 'downloadxml',
+            sortable: false,
+            width: 150
           }
         ]
       }
