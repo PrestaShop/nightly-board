@@ -5,7 +5,14 @@
         <div class="select">
           <p class="select-label">Campaign</p>
           <v-select
-            :items="['All', 'sanity', 'functional', 'e2e', 'regression', 'autoupgrade']"
+            :items="[
+              'All',
+              'sanity',
+              'functional',
+              'e2e',
+              'regression',
+              'autoupgrade'
+            ]"
             label="All"
             :value="''"
             append-icon="keyboard_arrow_down"
@@ -313,6 +320,26 @@
                   <template v-else>
                     <v-icon class="notranslate" right>
                       cloud_download
+                    </v-icon>
+                  </template>
+                </a>
+              </td>
+              <td class="download-reports">
+                <a
+                  :href="props.item.xml"
+                  target="_blank"
+                  :class="{ 'lg-and-up': !$vuetify.breakpoint.lgAndUp }"
+                  v-if="props.item.xml"
+                  rel="noreferrer"
+                >
+                  <template v-if="$vuetify.breakpoint.lgAndUp">
+                    <v-icon size="19" class="notranslate">
+                      download
+                    </v-icon>
+                  </template>
+                  <template v-else>
+                    <v-icon class="notranslate" right>
+                      download
                     </v-icon>
                   </template>
                 </a>
