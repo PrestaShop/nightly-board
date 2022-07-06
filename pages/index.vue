@@ -14,9 +14,8 @@
               'autoupgrade'
             ]"
             label="All"
-            :value="''"
+            v-model="paramCampaign"
             append-icon="keyboard_arrow_down"
-            @change="updateCampaignFilter"
             solo
           ></v-select>
         </div>
@@ -27,7 +26,7 @@
             label="All"
             :value="''"
             append-icon="keyboard_arrow_down"
-            @change="updatePlatformFilter"
+            v-model="paramPlatform"
             solo
           ></v-select>
         </div>
@@ -38,7 +37,7 @@
             label="All"
             :value="''"
             append-icon="keyboard_arrow_down"
-            @change="updateVersionFilter"
+            v-model="paramVersion"
             solo
           ></v-select>
         </div>
@@ -532,14 +531,14 @@
         isMobile: false,
         files: [],
         loading: true,
-        paramVersion: '',
-        paramPlatform: '',
-        paramCampaign: '',
+        paramVersion: this.$route.query.version ?? 'All',
+        paramPlatform: this.$route.query.platform ?? 'All',
+        paramCampaign: this.$route.query.campaign ?? 'All',
         pagination: {
-          descending: true,
-          page: 1,
-          rowsPerPage: 20,
-          sortBy: 'date'
+          descending: this.$route.query.descending ?? true,
+          page: parseInt(this.$route.query.page ?? 1, 10),
+          rowsPerPage: parseInt(this.$route.query.rowsPerPage ?? 20, 10),
+          sortBy: this.$route.query.sortBy ?? 'date'
         },
         headers: [
           {
@@ -608,6 +607,29 @@
       this.$store.commit('resetReport')
       this.$store.commit('changePageTitle', 'Nightly reports')
     },
+    watch: {
+      paramCampaign() {
+        this.updateFilers()
+      },
+      paramVersion() {
+        this.updateFilers()
+      },
+      paramPlatform() {
+        this.updateFilers()
+      },
+      pagination() {
+        this.updatePagination()
+      },
+      '$route.query': function(query) {
+        this.paramCampaign = query.campaign ?? 'All'
+        this.paramVersion = query.version ?? 'All'
+        this.paramPlatform = query.platform ?? 'All'
+        this.pagination.descending = query.descending ?? true
+        this.pagination.page = parseInt(query.page ?? 1, 10)
+        this.pagination.rowsPerPage = parseInt(query.rowsPerPage ?? 20, 10)
+        this.pagination.sortBy = query.descending ?? 'date'
+      }
+    },
     methods: {
       onResize() {
         if (window.innerWidth < 769) {
@@ -653,12 +675,12 @@
         let url = `${this.$store.state.env.domain}${URLS.reports}`
         let hasParams = false
 
-        if (this.paramPlatform !== '' && this.paramPlatform !== 'All') {
+        if (this.paramPlatform !== 'All') {
           url = `${url}?filter_platform[0]=${this.paramPlatform}`
           hasParams = true
         }
 
-        if (this.paramCampaign !== '' && this.paramCampaign !== 'All') {
+        if (this.paramCampaign !== 'All') {
           if (hasParams) {
             url = `${url}&filter_campaign[0]=${this.paramCampaign}`
           } else {
@@ -668,7 +690,7 @@
           hasParams = true
         }
 
-        if (this.paramVersion !== '' && this.paramVersion !== 'All') {
+        if (this.paramVersion !== 'All') {
           if (hasParams) {
             url = `${url}&filter_version[0]=${this.paramVersion}`
           } else {
@@ -688,17 +710,37 @@
 
         this.loading = false
       },
-      updatePlatformFilter(value) {
-        this.paramPlatform = value
+      updateFilers() {
+        const query = {
+          ...this.$route.query,
+          campaign:
+            this.paramCampaign === 'All' ? undefined : this.paramCampaign,
+          platform:
+            this.paramPlatform === 'All' ? undefined : this.paramPlatform,
+          version: this.paramVersion === 'All' ? undefined : this.paramVersion
+        }
+
+        this.$router.push({ query })
         this.getSuites()
       },
-      updateVersionFilter(value) {
-        this.paramVersion = value
-        this.getSuites()
-      },
-      updateCampaignFilter(value) {
-        this.paramCampaign = value
-        this.getSuites()
+      updatePagination() {
+        const pagination = {
+          ...this.$route.query,
+          descending:
+            this.pagination.descending === true
+              ? undefined
+              : this.pagination.descending,
+          page: this.pagination.page === 1 ? undefined : this.pagination.page,
+          rowsPerPage:
+            this.pagination.rowsPerPage === 20
+              ? undefined
+              : this.pagination.rowsPerPage,
+          sortBy:
+            this.pagination.sortBy === 'date'
+              ? undefined
+              : this.pagination.sortBy
+        }
+        this.$router.push({ query: pagination })
       }
     }
   }
