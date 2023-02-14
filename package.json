@@ -27,6 +27,7 @@
     "chart.js": "^2.9.4",
     "cookie-universal-nuxt": "^2.1.1",
     "cross-env": "^5.2.0",
+    "defu": "^6.1.2",
     "lottie-web": "^5.6.8",
     "nuxt": "^2.11.0",
     "nuxt-storage": "^1.2.2",
