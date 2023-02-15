@@ -1,4 +1,3 @@
-// eslint-disable no-undef
 import { mount, RouterLinkStub } from '@vue/test-utils'
 import Logo from '@/components/reusable/Logo.vue'
 
