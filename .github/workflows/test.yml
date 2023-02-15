@@ -16,7 +16,7 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v3
         with:
-          node-version: 10.7
+          node-version: 14.21
           cache: 'npm'
 
       - name: Install dependencies 💚

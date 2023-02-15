@@ -1,4 +1,4 @@
-FROM node:10.7
+FROM node:14.21
 
 RUN mkdir -p /app
 EXPOSE 3000
