@@ -19,10 +19,10 @@ jobs:
     concurrency: preprod-cd
 
     steps:
-    - name: Setting up Terraform
-      uses: hashicorp/setup-terraform@v1
-      with:
-        terraform_version: ${{ env.TF_VERSION }}
+      - name: Setting up Terraform
+        uses: hashicorp/setup-terraform@v1
+        with:
+          terraform_version: ${{ env.TF_VERSION }}
 
       - name: Checkout the repository
         uses: actions/checkout@v3
