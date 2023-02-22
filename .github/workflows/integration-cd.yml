@@ -1,4 +1,4 @@
-name: Preproduction CD for QAnightly
+name: Integration CD for QAnightly
 
 on:
   push:
@@ -13,10 +13,10 @@ env:
   APP_PATH: ./
 
 jobs:
-  preproduction_deployment:
-    name: Deploy (preproduction)
+  integration_deployment:
+    name: Deploy (integration)
     runs-on: ubuntu-latest
-    concurrency: preprod-cd
+    concurrency: integration-cd
 
     steps:
       - name: Setting up Terraform
