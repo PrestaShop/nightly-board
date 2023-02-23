@@ -9,7 +9,7 @@ locals {
 }
 
 module "apps" {
-  source                    = "../../modules/apps"
+  source                    = "../modules/apps"
   labels                    = local.labels
   app_version               = var.app_version
   project                   = var.project
