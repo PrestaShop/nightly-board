@@ -3,7 +3,7 @@ name: Integration CD for QAnightly
 on:
   push:
     branches:
-      - develop
+      - ops/ci-cd-rework
 
 env:
   GCLOUD_NAMESPACE: 'prestashop-cloud-integration'
@@ -42,7 +42,6 @@ jobs:
           gcp-credentials: ${{ secrets.INTEGRATION_GOOGLE_APPLICATION_CREDENTIALS }}
           gcp-namespace: ${{ env.GCLOUD_NAMESPACE }}
           app-path: ${{ env.APP_PATH }}
-          environment: "integration"
 
       # - name: Deploy app 🚚
       #   uses: ./.github/actions/deploy
