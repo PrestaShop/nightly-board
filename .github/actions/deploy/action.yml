@@ -60,15 +60,15 @@ runs:
         SHA: ${{ github.sha }}
         GOOGLE_CREDENTIALS: ${{ inputs.gcp-credentials }}
 
-    # - name: Terraform apply
-    #   shell: bash
-    #   working-directory: ${{ inputs.cloud-path }}
-    #   run: |
-    #     terraform apply -auto-approve \
-    #     --var app_version=$TAG \
-    #     --var hash_id=$SHA \
-    #     --var service_account_key=$GOOGLE_CREDENTIALS
-    #   env:
-    #     TAG: ${{ inputs.environment }}
-    #     SHA: ${{ github.sha }}
-    #     GOOGLE_CREDENTIALS: ${{ inputs.gcp-credentials }}
+    - name: Terraform apply
+      shell: bash
+      working-directory: ${{ inputs.cloud-path }}
+      run: |
+        terraform apply -auto-approve \
+        --var app_version=$TAG \
+        --var hash_id=$SHA \
+        --var 'service_account_key=${GOOGLE_CREDENTIALS}'
+      env:
+        TAG: ${{ inputs.environment }}
+        SHA: ${{ github.sha }}
+        GOOGLE_CREDENTIALS: ${{ inputs.gcp-credentials }}
