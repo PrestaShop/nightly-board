@@ -1,7 +1,7 @@
 locals {
   labels = {
     project     = var.project
-    tribe       = "/"
+    tribe       = "test"
     squad       = "QaNightlyresults"
     environment = var.environment
     github_hash = var.hash_id
