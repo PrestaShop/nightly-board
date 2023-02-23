@@ -23,12 +23,12 @@ inputs:
 runs:
   using: "composite"
   steps:
-    # - name: Get tag
-    #   shell: bash
-    #   id: get_tag
-    #   run: echo ::set-output name=TAG::$PREFIX_TAG$(echo $GITHUB_REF | cut -d / -f 3)
-    #   env:
-    #     PREFIX_TAG: ${{ inputs.prefix-tag }}
+    - name: Get tag
+      shell: bash
+      id: get_tag
+      run: echo ::set-output name=TAG::$PREFIX_TAG$(echo $GITHUB_REF | cut -d / -f 3)
+      env:
+        PREFIX_TAG: ${{ inputs.prefix-tag }}
 
     - name: Terraform init and fmt
       shell: bash
@@ -47,14 +47,28 @@ runs:
       env:
         GOOGLE_CREDENTIALS: ${{ inputs.gcp-credentials }}
 
-    - name: Terraform apply
+    - name: Terraform plan 🗒
       shell: bash
       working-directory: ${{ inputs.cloud-path }}
       run: |
-        terraform apply -auto-approve \
+        terraform plan \
         --var app_version=$TAG \
-        --var hash_id=$SHA
+        --var hash_id=$SHA \
+        --var service_account_key=$GOOGLE_CREDENTIALS
       env:
         TAG: ${{ inputs.environment }}
         SHA: ${{ github.sha }}
         GOOGLE_CREDENTIALS: ${{ inputs.gcp-credentials }}
+
+    # - name: Terraform apply
+    #   shell: bash
+    #   working-directory: ${{ inputs.cloud-path }}
+    #   run: |
+    #     terraform apply -auto-approve \
+    #     --var app_version=$TAG \
+    #     --var hash_id=$SHA \
+    #     --var service_account_key=$GOOGLE_CREDENTIALS
+    #   env:
+    #     TAG: ${{ inputs.environment }}
+    #     SHA: ${{ github.sha }}
+    #     GOOGLE_CREDENTIALS: ${{ inputs.gcp-credentials }}
