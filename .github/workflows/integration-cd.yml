@@ -6,6 +6,7 @@ on:
 
 env:
   DISTRIBUTION_APP: "qanightly"
+  LABELS: ${{toJSON(github.event.pull_request.labels)}}
 
 jobs:
   integration_deployment:
