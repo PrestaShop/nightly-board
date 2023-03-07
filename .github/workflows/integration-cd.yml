@@ -26,6 +26,9 @@ jobs:
           project_id: ${{ secrets.GCLOUD_NAMESPACE_INTEGRATION }}
           credentials_json: ${{ secrets.INTEGRATION_GOOGLE_APPLICATION_CREDENTIALS }}
 
+      - name: Setting up Cloud SDK ⚙️
+        uses: google-github-actions/setup-gcloud@v1
+
       - name: Managing labels 🏷️
         run: /bin/bash .github/scripts/manage-labels.sh
 
