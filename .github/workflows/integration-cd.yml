@@ -23,7 +23,7 @@ jobs:
       - name: Authenticating to GCP ⚙️
         uses: google-github-actions/auth@v1
         with:
-          project_id: ${{ env.GCLOUD_NAMESPACE_INTEGRATION }}
+          project_id: ${{ secrets.GCLOUD_NAMESPACE_INTEGRATION }}
           credentials_json: ${{ secrets.INTEGRATION_GOOGLE_APPLICATION_CREDENTIALS }}
 
       - name: Managing labels 🏷️
