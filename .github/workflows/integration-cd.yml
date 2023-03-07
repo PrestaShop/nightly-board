@@ -20,6 +20,12 @@ jobs:
       - name: Checkout the repository 🎁
         uses: actions/checkout@v3
 
+      - name: Authenticating to GCP ⚙️
+        uses: google-github-actions/auth@v1
+        with:
+          project_id: ${{ env.GCLOUD_NAMESPACE_INTEGRATION }}
+          credentials_json: ${{ secrets.INTEGRATION_GOOGLE_APPLICATION_CREDENTIALS }}
+
       - name: Managing labels 🏷️
         run: /bin/bash .github/scripts/manage-labels.sh
 
