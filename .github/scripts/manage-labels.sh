@@ -6,6 +6,7 @@ echo "Current branch is ${GITHUB_HEAD_REF}"
 echo "Current application is ${DISTRIBUTION_APP}"
 echo "Retrieving labels..."
 echo $LABELS > labels.json
+cat labels.json
 
 echo "Checking prestabulle label definition..."
 if [ `jq -r '.[] |.name' labels.json |grep prestabulle |wc -l` -gt 1 ]
