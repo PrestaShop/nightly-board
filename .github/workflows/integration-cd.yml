@@ -18,6 +18,11 @@ jobs:
 
     steps:
       - name: Managing labels 🏷️
+        run: |
+        ls
+        ls .github
+        ls .github/scripts
+      - name: Managing labels 🏷️
         run: /bin/bash .github/scripts/manage-labels.sh
 
       - name: Setting up the Bulle variable for later 💬
