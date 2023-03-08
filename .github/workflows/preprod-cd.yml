@@ -1,0 +1,46 @@
+name: preprod CD for QAnightly
+
+on:
+  push:
+    branches:
+      - develop
+
+env:
+  DISTRIBUTION_APP: "qanightly"
+
+jobs:
+  preprod_deployment:
+    name: Deploy (preprod)
+    runs-on: ubuntu-latest
+    concurrency: preprod-cd
+
+    steps:
+      - name: Checkout the repository 🎁
+        uses: actions/checkout@v3
+
+      - name: Authenticating to GCP ⚙️
+        uses: google-github-actions/auth@v1
+        with:
+          project_id: ${{ secrets.GCLOUD_NAMESPACE_PREPROD }}
+          credentials_json: ${{ secrets.PREPROD_GOOGLE_APPLICATION_CREDENTIALS }}
+
+      - name: Setting up Cloud SDK ⚙️
+        uses: google-github-actions/setup-gcloud@v1
+
+      - name: Trigger build
+        uses: aurelien-baudet/workflow-dispatch@v2
+        with:
+          workflow: preprod-cd-build-qanightly.yml
+          repo: PrestaShopCorp/qanightlyresults-cd
+          inputs: '{ "branch": "${{ steps.branch.outputs.current_branch }}"}'
+          token: ${{ secrets.TERRAFORM_ACCESS_TOKEN }}
+          ref: 'refs/heads/main'
+
+      - name: Trigger deploy
+        uses: aurelien-baudet/workflow-dispatch@v2
+        with:
+          workflow: preprod-cd-deploy-qanightly.yml
+          repo: PrestaShopCorp/qanightlyresults-cd
+          inputs: '{ "branch": "${{ steps.branch.outputs.current_branch }}"}'
+          token: ${{ secrets.TERRAFORM_ACCESS_TOKEN }}
+          ref: 'refs/heads/main'
