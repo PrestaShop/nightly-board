@@ -1,4 +1,4 @@
-name: BILLING PRESTABULLE CLEANING
+name: QANIGHTLY PRESTABULLE CLEANING
 
 on:
   pull_request:
@@ -11,11 +11,11 @@ env:
   LABELS: ${{toJSON(github.event.pull_request.labels)}}
 
 jobs:
-  billing_alpha:
-    name: Billing Cleaning Prestabulle
+  qanightly_prestabulle:
+    name: apiqanightly Cleaning Prestabulle
     runs-on: ubuntu-latest
     timeout-minutes: 25
-    if: (contains(github.event.pull_request.labels.*.name, 'prestabulle1') ||
+    if: contains(github.event.pull_request.labels.*.name, 'prestabulle1') ||
       contains(github.event.pull_request.labels.*.name, 'prestabulle2') ||
       contains(github.event.pull_request.labels.*.name, 'prestabulle3')
 
