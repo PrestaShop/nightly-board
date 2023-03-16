@@ -3,7 +3,8 @@ name: preprod CD for QAnightly
 on:
   push:
     branches:
-      - develop
+      # - develop
+      - ops/ci-cd-rework
 
 env:
   DISTRIBUTION_APP: "qanightly"
