@@ -24,20 +24,6 @@ jobs:
       - name: Checkout the repository 🎁
         uses: actions/checkout@v3
 
-      - name: Setting up terraform for later 🌎
-        uses: hashicorp/setup-terraform@v1
-        with:
-          terraform_version: ${{ env.TF_VERSION }}
-
-      - name: 'Authenticating to GCP ⚙️'
-        uses: google-github-actions/auth@v1
-        with:
-          project_id: ${{ secrets.GCLOUD_NAMESPACE_INTEGRATION }}
-          credentials_json: ${{ secrets.INTEGRATION_GOOGLE_APPLICATION_CREDENTIALS }}
-
-      - name: 'Setting up Cloud SDK ⚙️'
-        uses: 'google-github-actions/setup-gcloud@v1'
-
       - name: Setting up the Bulle variable for later 💬
         run: echo "BULLE=$BULLE$(echo $LABELS > labels.json && cat labels.json | jq -r '.[]|.name'|grep prestabulle)" >> $GITHUB_OUTPUT
         id: get_bulle
