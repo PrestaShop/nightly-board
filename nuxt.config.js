@@ -67,7 +67,8 @@ module.exports = {
           solid: ['faTerminal']
         }
       }
-    ]
+    ],
+    'nuxt-healthcheck',
   ],
 
   vuetify: {
@@ -120,5 +121,12 @@ module.exports = {
         })
       }
     }
-  }
+  },
+  healthcheck: {
+    path: '/healthcheck',
+    contentType: 'application/json',
+    healthy: () => {
+      return JSON.stringify({ build: true })
+    }
+  }  
 }
