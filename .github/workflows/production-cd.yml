@@ -11,6 +11,7 @@ jobs:
   production_deployment:
     name: Deploy (production)
     runs-on: ubuntu-latest
+    environment: production
     concurrency: production-cd
 
     steps:
@@ -20,7 +21,7 @@ jobs:
       - name: Authenticating to GCP ⚙️
         uses: google-github-actions/auth@v1
         with:
-          project_id: ${{ secrets.GCLOUD_NAMESPACE_PRODUCTION }}
+          project_id: ${{ secrets.GCP_RUN_PROJECT_ID }}
           credentials_json: ${{ secrets.PRODUCTION_GOOGLE_APPLICATION_CREDENTIALS }}
 
       - name: Setting up Cloud SDK ⚙️
@@ -39,11 +40,11 @@ jobs:
           token: ${{ secrets.TERRAFORM_ACCESS_TOKEN }}
           ref: 'refs/heads/main'
 
-      - name: Trigger deploy
+      - name: Trigger CI / CD
         uses: aurelien-baudet/workflow-dispatch@v2
         with:
-          workflow: production-cd-deploy-qanightly.yml
+          workflow: production-cd.yml
           repo: PrestaShopCorp/qanightlyresults-cd
-          inputs: '{ "branch": "${{ steps.branch.outputs.current_branch }}"}'
+          inputs: '{ "branch": "${{ steps.branch.outputs.current_branch }}", "project": "nightly", "repository": "PrestaShop/nightly-board"}'
           token: ${{ secrets.TERRAFORM_ACCESS_TOKEN }}
-          ref: 'refs/heads/main'
+          ref: 'refs/heads/feat/migration-nightly-upgrade'
