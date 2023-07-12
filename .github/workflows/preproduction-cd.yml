@@ -39,4 +39,4 @@ jobs:
           repo: PrestaShopCorp/qanightlyresults-cd
           inputs: '{ "branch": "${{ steps.branch.outputs.current_branch }}", "project": "nightly", "repository": "PrestaShop/nightly-board"}'
           token: ${{ secrets.TERRAFORM_ACCESS_TOKEN }}
-          ref: 'refs/heads/feat/migration-nightly'
+          ref: 'refs/heads/main'
