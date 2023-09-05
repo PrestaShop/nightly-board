@@ -4,9 +4,6 @@ on:
   release:
     types: [released]
 
-env:
-  DISTRIBUTION_APP: "qanightly"
-
 jobs:
   production_deployment:
     name: Deploy (production)
@@ -17,15 +14,6 @@ jobs:
     steps:
       - name: Checkout the repository 🎁
         uses: actions/checkout@v3
-
-      - name: Authenticating to GCP ⚙️
-        uses: google-github-actions/auth@v1
-        with:
-          project_id: ${{ secrets.GCP_RUN_PROJECT_ID }}
-          credentials_json: ${{ secrets.PRODUCTION_GOOGLE_APPLICATION_CREDENTIALS }}
-
-      - name: Setting up Cloud SDK ⚙️
-        uses: google-github-actions/setup-gcloud@v1
 
       - name: Get branch name
         id: branch
