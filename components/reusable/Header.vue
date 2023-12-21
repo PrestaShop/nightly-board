@@ -73,7 +73,7 @@
     position: fixed;
     top: 0;
     width: 100%;
-    background: $primary;
+    background: $bg-header;
     box-shadow: 0 0 10px 0 rgba(black, 0.2);
     z-index: 10;
     min-height: 50px;
@@ -81,6 +81,14 @@
 
     @at-root .dark & {
       background: $primaryDark;
+
+      h1 {
+        color: white;
+      }
+
+      .dates > p {
+        color: white;
+      }
     }
 
     &.isMobile {
@@ -88,7 +96,7 @@
     }
 
     h1 {
-      color: white;
+      color: #000;
       font-size: 20px;
       font-weight: bold;
       width: 100%;
@@ -105,7 +113,7 @@
       > p {
         font-size: 16px;
         line-height: 22px;
-        color: white;
+        color: #000;
         margin-bottom: 0;
 
         &:first-child {
