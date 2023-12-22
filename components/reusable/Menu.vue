@@ -7,7 +7,6 @@
       @click="$emit('toggle')"
     >
       <nuxt-link :to="item.route" class="menu-link">
-        <v-icon dark size="19" class="notranslate">{{ item.icon }}</v-icon>
         {{ item.name }}
       </nuxt-link>
     </li>
@@ -61,9 +60,13 @@
       text-decoration: none;
       padding: 5px 10px;
       font-weight: bold;
-      color: $white;
+      color: $primary;
       font-size: 16px;
       line-height: 22px;
+
+      @at-root .dark & {
+        color: white;
+      }
 
       > * {
         vertical-align: middle;
