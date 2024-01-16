@@ -25,6 +25,6 @@ jobs:
         with:
           workflow: preproduction-cd.yml
           repo: PrestaShopCorp/qanightlyresults-cd
-          inputs: '{ "branch": "${{ steps.branch.outputs.current_branch }}", "project": "nightly", "repository": "PrestaShop/nightly-board"}'
+          inputs: '{ "branch": "${{ steps.branch.outputs.current_branch }}", "project": "nightly", "repository": "PrestaShop/nightly-board", "commit": "$GITHUB_SHA"}'
           token: ${{ secrets.TERRAFORM_ACCESS_TOKEN }}
           ref: 'refs/heads/main'
