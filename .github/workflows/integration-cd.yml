@@ -1,4 +1,4 @@
-name: Integration CD for QAnightly
+name: Integration CD for nightly board
 
 on:
   pull_request:
@@ -40,4 +40,4 @@ jobs:
           repo: PrestaShopCorp/qanightlyresults-cd
           inputs: '{ "branch": "${{ steps.branch.outputs.current_branch }}", "bulle": "${{ steps.get_bulle.outputs.BULLE }}", "project": "nightly", "repository": "PrestaShop/nightly-board", "tag": "${{ steps.get_tag.outputs.TAG }}", "commit": "${{ github.sha }}"}'
           token: ${{ secrets.TERRAFORM_ACCESS_TOKEN }}
-          ref: 'refs/heads/main'
+          ref: 'refs/heads/fix/ci-deployment'
