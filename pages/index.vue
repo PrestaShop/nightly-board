@@ -33,7 +33,7 @@
         <div class="select">
           <p class="select-label">Version</p>
           <v-select
-            :items="['All', 'develop', '8.1.x', '8.0.x', '1.7.8.x', '1.7.7.x']"
+            :items="['All', 'develop', '9.0.x', '8.2.x', '8.1.x', '8.0.x', '1.7.8.x', '1.7.7.x']"
             label="All"
             :value="''"
             append-icon="keyboard_arrow_down"
