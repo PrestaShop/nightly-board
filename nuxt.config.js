@@ -2,7 +2,7 @@
 const pkg = require('./package')
 
 module.exports = {
-  mode: 'universal',
+  ssr: true,
   env: {
     ga: process.env.QANB_GA || 'UA-XXXXXXXX-X',
     DOMAIN_URL: process.env.QANB_API_DOMAIN || 'http://www.qa.local/'
