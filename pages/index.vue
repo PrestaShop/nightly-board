@@ -33,7 +33,16 @@
         <div class="select">
           <p class="select-label">Version</p>
           <v-select
-            :items="['All', 'develop', '8.1.x', '8.0.x', '1.7.8.x', '1.7.7.x']"
+            :items="[
+              'All',
+              'develop',
+              '9.0.x',
+              '8.2.x',
+              '8.1.x',
+              '8.0.x',
+              '1.7.8.x',
+              '1.7.7.x'
+            ]"
             label="All"
             :value="''"
             append-icon="keyboard_arrow_down"
@@ -50,7 +59,8 @@
           :items="files"
           :headers="isMobile ? [] : headers"
           :pagination.sync="pagination"
-          :rows-per-page-items="[20, 50, { text: 'All', value: -1 }]"
+          :rows-per-page-items="[20, 50, 100]"
+          :total-items="filesLength"
           :footer-props="{
             showFirstLastPage: true,
             firstIcon: 'mdi-arrow-collapse-left',
@@ -530,6 +540,7 @@
         data: {},
         isMobile: false,
         files: [],
+        filesLength: 0,
         loading: true,
         paramVersion: this.$route.query.version ?? 'All',
         paramPlatform: this.$route.query.platform ?? 'All',
@@ -617,10 +628,13 @@
       paramPlatform() {
         this.updateFilers()
       },
-      pagination() {
-        this.updatePagination()
+      pagination: {
+        handler() {
+          this.updatePagination()
+        },
+        deep: true
       },
-      '$route.query': function(query) {
+      '$route.query': function $routeQuery(query) {
         this.paramCampaign = query.campaign ?? 'All'
         this.paramVersion = query.version ?? 'All'
         this.paramPlatform = query.platform ?? 'All'
@@ -672,40 +686,29 @@
       },
       async getSuites() {
         this.loading = true
-        let url = `${this.$store.state.env.domain}${URLS.reports}`
-        let hasParams = false
+        let url = `${this.$store.state.env.domain}${URLS.reports}?page=${this.pagination.page}&limit=${this.pagination.rowsPerPage}`
 
         if (this.paramPlatform !== 'All') {
-          url = `${url}?filter_platform[0]=${this.paramPlatform}`
-          hasParams = true
+          url = `${url}&filter_platform[0]=${this.paramPlatform}`
         }
 
         if (this.paramCampaign !== 'All') {
-          if (hasParams) {
-            url = `${url}&filter_campaign[0]=${this.paramCampaign}`
-          } else {
-            url = `${url}?filter_campaign[0]=${this.paramCampaign}`
-          }
-
-          hasParams = true
+          url = `${url}&filter_campaign[0]=${this.paramCampaign}`
         }
 
         if (this.paramVersion !== 'All') {
-          if (hasParams) {
-            url = `${url}&filter_version[0]=${this.paramVersion}`
-          } else {
-            url = `${url}?filter_version[0]=${this.paramVersion}`
-          }
+          url = `${url}&filter_version[0]=${this.paramVersion}`
         }
 
         const { data } = await this.$axios.get(url, {
           crossdomain: true
         })
 
+        this.filesLength = data.count
         if (this.isMobile) {
-          this.files = data.filter(e => e.id)
+          this.files = data.reports.filter(e => e.id)
         } else {
-          this.files = data
+          this.files = data.reports
         }
 
         this.loading = false
@@ -741,6 +744,7 @@
               : this.pagination.sortBy
         }
         this.$router.push({ query: pagination })
+        this.getSuites()
       }
     }
   }
