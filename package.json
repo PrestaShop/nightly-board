@@ -33,7 +33,7 @@
     "nuxt-healthcheck": "^1.0.1",
     "nuxt-storage": "^1.2.2",
     "sass": "^1.58.1",
-    "vue": "^2.7.14",
+    "vue": "^3.0.0",
     "vue-chartjs": "^3.5.0",
     "vue-content-loader": "^0.2.2",
     "vue-moment": "^4.1.0",
